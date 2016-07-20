@@ -113,7 +113,7 @@ only extends some features to cover more needs, like the:&lt;/p&gt;
 &lt;p&gt;When working in distributed &amp;ldquo;cloud&amp;rdquo; environments or while doing Continuous
 Deployments, exists the need to automate the behavior of the supervisor on
 demand, because of this &lt;strong&gt;immortal&lt;/strong&gt; can be used with a custom configuration
-file &lt;code&gt;run.yml&lt;/code&gt; helping with this to simplify the deployment flow besides
+file &lt;code&gt;run.yml&lt;/code&gt; helping to simplify the deployment flow besides
 offering more flexibility.&lt;/p&gt;
 
 &lt;p&gt;Example &lt;code&gt;run.yml&lt;/code&gt;:&lt;/p&gt;
