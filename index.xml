@@ -15,11 +15,7 @@
       <pubDate>Wed, 20 Jul 2016 21:07:15 +0200</pubDate>
       
       <guid>https://immortal.run/post/the-problem-to-solve/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://asciinema.org/a/80357&#34;&gt;&lt;img src=&#34;https://asciinema.org/a/80357.png&#34; alt=&#34;asciicast&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://asciinema.org/a/80371&#34;&gt;&lt;img src=&#34;https://asciinema.org/a/80371.png&#34; alt=&#34;asciicast&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://asciinema.org/a/80360&#34;&gt;&lt;img src=&#34;https://asciinema.org/a/80360.png&#34; alt=&#34;asciicast&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;a href=&#34;https://asciinema.org/a/80371&#34;&gt;&lt;img src=&#34;https://asciinema.org/a/80371.png&#34; alt=&#34;asciicast&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -29,7 +25,8 @@
       <pubDate>Wed, 20 Jul 2016 21:01:08 +0200</pubDate>
       
       <guid>https://immortal.run/post/how-it-works/</guid>
-      <description></description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://asciinema.org/a/80360&#34;&gt;&lt;img src=&#34;https://asciinema.org/a/80360.png&#34; alt=&#34;asciicast&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -40,10 +37,70 @@
       <guid>https://immortal.run/about/</guid>
       <description>
 
-&lt;h1 id=&#34;the-need&#34;&gt;The need&lt;/h1&gt;
+&lt;h1 id=&#34;what-is-immortal&#34;&gt;What is immortal ?&lt;/h1&gt;
 
-&lt;p&gt;Supervise applications that follow the zero-downtime deployment pattern
-(unicorn/gunicorn) or when distributed logging is required.&lt;/p&gt;
+&lt;p&gt;A *nix cross-platform (OS agnostic) supervisor based on
+&lt;a href=&#34;https://cr.yp.to/daemontools.html&#34;&gt;daemontools&lt;/a&gt; &amp;amp; &lt;a href=&#34;http://smarden.org/runit/&#34;&gt;runit&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Improve the wheel, don’t reinvent it&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&#34;why-another-supervisor&#34;&gt;Why another supervisor ?&lt;/h1&gt;
+
+&lt;p&gt;Daemontools &amp;amp; runit work very well but don&amp;rsquo;t cover all use cases, mainly when
+dealing with applications that follow the zero-downtime deployment pattern
+(&lt;a href=&#34;https://unicorn.bogomips.org/&#34;&gt;unicorn&lt;/a&gt;/&lt;a href=&#34;http://gunicorn.org/&#34;&gt;gunicorn&lt;/a&gt;),
+applications that daemonize itself like &lt;a href=&#34;http://nginx.org&#34;&gt;nginx&lt;/a&gt; or when
+distributed logging is required.&lt;/p&gt;
+
+&lt;p&gt;Example of a zero-downtime flow using unicorn and signal handling:
+&lt;a href=&#34;https://asciinema.org/a/80357&#34;&gt;&lt;img src=&#34;https://asciinema.org/a/80357.png&#34; alt=&#34;asciicast&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;⭕  immortal, follows and implements the same logic/principles of daemontools, it
+only extends some features to cover more needs, like the:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-f follow pid
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Because of this, it aims to be compatible with existing daemontools or runit
+&lt;a href=&#34;https://cr.yp.to/daemontools/supervise.html&#34;&gt;run&lt;/a&gt; scripts.&lt;/p&gt;
+
+&lt;p&gt;Example using the &lt;code&gt;-f follow pid&lt;/code&gt; option supervising unicorn:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://asciinema.org/a/80360&#34;&gt;&lt;img src=&#34;https://asciinema.org/a/80360.png&#34; alt=&#34;asciicast&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;When working in distributed &amp;ldquo;cloud&amp;rdquo; environments or while doing Continuous
+Deployments, exists the need to automate the behavior of the supervisor on
+demand, because of this &lt;strong&gt;immortal&lt;/strong&gt; can be used with a custom configuration
+file &lt;code&gt;run.yml&lt;/code&gt; helping with this to simplify the deployment flow besides
+offering more flexibility.&lt;/p&gt;
+
+&lt;p&gt;Example &lt;code&gt;run.yml&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cmd: bundle exec unicorn -c unicorn.rb
+cwd: /arena/app-1/tmp
+env:
+    DEBUG: 1
+    ENVIROMENT: production
+followpid: /path/to/unicorn.pid
+log:
+    file: /var/log/app.log
+    age: 86400 # seconds
+    num: 7     # int
+    size: 1    # MegaBytes
+logger: logger -t unicorn
+user: www
+if_signal:
+    HUP:
+    INT:
+    TERM:
+    USR1:
+    USR2:
+    WINCH:
+    TTIN:
+    TTOU:
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     

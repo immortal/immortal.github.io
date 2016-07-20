@@ -48,10 +48,70 @@
                 <section id="post-body">
                     
 
-<h1 id="the-need">The need</h1>
+<h1 id="what-is-immortal">What is immortal ?</h1>
 
-<p>Supervise applications that follow the zero-downtime deployment pattern
-(unicorn/gunicorn) or when distributed logging is required.</p>
+<p>A *nix cross-platform (OS agnostic) supervisor based on
+<a href="https://cr.yp.to/daemontools.html">daemontools</a> &amp; <a href="http://smarden.org/runit/">runit</a>.</p>
+
+<blockquote>
+<p>Improve the wheel, don’t reinvent it</p>
+</blockquote>
+
+<h1 id="why-another-supervisor">Why another supervisor ?</h1>
+
+<p>Daemontools &amp; runit work very well but don&rsquo;t cover all use cases, mainly when
+dealing with applications that follow the zero-downtime deployment pattern
+(<a href="https://unicorn.bogomips.org/">unicorn</a>/<a href="http://gunicorn.org/">gunicorn</a>),
+applications that daemonize itself like <a href="http://nginx.org">nginx</a> or when
+distributed logging is required.</p>
+
+<p>Example of a zero-downtime flow using unicorn and signal handling:
+<a href="https://asciinema.org/a/80357"><img src="https://asciinema.org/a/80357.png" alt="asciicast" /></a></p>
+
+<p>⭕  immortal, follows and implements the same logic/principles of daemontools, it
+only extends some features to cover more needs, like the:</p>
+
+<pre><code>-f follow pid
+</code></pre>
+
+<p>Because of this, it aims to be compatible with existing daemontools or runit
+<a href="https://cr.yp.to/daemontools/supervise.html">run</a> scripts.</p>
+
+<p>Example using the <code>-f follow pid</code> option supervising unicorn:</p>
+
+<p><a href="https://asciinema.org/a/80360"><img src="https://asciinema.org/a/80360.png" alt="asciicast" /></a></p>
+
+<p>When working in distributed &ldquo;cloud&rdquo; environments or while doing Continuous
+Deployments, exists the need to automate the behavior of the supervisor on
+demand, because of this <strong>immortal</strong> can be used with a custom configuration
+file <code>run.yml</code> helping with this to simplify the deployment flow besides
+offering more flexibility.</p>
+
+<p>Example <code>run.yml</code>:</p>
+
+<pre><code>cmd: bundle exec unicorn -c unicorn.rb
+cwd: /arena/app-1/tmp
+env:
+    DEBUG: 1
+    ENVIROMENT: production
+followpid: /path/to/unicorn.pid
+log:
+    file: /var/log/app.log
+    age: 86400 # seconds
+    num: 7     # int
+    size: 1    # MegaBytes
+logger: logger -t unicorn
+user: www
+if_signal:
+    HUP:
+    INT:
+    TERM:
+    USR1:
+    USR2:
+    WINCH:
+    TTIN:
+    TTOU:
+</code></pre>
 
                 </section>
             </article>
