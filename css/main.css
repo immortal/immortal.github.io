@@ -13,6 +13,12 @@ body {
   -moz-font-feature-settings: "liga" on;
 }
 
+img {
+  max-width: 100%;
+  margin: 1rem 0 0 1rem;
+  border: 0;
+  border-radius: 5px; }
+
 h1,
 h2,
 h3,
