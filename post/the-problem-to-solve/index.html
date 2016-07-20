@@ -50,7 +50,47 @@
                     </h2>
                 </header>
                 <section id="post-body">
-                    <p><a href="https://asciinema.org/a/80371"><img src="https://asciinema.org/a/80371.png" alt="asciicast" /></a></p>
+                    
+
+<h2 id="logging">logging</h2>
+
+<p>When working in distributed &ldquo;cloud&rdquo; environments, centralized logging becomes a
+requirement, therefore is desired to have availability to chose how and where
+to log, either to a local file, to a local file and to a remote server or only
+remotely either TCP or UDP.</p>
+
+<p>To achieve this, <strong>immortal</strong> besides been capable write logs to a defined file or to a
+remote server, it allows to specify an external logger, by specifying the <code>-l</code>
+and <code>-logger</code> options example:</p>
+
+<pre><code>$ immortal -l /tmp/test.log -logger &quot;logger -t test&quot; my-app
+</code></pre>
+
+<p>In this case <code>-loger</code> is going to pass the Stander output/error to the
+<a href="https://www.freebsd.org/cgi/man.cgi?logger(1)">logger</a></p>
+
+<p>Example logging to a file and to the system syslog using <code>logger</code>:</p>
+
+<p><a href="https://asciinema.org/a/80376"><img src="https://asciinema.org/a/80376.png" alt="asciicast" /></a></p>
+
+<h2 id="follow-pid">Follow PID</h2>
+
+<p>In some cases is required to supervise applications that
+daemonize by default, normally this kind of applications create a
+<a href="https://en.wikipedia.org/wiki/Process_identifier#Pidfile">pidfile</a> every time
+they <a href="https://en.wikipedia.org/wiki/Fork_(system_call)">fork</a>, the one can be
+used to follow subsequent forks and avoid creating a race condition between
+the supervisor trying to start again the process and the forks created by the
+application.</p>
+
+<p>Example of a race condition while trying to supervise unicorn with runit:</p>
+
+<p><a href="https://asciinema.org/a/80371"><img src="https://asciinema.org/a/80371.png" alt="asciicast" /></a></p>
+
+<p>In this case after forking (<code>kill -USR2 $PID</code>), The supervisor in use
+<code>runit</code> in this case, tries to start up again the application, since the
+process that was supervising died, but instead enters into loop
+since the application still up and running using the same port.</p>
 
                 </section>
             </article>
