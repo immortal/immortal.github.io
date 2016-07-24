@@ -5,7 +5,8 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="author" content="immortal">
-		
+		<meta name="description" content="A *nix cross-platform (OS agnostic) supervisor">
+		<meta name="keywords" content="supervisor, follow pid, daemonize, run, logging">
 		<meta name="generator" content="Hugo 0.16" />
 		<title>The problem to solve &middot; immortal</title>
 		<link rel="shortcut icon" href="https://immortal.run/images/favicon.ico">
@@ -52,6 +53,25 @@
                 <section id="post-body">
                     
 
+<h2 id="follow-pid">Follow PID</h2>
+
+<p>In some cases is required to supervise applications that
+daemonize by default, normally this kind of applications create a
+<a href="https://en.wikipedia.org/wiki/Process_identifier#Pidfile">pidfile</a> every time
+they <a href="https://en.wikipedia.org/wiki/Fork_(system_call)">fork</a>, the one can be
+used to follow subsequent forks and avoid creating a race condition between
+the supervisor trying to start again the process and the forks created by the
+application.</p>
+
+<p>Example of a race condition while trying to supervise unicorn with runit:</p>
+
+<p><a href="https://asciinema.org/a/80371"><img src="https://asciinema.org/a/80371.png" alt="asciicast" /></a></p>
+
+<p>In this case after forking (<code>kill -USR2 $PID</code>), The supervisor in use
+<code>runit</code> in this case, tries to start up again the application, since the
+process that was supervising died, but instead enters into loop
+since the application still up and running using the same port.</p>
+
 <h2 id="logging">logging</h2>
 
 <p>When working in distributed &ldquo;cloud&rdquo; environments, centralized logging becomes a
@@ -72,25 +92,6 @@ and <code>-logger</code> options example:</p>
 <p>Example logging to a file and to the system syslog using <code>logger</code>:</p>
 
 <p><a href="https://asciinema.org/a/80376"><img src="https://asciinema.org/a/80376.png" alt="asciicast" /></a></p>
-
-<h2 id="follow-pid">Follow PID</h2>
-
-<p>In some cases is required to supervise applications that
-daemonize by default, normally this kind of applications create a
-<a href="https://en.wikipedia.org/wiki/Process_identifier#Pidfile">pidfile</a> every time
-they <a href="https://en.wikipedia.org/wiki/Fork_(system_call)">fork</a>, the one can be
-used to follow subsequent forks and avoid creating a race condition between
-the supervisor trying to start again the process and the forks created by the
-application.</p>
-
-<p>Example of a race condition while trying to supervise unicorn with runit:</p>
-
-<p><a href="https://asciinema.org/a/80371"><img src="https://asciinema.org/a/80371.png" alt="asciicast" /></a></p>
-
-<p>In this case after forking (<code>kill -USR2 $PID</code>), The supervisor in use
-<code>runit</code> in this case, tries to start up again the application, since the
-process that was supervising died, but instead enters into loop
-since the application still up and running using the same port.</p>
 
                 </section>
             </article>

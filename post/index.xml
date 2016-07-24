@@ -17,6 +17,25 @@
       <guid>https://immortal.run/post/the-problem-to-solve/</guid>
       <description>
 
+&lt;h2 id=&#34;follow-pid&#34;&gt;Follow PID&lt;/h2&gt;
+
+&lt;p&gt;In some cases is required to supervise applications that
+daemonize by default, normally this kind of applications create a
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Process_identifier#Pidfile&#34;&gt;pidfile&lt;/a&gt; every time
+they &lt;a href=&#34;https://en.wikipedia.org/wiki/Fork_(system_call)&#34;&gt;fork&lt;/a&gt;, the one can be
+used to follow subsequent forks and avoid creating a race condition between
+the supervisor trying to start again the process and the forks created by the
+application.&lt;/p&gt;
+
+&lt;p&gt;Example of a race condition while trying to supervise unicorn with runit:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://asciinema.org/a/80371&#34;&gt;&lt;img src=&#34;https://asciinema.org/a/80371.png&#34; alt=&#34;asciicast&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;In this case after forking (&lt;code&gt;kill -USR2 $PID&lt;/code&gt;), The supervisor in use
+&lt;code&gt;runit&lt;/code&gt; in this case, tries to start up again the application, since the
+process that was supervising died, but instead enters into loop
+since the application still up and running using the same port.&lt;/p&gt;
+
 &lt;h2 id=&#34;logging&#34;&gt;logging&lt;/h2&gt;
 
 &lt;p&gt;When working in distributed &amp;ldquo;cloud&amp;rdquo; environments, centralized logging becomes a
@@ -37,25 +56,6 @@ and &lt;code&gt;-logger&lt;/code&gt; options example:&lt;/p&gt;
 &lt;p&gt;Example logging to a file and to the system syslog using &lt;code&gt;logger&lt;/code&gt;:&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://asciinema.org/a/80376&#34;&gt;&lt;img src=&#34;https://asciinema.org/a/80376.png&#34; alt=&#34;asciicast&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;follow-pid&#34;&gt;Follow PID&lt;/h2&gt;
-
-&lt;p&gt;In some cases is required to supervise applications that
-daemonize by default, normally this kind of applications create a
-&lt;a href=&#34;https://en.wikipedia.org/wiki/Process_identifier#Pidfile&#34;&gt;pidfile&lt;/a&gt; every time
-they &lt;a href=&#34;https://en.wikipedia.org/wiki/Fork_(system_call)&#34;&gt;fork&lt;/a&gt;, the one can be
-used to follow subsequent forks and avoid creating a race condition between
-the supervisor trying to start again the process and the forks created by the
-application.&lt;/p&gt;
-
-&lt;p&gt;Example of a race condition while trying to supervise unicorn with runit:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://asciinema.org/a/80371&#34;&gt;&lt;img src=&#34;https://asciinema.org/a/80371.png&#34; alt=&#34;asciicast&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;In this case after forking (&lt;code&gt;kill -USR2 $PID&lt;/code&gt;), The supervisor in use
-&lt;code&gt;runit&lt;/code&gt; in this case, tries to start up again the application, since the
-process that was supervising died, but instead enters into loop
-since the application still up and running using the same port.&lt;/p&gt;
 </description>
     </item>
     
