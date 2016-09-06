@@ -69,5 +69,42 @@ and &lt;code&gt;-logger&lt;/code&gt; options example:&lt;/p&gt;
 </description>
     </item>
     
+    <item>
+      <title>run.yml</title>
+      <link>https://immortal.run/post/run.yml/</link>
+      <pubDate>Wed, 06 Jul 2016 20:35:39 +0200</pubDate>
+      
+      <guid>https://immortal.run/post/run.yml/</guid>
+      <description>&lt;p&gt;A configuration file for running/logging/supervising:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cmd: bundle exec unicorn -c unicorn.rb
+cwd: /tmp/
+env:
+    DEBUG: 1
+    ENVIROMENT: production
+pid:
+    follow: /path/to/unicorn.pid
+    parent: /tmp/parent.pid
+    child: /tmp/child.pid
+log:
+    file: /var/log/app.log
+    age: 86400 # seconds
+    num: 7     # int
+    size: 1    # MegaBytes
+logger: logger -t unicorn
+user: www
+wait: 1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;One of the main ideas behind the &lt;code&gt;run.yml&lt;/code&gt; is to eliminate an
+operations/devops dependency while deploying.&lt;/p&gt;
+
+&lt;p&gt;The application &amp;ldquo;micro service&amp;rdquo; can be shipped with a &lt;code&gt;run.yml&lt;/code&gt; and when
+doing a CI &amp;amp; CD flow, by simple updating the &lt;code&gt;run.yml&lt;/code&gt; file, the &lt;strong&gt;immortal&lt;/strong&gt;
+supervisor could stop, restart, pause, resume the service without need to
+logging the server and execute does steps.&lt;/p&gt;
+</description>
+    </item>
+    
   </channel>
 </rss>

@@ -8,7 +8,7 @@
 		<meta name="description" content="A *nix cross-platform (OS agnostic) supervisor that implements a follow pid feature and multiple logging options">
 		<meta name="keywords" content="supervisor, follow pid, daemonize, run, logging">
 		<meta name="generator" content="Hugo 0.16" />
-		<title>How it works &middot; immortal</title>
+		<title>run.yml &middot; immortal</title>
 		<link rel="shortcut icon" href="https://immortal.run/images/favicon.ico">
 		<link rel="stylesheet" href="https://immortal.run/css/style.css">
 		<link rel="stylesheet" href="https://immortal.run/css/highlight.css">
@@ -44,14 +44,41 @@
         <section id="wrapper">
             <article class="post">
                 <header>
-                    <h1>How it works</h1>
+                    <h1>run.yml</h1>
                     <h2 class="headline">
                     <br>
                     
                     </h2>
                 </header>
                 <section id="post-body">
-                    <p><a href="https://asciinema.org/a/80360"><img src="https://asciinema.org/a/80360.png" alt="asciicast" /></a></p>
+                    <p>A configuration file for running/logging/supervising:</p>
+
+<pre><code>cmd: bundle exec unicorn -c unicorn.rb
+cwd: /tmp/
+env:
+    DEBUG: 1
+    ENVIROMENT: production
+pid:
+    follow: /path/to/unicorn.pid
+    parent: /tmp/parent.pid
+    child: /tmp/child.pid
+log:
+    file: /var/log/app.log
+    age: 86400 # seconds
+    num: 7     # int
+    size: 1    # MegaBytes
+logger: logger -t unicorn
+user: www
+wait: 1
+</code></pre>
+
+<p>One of the main ideas behind the <code>run.yml</code> is to eliminate an
+operations/devops dependency while deploying.</p>
+
+<p>The application &ldquo;micro service&rdquo; can be shipped with a <code>run.yml</code> and when
+doing a CI &amp; CD flow, by simple updating the <code>run.yml</code> file, the <strong>immortal</strong>
+supervisor could stop, restart, pause, resume the service without need to
+logging the server and execute does steps.</p>
 
                 </section>
             </article>
@@ -59,7 +86,7 @@
                 
                     
                 <section id="sharing">
-                    <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fimmortal.run%2fpost%2fhow-it-works%2f - How%20it%20works "><span class="icon-twitter"> Tweet</span></a>
+                    <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fimmortal.run%2fpost%2frun.yml%2f - run.yml "><span class="icon-twitter"> Tweet</span></a>
 
 <a class="facebook" href="#" onclick="
     window.open(
