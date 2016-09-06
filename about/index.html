@@ -96,11 +96,11 @@ env:
     DEBUG: 1
     ENVIROMENT: production
 pid:
-    follow: /path/to/unicorn.pid
-    parent: /tmp/parent.pid
-    child: /tmp/child.pid
+    follow: /arena/app-1/unicorn.pid
+    parent: /arena/app-1/parent.pid
+    child: /arena/app-1/child.pid
 log:
-    file: /var/log/app.log
+    file: /var/log/app-1.log
     age: 86400 # seconds
     num: 7     # int
     size: 1    # MegaBytes
