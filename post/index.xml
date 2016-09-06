@@ -75,7 +75,11 @@ and &lt;code&gt;-logger&lt;/code&gt; options example:&lt;/p&gt;
       <pubDate>Wed, 06 Jul 2016 20:35:39 +0200</pubDate>
       
       <guid>https://immortal.run/post/run.yml/</guid>
-      <description>&lt;p&gt;A configuration file for running/logging/supervising:&lt;/p&gt;
+      <description>
+
+&lt;h2 id=&#34;immortal-c-run-yml&#34;&gt;immortal -c run.yml&lt;/h2&gt;
+
+&lt;p&gt;A configuration file for running/logging/supervising:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;cmd: bundle exec unicorn -c unicorn.rb
 cwd: /tmp/
