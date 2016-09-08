@@ -85,7 +85,7 @@ and &lt;code&gt;-logger&lt;/code&gt; options example:&lt;/p&gt;
 cwd: /arena/app-1
 env:
     DEBUG: 1
-    ENVIROMENT: production
+    ENVIRONMENT: production
 pid:
     follow: /arena/app-1/unicorn.pid
     parent: /arena/app-1/parent.pid

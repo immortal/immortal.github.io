@@ -122,7 +122,7 @@ offering more flexibility.&lt;/p&gt;
 cwd: /arena/app-1/tmp
 env:
     DEBUG: 1
-    ENVIROMENT: production
+    ENVIRONMENT: production
 pid:
     follow: /arena/app-1/unicorn.pid
     parent: /arena/app-1/parent.pid
@@ -155,7 +155,7 @@ wait: 1
 cwd: /arena/app-1
 env:
     DEBUG: 1
-    ENVIROMENT: production
+    ENVIRONMENT: production
 pid:
     follow: /arena/app-1/unicorn.pid
     parent: /arena/app-1/parent.pid
