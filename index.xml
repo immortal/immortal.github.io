@@ -2,10 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>immortal</title>
-    <link>https://immortal.run/</link>
+    <link>https://immortal.run/index.xml</link>
     <description>Recent content on immortal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <copyright> </copyright>
     <lastBuildDate>Wed, 20 Jul 2016 21:07:15 +0200</lastBuildDate>
     <atom:link href="https://immortal.run/index.xml" rel="self" type="application/rss+xml" />
     
@@ -141,10 +142,10 @@ wait: 1
     
     <item>
       <title>run.yml</title>
-      <link>https://immortal.run/post/run.yml/</link>
+      <link>https://immortal.run/post/run/</link>
       <pubDate>Wed, 06 Jul 2016 20:35:39 +0200</pubDate>
       
-      <guid>https://immortal.run/post/run.yml/</guid>
+      <guid>https://immortal.run/post/run/</guid>
       <description>
 
 &lt;h2 id=&#34;immortal-c-run-yml&#34;&gt;immortal -c run.yml&lt;/h2&gt;
