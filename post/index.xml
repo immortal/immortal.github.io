@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Post-rsses on immortal</title>
+    <title>Posts on immortal</title>
     <link>https://immortal.run/post/index.xml</link>
-    <description>Recent content in Post-rsses on immortal</description>
+    <description>Recent content in Posts on immortal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright> </copyright>
@@ -72,10 +72,10 @@ and &lt;code&gt;-logger&lt;/code&gt; options example:&lt;/p&gt;
     
     <item>
       <title>run.yml</title>
-      <link>https://immortal.run/post/run/</link>
+      <link>https://immortal.run/post/run.yml/</link>
       <pubDate>Wed, 06 Jul 2016 20:35:39 +0200</pubDate>
       
-      <guid>https://immortal.run/post/run/</guid>
+      <guid>https://immortal.run/post/run.yml/</guid>
       <description>
 
 &lt;h2 id=&#34;immortal-c-run-yml&#34;&gt;immortal -c run.yml&lt;/h2&gt;
