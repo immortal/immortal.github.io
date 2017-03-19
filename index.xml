@@ -48,7 +48,10 @@ application.&lt;/p&gt;
 
 &lt;p&gt;Example of a race condition while trying to supervise unicorn with runit:&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://asciinema.org/a/80371&#34;&gt;&lt;img src=&#34;https://asciinema.org/a/80371.png&#34; alt=&#34;asciicast&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;embed video-player&#34;&gt;
+    &lt;script type=&#34;text/javascript&#34; src=&#34;https://asciinema.org/a/80371.js&#34; id=&#34;asciicast-80371&#34; async&gt;&lt;/script&gt;
+&lt;/div&gt;
+
 
 &lt;p&gt;In the example given below, after forking (&lt;code&gt;kill -USR2 $PID&lt;/code&gt;), The supervisor in use
 &lt;code&gt;runit&lt;/code&gt; in this case, tries to start up again the application, since the
@@ -74,7 +77,10 @@ and &lt;code&gt;-logger&lt;/code&gt; options example:&lt;/p&gt;
 
 &lt;p&gt;Example logging to a file and to the system syslog using &lt;code&gt;logger&lt;/code&gt;:&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://asciinema.org/a/80376&#34;&gt;&lt;img src=&#34;https://asciinema.org/a/80376.png&#34; alt=&#34;asciicast&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;embed video-player&#34;&gt;
+    &lt;script type=&#34;text/javascript&#34; src=&#34;https://asciinema.org/a/80376.js&#34; id=&#34;asciicast-80376&#34; async&gt;&lt;/script&gt;
+&lt;/div&gt;
+
 </description>
     </item>
     
@@ -84,7 +90,10 @@ and &lt;code&gt;-logger&lt;/code&gt; options example:&lt;/p&gt;
       <pubDate>Wed, 20 Jul 2016 21:01:08 +0200</pubDate>
       
       <guid>https://immortal.run/post/how-it-works/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://asciinema.org/a/80360&#34;&gt;&lt;img src=&#34;https://asciinema.org/a/80360.png&#34; alt=&#34;asciicast&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+      <description>&lt;div class=&#34;embed video-player&#34;&gt;
+    &lt;script type=&#34;text/javascript&#34; src=&#34;https://asciinema.org/a/80360.js&#34; id=&#34;asciicast-80360&#34; async&gt;&lt;/script&gt;
+&lt;/div&gt;
+
 </description>
     </item>
     
