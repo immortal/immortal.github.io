@@ -22,9 +22,10 @@ been terminated. The service can be controlled by querying a Unix socket
 &amp;ldquo;immortal.sock&amp;rdquo;, this allows to remotely have full control over the service if
 required by exposing the socket using a web server like Nginx.&lt;/p&gt;
 
-&lt;p&gt;immortal    - Starts and monitor a service
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;immortal    - Starts and monitor a service
 immortaldir - Directory to scan for services *.yml
-immortalctl - Control existing services&lt;/p&gt;
+immortalctl - Control existing services
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
@@ -204,7 +205,7 @@ any web server like Nginx.&lt;/p&gt;
 
 &lt;p&gt;Example using curl to query the status of a process:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt; curl --unix-socket immortal.sock http:/status -s | jq
+&lt;pre&gt;&lt;code&gt;curl --unix-socket immortal.sock http:/status -s | jq
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Outputs:&lt;/p&gt;

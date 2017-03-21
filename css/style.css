@@ -501,7 +501,6 @@ hr {
 
 span.code {
     font-family: Menlo, Monaco, Courier;
-    background-color: #EEE;
     font-size: 14px;
 }
 
@@ -923,7 +922,6 @@ a.symbol:hover {
 
 code {
     font-family: Menlo, Monaco, Courier;
-    background-color: #EEE;
     font-size: 14px;
     padding: 4px;
     font-weight: 600;
