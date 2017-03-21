@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Immortaldir on immortal</title>
+    <link>https://immortal.run/tags/immortaldir/index.xml</link>
+    <description>Recent content in Immortaldir on immortal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright> </copyright>
+    <atom:link href="https://immortal.run/tags/immortaldir/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>How it works</title>
+      <link>https://immortal.run/post/how-it-works/</link>
+      <pubDate>Tue, 21 Mar 2017 12:04:36 +0100</pubDate>
+      
+      <guid>https://immortal.run/post/how-it-works/</guid>
+      <description>&lt;p&gt;⭕  immortal runs a command or script detached from the controlling terminal
+as a Unix daemon, it will supervise and restart the service if it has
+been terminated. The service can be controlled by querying a Unix socket
+&amp;ldquo;immortal.sock&amp;rdquo;, this allows to remotely have full control over the service if
+required by exposing the socket using a web server like Nginx.&lt;/p&gt;
+
+&lt;p&gt;immortal    - Starts and monitor a service
+immortaldir - Directory to scan for services *.yml
+immortalctl - Control existing services&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

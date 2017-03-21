@@ -7,8 +7,26 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright> </copyright>
-    <lastBuildDate>Wed, 20 Jul 2016 21:07:15 +0200</lastBuildDate>
+    <lastBuildDate>Tue, 21 Mar 2017 12:04:36 +0100</lastBuildDate>
     <atom:link href="https://immortal.run/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>How it works</title>
+      <link>https://immortal.run/post/how-it-works/</link>
+      <pubDate>Tue, 21 Mar 2017 12:04:36 +0100</pubDate>
+      
+      <guid>https://immortal.run/post/how-it-works/</guid>
+      <description>&lt;p&gt;⭕  immortal runs a command or script detached from the controlling terminal
+as a Unix daemon, it will supervise and restart the service if it has
+been terminated. The service can be controlled by querying a Unix socket
+&amp;ldquo;immortal.sock&amp;rdquo;, this allows to remotely have full control over the service if
+required by exposing the socket using a web server like Nginx.&lt;/p&gt;
+
+&lt;p&gt;immortal    - Starts and monitor a service
+immortaldir - Directory to scan for services *.yml
+immortalctl - Control existing services&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>The problem to solve</title>
@@ -17,6 +35,16 @@
       
       <guid>https://immortal.run/post/the-problem-to-solve/</guid>
       <description>
+
+&lt;h2 id=&#34;a-common-way-to-start-up-services&#34;&gt;A common way to start up services&lt;/h2&gt;
+
+&lt;p&gt;Either you are using macOs, FreeBSD, or any Linux variant the idea is to
+simplify how process/services are keep up and running, without need to worry
+about special environments or paths.&lt;/p&gt;
+
+&lt;p&gt;A single &lt;a href=&#34;https://immortal.run/post/run.yml&#34;&gt;&lt;code&gt;run.yml&lt;/code&gt;&lt;/a&gt; file should be enough for start and supervise
+the services, or used as a template within automation tools like
+&lt;a href=&#34;http://saltstack.org&#34;&gt;Saltstack&lt;/a&gt;, &lt;a href=&#34;https://ansible.com&#34;&gt;Ansible&lt;/a&gt;, etc.&lt;/p&gt;
 
 &lt;h2 id=&#34;follow-pid&#34;&gt;Follow PID&lt;/h2&gt;
 
@@ -61,19 +89,6 @@ and &lt;code&gt;-logger&lt;/code&gt; options example:&lt;/p&gt;
 
 &lt;div class=&#34;embed video-player&#34;&gt;
     &lt;script type=&#34;text/javascript&#34; src=&#34;https://asciinema.org/a/80376.js&#34; id=&#34;asciicast-80376&#34; async&gt;&lt;/script&gt;
-&lt;/div&gt;
-
-</description>
-    </item>
-    
-    <item>
-      <title>How it works</title>
-      <link>https://immortal.run/post/how-it-works/</link>
-      <pubDate>Wed, 20 Jul 2016 21:01:08 +0200</pubDate>
-      
-      <guid>https://immortal.run/post/how-it-works/</guid>
-      <description>&lt;div class=&#34;embed video-player&#34;&gt;
-    &lt;script type=&#34;text/javascript&#34; src=&#34;https://asciinema.org/a/80360.js&#34; id=&#34;asciicast-80360&#34; async&gt;&lt;/script&gt;
 &lt;/div&gt;
 
 </description>

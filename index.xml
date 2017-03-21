@@ -7,8 +7,26 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright> </copyright>
-    <lastBuildDate>Mon, 20 Mar 2017 16:17:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 21 Mar 2017 12:04:36 +0100</lastBuildDate>
     <atom:link href="https://immortal.run/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>How it works</title>
+      <link>https://immortal.run/post/how-it-works/</link>
+      <pubDate>Tue, 21 Mar 2017 12:04:36 +0100</pubDate>
+      
+      <guid>https://immortal.run/post/how-it-works/</guid>
+      <description>&lt;p&gt;⭕  immortal runs a command or script detached from the controlling terminal
+as a Unix daemon, it will supervise and restart the service if it has
+been terminated. The service can be controlled by querying a Unix socket
+&amp;ldquo;immortal.sock&amp;rdquo;, this allows to remotely have full control over the service if
+required by exposing the socket using a web server like Nginx.&lt;/p&gt;
+
+&lt;p&gt;immortal    - Starts and monitor a service
+immortaldir - Directory to scan for services *.yml
+immortalctl - Control existing services&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>pkg install immortal</title>
@@ -50,6 +68,16 @@
       
       <guid>https://immortal.run/post/the-problem-to-solve/</guid>
       <description>
+
+&lt;h2 id=&#34;a-common-way-to-start-up-services&#34;&gt;A common way to start up services&lt;/h2&gt;
+
+&lt;p&gt;Either you are using macOs, FreeBSD, or any Linux variant the idea is to
+simplify how process/services are keep up and running, without need to worry
+about special environments or paths.&lt;/p&gt;
+
+&lt;p&gt;A single &lt;a href=&#34;https://immortal.run/post/run.yml&#34;&gt;&lt;code&gt;run.yml&lt;/code&gt;&lt;/a&gt; file should be enough for start and supervise
+the services, or used as a template within automation tools like
+&lt;a href=&#34;http://saltstack.org&#34;&gt;Saltstack&lt;/a&gt;, &lt;a href=&#34;https://ansible.com&#34;&gt;Ansible&lt;/a&gt;, etc.&lt;/p&gt;
 
 &lt;h2 id=&#34;follow-pid&#34;&gt;Follow PID&lt;/h2&gt;
 
@@ -100,19 +128,6 @@ and &lt;code&gt;-logger&lt;/code&gt; options example:&lt;/p&gt;
     </item>
     
     <item>
-      <title>How it works</title>
-      <link>https://immortal.run/post/how-it-works/</link>
-      <pubDate>Wed, 20 Jul 2016 21:01:08 +0200</pubDate>
-      
-      <guid>https://immortal.run/post/how-it-works/</guid>
-      <description>&lt;div class=&#34;embed video-player&#34;&gt;
-    &lt;script type=&#34;text/javascript&#34; src=&#34;https://asciinema.org/a/80360.js&#34; id=&#34;asciicast-80360&#34; async&gt;&lt;/script&gt;
-&lt;/div&gt;
-
-</description>
-    </item>
-    
-    <item>
       <title>⭕  immortal</title>
       <link>https://immortal.run/about/</link>
       <pubDate>Wed, 20 Jul 2016 17:34:22 +0200</pubDate>
@@ -151,7 +166,7 @@ only extends some features to cover more needs, like the:&lt;/p&gt;
 
 &lt;p&gt;Example using the &lt;code&gt;-f follow pid&lt;/code&gt; option supervising unicorn:&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://asciinema.org/a/80360&#34;&gt;&lt;img src=&#34;https://asciinema.org/a/80360.png&#34; alt=&#34;asciicast&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://asciinema.org/a/108148&#34;&gt;&lt;img src=&#34;https://asciinema.org/a/108148.png&#34; alt=&#34;asciicast&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;When working in distributed &amp;ldquo;cloud&amp;rdquo; environments or while doing Continuous
 Deployments, exists the need to automate the behavior of the supervisor on
@@ -175,9 +190,32 @@ log:
     age: 86400 # seconds
     num: 7     # int
     size: 1    # MegaBytes
-logger: logger -t unicorn
+logger: filebeat -c filebeat.yml -v -once
 user: www
 wait: 1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;manage-your-process-using-a-json-api&#34;&gt;Manage your process using a JSON API&lt;/h1&gt;
+
+&lt;p&gt;⭕ &lt;strong&gt;immortal&lt;/strong&gt; exposes full control over the process via an Unix socket,
+returning status in JSON format allowing with this to query and full manage the
+process via http, based on the requirements the services could be exposed via
+any web server like Nginx.&lt;/p&gt;
+
+&lt;p&gt;Example using curl to query the status of a process:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; curl --unix-socket immortal.sock http:/status -s | jq
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Outputs:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+  &amp;quot;pid&amp;quot;: 6940,
+  &amp;quot;up&amp;quot;: &amp;quot;7.9s&amp;quot;,
+  &amp;quot;cmd&amp;quot;: &amp;quot;./stdout&amp;quot;,
+  &amp;quot;fpid&amp;quot;: false,
+  &amp;quot;count&amp;quot;: 4
+}
 &lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
