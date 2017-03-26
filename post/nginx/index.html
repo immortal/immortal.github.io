@@ -8,7 +8,7 @@
 		<meta name="description" content="A *nix cross-platform (OS agnostic) supervisor that implements a follow pid feature and multiple logging options">
 		<meta name="keywords" content="supervisor, follow pid, daemonize, run, logging">
 		<meta name="generator" content="Hugo 0.19" />
-		<title>homebrew &middot; immortal</title>
+		<title>Using Nginx to manage the services &middot; immortal</title>
 		<link rel="shortcut icon" href="https://immortal.run/images/favicon.ico">
 		<link rel="stylesheet" href="https://immortal.run/css/style.css">
 		<link rel="stylesheet" href="https://immortal.run/css/highlight.css">
@@ -44,22 +44,62 @@
         <section id="wrapper">
             <article class="post">
                 <header>
-                    <h1>homebrew</h1>
+                    <h1>Using Nginx to manage the services</h1>
                     <h2 class="headline">
                     <br>
                     
                     </h2>
                 </header>
                 <section id="post-body">
-                    <p>To install <strong>immortal</strong> on Mac OS X:</p>
+                    <p>To expose the services via web <a href="https://nginx.com">Nginx</a> can be used.</p>
 
-<pre><code>$ brew tap immortal/tap
+<p>Configuration example:</p>
+
+<pre><code class="language-nginx">upstream immortal {
+    server unix:/var/run/immortal/sleep/immortal.sock;
+}
+
+server {
+listen 80 default_server;
+server_name _;
+location / {
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_set_header X-NginX-Proxy true;
+    proxy_http_version 1.1; # for keep-alive
+    proxy_pass http://immortal/;
+    proxy_redirect off;
+    }
+}
 </code></pre>
 
-<p>Next:</p>
+<p>Based on the setup, permissions for the socket may need to be changed:</p>
 
-<pre><code>$ brew install immortal
+<pre><code>$ chmod 766 /var/run/immortal/&lt;service name&gt;/immortal.sock
 </code></pre>
+
+<p>To check the service status:</p>
+
+<pre><code>http://&lt;domain&gt;
+</code></pre>
+
+<p>To send signals:</p>
+
+<pre><code>http://&lt;domain&gt;/signal/&lt;signal&gt;
+</code></pre>
+
+<p>For example to stop the service:</p>
+
+<pre><code>http://&lt;domain&gt;/signal/stop
+</code></pre>
+
+<p>To start the service:</p>
+
+<pre><code>http://&lt;domain&gt;/signal/start
+</code></pre>
+
+<p>The responses are in JSON format.</p>
 
                 </section>
             </article>
@@ -67,7 +107,7 @@
                 
                     
                 <section id="sharing">
-                    <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fimmortal.run%2fmac%2f - homebrew "><span class="icon-twitter"> Tweet</span></a>
+                    <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fimmortal.run%2fpost%2fnginx%2f - Using%20Nginx%20to%20manage%20the%20services "><span class="icon-twitter"> Tweet</span></a>
 
 <a class="facebook" href="#" onclick="
     window.open(

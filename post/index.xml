@@ -146,5 +146,63 @@ logging the server and execute does steps.&lt;/p&gt;
 </description>
     </item>
     
+    <item>
+      <title>Using Nginx to manage the services</title>
+      <link>https://immortal.run/post/nginx/</link>
+      <pubDate>Fri, 26 Mar 2010 23:14:08 +0200</pubDate>
+      
+      <guid>https://immortal.run/post/nginx/</guid>
+      <description>&lt;p&gt;To expose the services via web &lt;a href=&#34;https://nginx.com&#34;&gt;Nginx&lt;/a&gt; can be used.&lt;/p&gt;
+
+&lt;p&gt;Configuration example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-nginx&#34;&gt;upstream immortal {
+    server unix:/var/run/immortal/sleep/immortal.sock;
+}
+
+server {
+listen 80 default_server;
+server_name _;
+location / {
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_set_header X-NginX-Proxy true;
+    proxy_http_version 1.1; # for keep-alive
+    proxy_pass http://immortal/;
+    proxy_redirect off;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Based on the setup, permissions for the socket may need to be changed:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ chmod 766 /var/run/immortal/&amp;lt;service name&amp;gt;/immortal.sock
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To check the service status:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;http://&amp;lt;domain&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To send signals:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;http://&amp;lt;domain&amp;gt;/signal/&amp;lt;signal&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For example to stop the service:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;http://&amp;lt;domain&amp;gt;/signal/stop
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To start the service:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;http://&amp;lt;domain&amp;gt;/signal/start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The responses are in JSON format.&lt;/p&gt;
+</description>
+    </item>
+    
   </channel>
 </rss>
