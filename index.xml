@@ -16,26 +16,26 @@
       <pubDate>Tue, 21 Mar 2017 12:04:36 +0100</pubDate>
       
       <guid>https://immortal.run/post/how-it-works/</guid>
-      <description>
-
-&lt;p&gt;⭕  immortal runs a command or script detached from the controlling terminal
+      <description>&lt;p&gt;⭕  &lt;code&gt;immortal&lt;/code&gt; runs a command or script detached from the controlling terminal
 as a Unix daemon, it will supervise and restart the service if it has
 been terminated. The service can be controlled by querying a Unix socket
-&amp;ldquo;immortal.sock&amp;rdquo;, this allows to remotely have full control over the service if
-required by exposing the socket using a web server like Nginx.&lt;/p&gt;
+&amp;ldquo;immortal.sock&amp;rdquo; (&lt;code&gt;immortalctl&lt;/code&gt;), this allows to remotely have full control over
+the service if required by exposing the socket using a web server like Nginx.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;immortal    - Starts and monitor a service
 immortaldir - Directory to scan for services *.yml
 immortalctl - Control existing services
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;immortal&#34;&gt;immortal&lt;/h1&gt;
+&lt;p&gt;In a nutshell, &lt;code&gt;immortal&lt;/code&gt; is a command that runs forever an application or
+service.  In most common cases &lt;code&gt;immortal&lt;/code&gt; is called by &lt;code&gt;imortaldir&lt;/code&gt; which
+searches for immortal configuration files &lt;a href=&#34;https://immortal.run/post/run.yml&#34;&gt;run.yml&lt;/a&gt; and ideally
+starts at boot time in order to persist across reboots.&lt;/p&gt;
 
-&lt;p&gt;To start an keep runing forever&lt;/p&gt;
+&lt;div class=&#34;embed video-player&#34;&gt;
+    &lt;script type=&#34;text/javascript&#34; src=&#34;https://asciinema.org/a/108148.js&#34; id=&#34;asciicast-108148&#34; async&gt;&lt;/script&gt;
+&lt;/div&gt;
 
-&lt;h1 id=&#34;immortaldir&#34;&gt;immortaldir&lt;/h1&gt;
-
-&lt;h1 id=&#34;immortalctl&#34;&gt;immortalctl&lt;/h1&gt;
 </description>
     </item>
     
