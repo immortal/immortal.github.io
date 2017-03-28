@@ -1,0 +1,314 @@
+    <!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="immortal">
+		<meta name="description" content="A *nix cross-platform (OS agnostic) supervisor that implements a follow pid feature and multiple logging options">
+		<meta name="keywords" content="supervisor, follow pid, daemonize, run, logging">
+		<meta name="generator" content="Hugo 0.19" />
+		<title>immortal &middot; immortal</title>
+		<link rel="shortcut icon" href="https://immortal.run/images/favicon.ico">
+		<link rel="stylesheet" href="https://immortal.run/css/style.css">
+		<link rel="stylesheet" href="https://immortal.run/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="https://immortal.run/css/monosocialiconsfont.css">
+		
+
+		
+		<link href="https://immortal.run/index.xml" rel="alternate" type="application/rss+xml" title="immortal" />
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='https://immortal.run/'> <span class="arrow">←</span>Home</a>
+	
+
+	
+		<a href="https://github.com/immortal/immortal/">Github</a>
+		<a href="https://github.com/immortal/immortal/issues">Issues</a>
+		<a href='https://immortal.run/about'>About</a>
+	
+
+	
+	<a class="cta" href="https://immortal.run/index.xml">Subscribe</a>
+	
+</nav>
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>immortal</h1>
+                    <h2 class="headline">
+                    <br>
+                    
+                    </h2>
+                </header>
+                <section id="post-body">
+                    
+
+<p>⭕   <code>immortal</code> runs a command or script detached from the controlling terminal as a Unix daemon, it will supervise and restart the service if  it has been terminated.  The service can be controlled by querying a Unix socket &ldquo;immortal.sock&rdquo;, this allows to remotely have full control over the service if required by exposing the socket using a web server like Nginx.</p>
+
+<h2 id="usage">Usage</h2>
+
+<pre><code class="language-sh">immortal [-v] [-ctl dir] [-d dir] [-e dir] [-f pidfile] [-l logfile] [-logger logger] [-p child_pidfile] [-P supervisor_pidfile] [-u user] command
+</code></pre>
+
+<h2 id="d-dir"><code>-d dir</code></h2>
+
+<p>Change to directory <code>&lt;dir&gt;</code> before starting the command</p>
+
+<h2 id="e-dir"><code>-e dir</code></h2>
+
+<p>Set environment variables specified by files within the <code>&lt;dir&gt;</code>.  For example, if <code>&lt;dir&gt;</code> is /tmp/env and contains 3 files:</p>
+
+<pre><code>/tmp/env
+    |--DEBUG  (contains true)
+    |--DBHOST (contains 10.0.0.1)
+    `--DBPASS (contains secret)
+</code></pre>
+
+<p>An environment var is going to be created for each file, in this case:</p>
+
+<pre><code>DEBUG=true
+DBHOST=10.0.0.1
+DBPASS=secret
+</code></pre>
+
+<h2 id="f-pidfile"><code>-f pidfile</code></h2>
+
+<p>Follow PID in pidfile.</p>
+
+<p>In  some  cases  it is required to supervise applications that daemonize by default. Normally this kind of applications create a pidfile  every  time  they fork, the one can be used to follow subsequent forks and avoid creating a race condition between the supervisor trying  to  start again the process and the forks created by the application.</p>
+
+<p>If using <a href="/post/immortalctl">immortalctl</a> the color yellow on the  Down  column, helps  to  identify  does  process that have been forked and that currently are been supervised by the PID on the <code>&lt;pidfile&gt;</code>.  When the supervised application forks and creates a  <code>&lt;pidfile&gt;</code> a log entry (level DAEMON) will be created:</p>
+
+<p>Watching pid <code>&lt;int&gt;</code> on file <code>&lt;pidfile&gt;</code></p>
+
+<blockquote>
+<p>The  follow  pid option has better performance on Unix/BSD due the kernel event notification mechanism <a href="https://www.freebsd.org/cgi/man.cgi?query=kqueue&amp;sektion=2">kqueue(2)</a>.</p>
+</blockquote>
+
+<h2 id="l-logfile"><code>-l logfile</code></h2>
+
+<p>Write stdout/stderr to <code>&lt;logfile&gt;</code></p>
+
+<h2 id="logger-command"><code>-logger command</code></h2>
+
+<p>A command <code>&lt;command&gt;</code> to pipe stdout/stderr from stdin.  Besides writing logs locally by using the option -l, they can be sent to a remote host or by processed by another tool, for example to write logs locally and send logs remotely using logger  this  could be used:</p>
+
+<pre><code>-l /var/log/app.log --logger &quot;logger -h 10.0.0.1 -t app&quot;
+</code></pre>
+
+<h2 id="p-pidfile"><code>-P pidfile</code></h2>
+
+<p>Path to write the supervisor pidfile</p>
+
+<h2 id="p-pidfile-1"><code>-p pidfile</code></h2>
+
+<p>Path to write the child pidfile</p>
+
+<h2 id="s-seconds"><code>-s seconds</code></h2>
+
+<p>Seconds (int) <code>&lt;seconds&gt;</code> to wait before starting.</p>
+
+<h2 id="u-user"><code>-u user</code></h2>
+
+<p>Execute command on behalf <code>&lt;user&gt;</code></p>
+
+<h2 id="v"><code>-v</code></h2>
+
+<p>Print version</p>
+
+<h1 id="the-configuration-file">The configuration file</h1>
+
+<p><code>-c &lt;service name&gt;.yml</code></p>
+
+<p>A  configuration  file with valid YAML syntax, when using this option, it will overwrite other options, configuration format:</p>
+
+<pre><code class="language-yaml">cmd: &lt;command to execute&gt;
+cwd: &lt;change workding directory&gt; # option -d
+env:                             # option -e
+    &lt;key&gt;: &lt;value&gt;
+pid:
+    follow: &lt;pidfile&gt;            # option -f
+    parent: &lt;pidfile&gt;            # option -P
+    child: &lt;pidfile&gt;             # option -p
+log:
+    file: &lt;path&gt;                 # option -l
+    age: &lt;int&gt;   # seconds
+    num: &lt;int&gt;   # int
+    size: &lt;int&gt;  # MegaBytes
+logger: &lt;command&gt;                # option -logger
+user: &lt;user&gt;                     # option -u
+wait: &lt;int&gt;                      # option -s
+</code></pre>
+
+<h2 id="ctl-var-run-immortal-service"><code>-ctl /var/run/immortal/&lt;service&gt;</code></h2>
+
+<p>Path where the supervise directory will be created. This directory is unique per
+service and is used to manage the service via a Unix socket besides preventing
+running multiple times the same service by using a lock.</p>
+
+<p>A supervise directory containing two files:</p>
+
+<pre><code class="language-text">lock
+immortal.sock
+</code></pre>
+
+<p>When  calling  immortal  from  the  command line, not by using immortaldir(8) as root, the supervise directory, will be created on  a hidden directory named &ldquo;.immortal&rdquo; within the $HOME of the user:</p>
+
+<pre><code class="language-sh"> ~/.immortal/&lt;PID&gt;
+</code></pre>
+
+<p>This  helps  to  run  and  supervise the same command multiple times without colliding, useful for testing or for temporary  services that will exit when server reboots.</p>
+
+<p>To  keep  services  up  and running on boot time, is better to create a configuration file &ldquo;run.yml&rdquo; and use immortaldir(8).</p>
+
+<h1 id="environment">ENVIRONMENT</h1>
+
+<p><code>IMMORTAL_SDIR</code> This environment variable allows to override the default supervise  directory  /var/run/immortal, used also by <a href="/post/immortalctl">immortalctl</a> and <a href="/post/immortaldir">immortaldir</a></p>
+
+                </section>
+            </article>
+            <footer id="post-meta" class="clearfix">
+                
+                    
+                <section id="sharing">
+                    <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fimmortal.run%2fpost%2fimmortal%2f - immortal "><span class="icon-twitter"> Tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+
+                </section>
+            </footer>
+
+            
+
+            <ul id="post-list" class="archive readmore">
+    <h3>Read more</h3>
+    
+    
+        
+        <li>
+            <a href="https://immortal.run/post/how-it-works/">How it works</a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://immortal.run/post/the-problem-to-solve/">The problem to solve</a>
+        </li>
+        
+   
+    
+        
+   
+    
+        
+        <li>
+            <a href="https://immortal.run/post/run.yml/">run.yml</a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://immortal.run/post/nginx/">Using Nginx to manage the services</a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://immortal.run/post/immortal/">immortal</a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://immortal.run/post/immortalctl/">immortalctl</a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://immortal.run/post/immortaldir/">immortaldir</a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://immortal.run/tags/immortal/">Immortal</a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://immortal.run/tags/immortalctl/">Immortalctl</a>
+        </li>
+        
+   
+</ul>
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    
+    <a class="symbol" href="https://github.com/immortal">
+        circlegithub
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+        
+    
+    </p>
+</footer>
+
+        </section>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://immortal.run/js/main.js"></script>
+<script src="https://immortal.run/js/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-79517076-2', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+    </body>
+</html>
