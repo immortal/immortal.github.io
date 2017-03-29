@@ -32,6 +32,16 @@ service.  In most common cases &lt;code&gt;immortal&lt;/code&gt; is called by &l
 searches for immortal configuration files &lt;a href=&#34;https://immortal.run/post/run.yml&#34;&gt;run.yml&lt;/a&gt; and ideally
 starts at boot time in order to persist across reboots.&lt;/p&gt;
 
+&lt;p&gt;In some cases there is a need to &amp;ldquo;daemonize&amp;rdquo; a command but not to keep it
+persistent across reboots, for this cases &lt;a href=&#34;https://immortal.run/post/immortal&#34;&gt;immortal&lt;/a&gt; can be
+used directly with out the need of a &lt;a href=&#34;https://immortal.run/post/run.yml&#34;&gt;configuration file&lt;/a&gt;
+or either no need to use &lt;a href=&#34;https://immortal.run/post/immortaldir&#34;&gt;immortaldir&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://immortal.run/post/immortalctl&#34;&gt;immortalctl&lt;/a&gt; still will show the status of existing
+processes besides been available to control them.&lt;/p&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
 &lt;div class=&#34;embed video-player&#34;&gt;
     &lt;script type=&#34;text/javascript&#34; src=&#34;https://asciinema.org/a/108148.js&#34; id=&#34;asciicast-108148&#34; async&gt;&lt;/script&gt;
 &lt;/div&gt;

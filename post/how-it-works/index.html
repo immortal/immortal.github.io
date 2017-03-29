@@ -77,6 +77,16 @@ service.  In most common cases <code>immortal</code> is called by <code>imortald
 searches for immortal configuration files <a href="/post/run.yml">run.yml</a> and ideally
 starts at boot time in order to persist across reboots.</p>
 
+<p>In some cases there is a need to &ldquo;daemonize&rdquo; a command but not to keep it
+persistent across reboots, for this cases <a href="/post/immortal">immortal</a> can be
+used directly with out the need of a <a href="/post/run.yml">configuration file</a>
+or either no need to use <a href="/post/immortaldir">immortaldir</a>.</p>
+
+<p><a href="/post/immortalctl">immortalctl</a> still will show the status of existing
+processes besides been available to control them.</p>
+
+<p>Example:</p>
+
 <div class="embed video-player">
     <script type="text/javascript" src="https://asciinema.org/a/108148.js" id="asciicast-108148" async></script>
 </div>
