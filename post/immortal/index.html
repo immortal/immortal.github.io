@@ -55,18 +55,14 @@
 
 <p>⭕   <code>immortal</code> runs a command or script detached from the controlling terminal as a Unix daemon, it will supervise and restart the service if  it has been terminated.  The service can be controlled by querying a Unix socket &ldquo;immortal.sock&rdquo;, this allows to remotely have full control over the service if required by exposing the socket using a web server like Nginx.</p>
 
-<h2 id="usage">Usage</h2>
-
-<pre><code class="language-sh">immortal [-v] [-ctl dir] [-d dir] [-e dir] [-f pidfile] [-l logfile] [-logger logger] [-p child_pidfile] [-P supervisor_pidfile] [-u user] command
+<pre><code>immortal [-v] [-ctl dir] [-d dir] [-e dir] [-f pidfile] [-l logfile] [-logger logger] [-p child_pidfile] [-P supervisor_pidfile] [-u user] command
 </code></pre>
 
-<h2 id="d-dir"><code>-d dir</code></h2>
+<p><strong><code>-d dir</code></strong>
+Change to directory <code>&lt;dir&gt;</code> before starting the command</p>
 
-<p>Change to directory <code>&lt;dir&gt;</code> before starting the command</p>
-
-<h2 id="e-dir"><code>-e dir</code></h2>
-
-<p>Set environment variables specified by files within the <code>&lt;dir&gt;</code>.  For example, if <code>&lt;dir&gt;</code> is /tmp/env and contains 3 files:</p>
+<p><strong><code>-e dir</code></strong>
+Set environment variables specified by files within the <code>&lt;dir&gt;</code>.  For example, if <code>&lt;dir&gt;</code> is /tmp/env and contains 3 files:</p>
 
 <pre><code>/tmp/env
     |--DEBUG  (contains true)
@@ -81,9 +77,8 @@ DBHOST=10.0.0.1
 DBPASS=secret
 </code></pre>
 
-<h2 id="f-pidfile"><code>-f pidfile</code></h2>
-
-<p>Follow PID in pidfile.</p>
+<p><strong><code>-f pidfile</code></strong>
+Follow PID in pidfile.</p>
 
 <p>In  some  cases  it is required to supervise applications that daemonize by default. Normally this kind of applications create a pidfile  every  time  they fork, the one can be used to follow subsequent forks and avoid creating a race condition between the supervisor trying  to  start again the process and the forks created by the application.</p>
 
@@ -95,42 +90,34 @@ DBPASS=secret
 <p>The  follow  pid option has better performance on Unix/BSD due the kernel event notification mechanism <a href="https://www.freebsd.org/cgi/man.cgi?query=kqueue&amp;sektion=2">kqueue(2)</a>.</p>
 </blockquote>
 
-<h2 id="l-logfile"><code>-l logfile</code></h2>
+<p><strong><code>-l logfile</code></strong>
+Write stdout/stderr to <code>&lt;logfile&gt;</code></p>
 
-<p>Write stdout/stderr to <code>&lt;logfile&gt;</code></p>
-
-<h2 id="logger-command"><code>-logger command</code></h2>
-
-<p>A command <code>&lt;command&gt;</code> to pipe stdout/stderr from stdin.  Besides writing logs locally by using the option -l, they can be sent to a remote host or by processed by another tool, for example to write logs locally and send logs remotely using logger  this  could be used:</p>
+<p><strong><code>-logger command</code></strong>
+A command <code>&lt;command&gt;</code> to pipe stdout/stderr from stdin.  Besides writing logs locally by using the option -l, they can be sent to a remote host or by processed by another tool, for example to write logs locally and send logs remotely using logger  this  could be used:</p>
 
 <pre><code>-l /var/log/app.log --logger &quot;logger -h 10.0.0.1 -t app&quot;
 </code></pre>
 
-<h2 id="p-pidfile"><code>-P pidfile</code></h2>
+<p><strong><code>-P pidfile</code></strong>
+Path to write the supervisor pidfile</p>
 
-<p>Path to write the supervisor pidfile</p>
+<p><strong><code>-p pidfile</code></strong>
+Path to write the child pidfile</p>
 
-<h2 id="p-pidfile-1"><code>-p pidfile</code></h2>
+<p><strong><code>-s seconds</code></strong>
+Seconds (int) <code>&lt;seconds&gt;</code> to wait before starting.</p>
 
-<p>Path to write the child pidfile</p>
+<p><strong><code>-u user</code></strong>
+Execute command on behalf <code>&lt;user&gt;</code></p>
 
-<h2 id="s-seconds"><code>-s seconds</code></h2>
-
-<p>Seconds (int) <code>&lt;seconds&gt;</code> to wait before starting.</p>
-
-<h2 id="u-user"><code>-u user</code></h2>
-
-<p>Execute command on behalf <code>&lt;user&gt;</code></p>
-
-<h2 id="v"><code>-v</code></h2>
-
-<p>Print version</p>
+<p><strong><code>-v</code></strong>
+Print version</p>
 
 <h1 id="the-configuration-file">The configuration file</h1>
 
-<p><code>-c &lt;service name&gt;.yml</code></p>
-
-<p>A  configuration  file with valid YAML syntax, when using this option, it will overwrite other options, configuration format:</p>
+<p><strong><code>-c &lt;service name&gt;.yml</code></strong>
+A  configuration  file with valid YAML syntax, when using this option, it will overwrite other options, configuration format:</p>
 
 <pre><code class="language-yaml">cmd: &lt;command to execute&gt;
 cwd: &lt;change workding directory&gt; # option -d
@@ -150,9 +137,8 @@ user: &lt;user&gt;                     # option -u
 wait: &lt;int&gt;                      # option -s
 </code></pre>
 
-<h2 id="ctl-var-run-immortal-service"><code>-ctl /var/run/immortal/&lt;service&gt;</code></h2>
-
-<p>Path where the supervise directory will be created. This directory is unique per
+<p><strong><code>-ctl /var/run/immortal/&lt;service&gt;</code></strong>
+Path where the supervise directory will be created. This directory is unique per
 service and is used to manage the service via a Unix socket besides preventing
 running multiple times the same service by using a lock.</p>
 
@@ -174,6 +160,149 @@ immortal.sock
 <h1 id="environment">ENVIRONMENT</h1>
 
 <p><code>IMMORTAL_SDIR</code> This environment variable allows to override the default supervise  directory  /var/run/immortal, used also by <a href="/post/immortalctl">immortalctl</a> and <a href="/post/immortaldir">immortaldir</a></p>
+
+<h1 id="examples">Examples</h1>
+
+<p>Run command and restart it when finishes:</p>
+
+<pre><code>immortal /bin/sh -c &quot;date &amp;&amp; sleep 5 &gt; /tmp/sleep.log&quot;
+</code></pre>
+
+<p>Run command, restart it when finishes and log output to file:</p>
+
+<pre><code>immortal -l /tmp/sleep.log /bin/sh -c &quot;date &amp;&amp; sleep 5&quot;
+</code></pre>
+
+<p>Run command, restart it when finishes, log output to file and to external
+logger:</p>
+
+<pre><code>immortal -l /tmp/sleep.log -logger &quot;tee /tmp/sleep2.log&quot; /bin/sh -c &quot;date &amp;&amp; sleep 5&quot;
+</code></pre>
+
+<p>Run command, restart it when finishes, log output to file, wait 2 seconds before
+start:</p>
+
+<pre><code>immortal -s 2 -l /tmp/sleep.log /bin/sh -c &quot;date &amp;&amp; sleep 5&quot;
+</code></pre>
+
+<p>Run a command, restart it when finishes, log output to file, and follow pid if
+it forks:</p>
+
+<pre><code>immortal -l /tmp/x.log -logger &quot;tee /tmp/y.log&quot; -f ./unicorn.pid  bundle exec unicorn -c unicorn.rb
+</code></pre>
+
+<p>Run a command, restart it when finishes, log output to file and create supervice
+dir in /tmp/immortal/sleep</p>
+
+<pre><code>immortal -l /tmp/sleep.log -ctl /tmp/immortal/sleep /bin/sh -c &quot;sleep 5 &amp;&amp; date&quot;
+</code></pre>
+
+<p>For making <code>immortalctl</code> work using the <code>-ctl &lt;dir&gt;</code> the <code>IMMORTAL_SDIR</code>
+environment var should be set to <code>/tmp/immortal</code></p>
+
+<h1 id="configuration-example">Configuration example:</h1>
+
+<pre><code class="language-yaml">cmd: bundle exec unicorn -c unicorn.rb
+cwd: /test/unicorn
+env:
+    DEBUG: 1
+    ENVIROMENT: production
+pid:
+    follow: /test/unicorn/unicorn.pid
+    parent: /tmp/parent.pid
+    child: /tmp/child.pid
+log:
+    file: /tmp/app.log
+    age: 86400 # seconds
+    num: 7     # int
+    size: 1    # MegaBytes
+logger: filebeat -c filebeat.yml -v -once
+user: www
+wait: 1
+</code></pre>
+
+<blockquote>
+<p>Notice that when using the option <code>-u/user</code>, superuser privileges will be required</p>
+</blockquote>
+
+<h1 id="nginx-example-to-manage-remotely-the-service">Nginx example to manage remotely the service:</h1>
+
+<pre><code>immortal -l /tmp/sleep.log -ctl /tmp/immortal/sleep /bin/sh -c &quot;sleep 5 &amp;&amp; date&quot;
+</code></pre>
+
+<p>Based on your shell set <code>IMMORTAL_SDIR</code></p>
+
+<pre><code>setenv IMMORTAL_SDIR /tmp/immortal
+</code></pre>
+
+<p>or</p>
+
+<pre><code>export IMMORTAL_SDIR=/tmp/immortal
+</code></pre>
+
+<p>This is only required for making <code>immortalctl</code> to work, you can query directly the socket using curl, for example:</p>
+
+<pre><code>curl --unix-socket immortal.sock http:/status -s | jq
+</code></pre>
+
+<p>Will output something like:</p>
+
+<pre><code class="language-json">{
+  &quot;pid&quot;: 7713,
+  &quot;up&quot;: &quot;4.2s&quot;,
+  &quot;cmd&quot;: &quot;sleep 5&quot;,
+  &quot;fpid&quot;: false,
+  &quot;count&quot;: 4
+}
+</code></pre>
+
+<h1 id="nginx-configuration">Nginx configuration:</h1>
+
+<pre><code class="language-nginx">upstream immortal {
+    server unix:/tmp/immortal/sleep/immortal.sock;
+}
+
+server {
+listen 80 default_server;
+server_name _;
+location / {
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_set_header X-NginX-Proxy true;
+    proxy_http_version 1.1; # for keep-alive
+    proxy_pass http://immortal/;
+    proxy_redirect off;
+    }
+}
+</code></pre>
+
+<p>In some cases you may have to change permissions of the socket:</p>
+
+<pre><code>chmod 766 /tmp/immortal/sleep/immortal.sock
+</code></pre>
+
+<p>To check the service status:</p>
+
+<pre><code class="language-sh">http://&lt;domain&gt;
+</code></pre>
+
+<p>To send signals:</p>
+
+<pre><code class="language-sh">http://&lt;domain&gt;/signal/&lt;signal&gt;
+</code></pre>
+
+<p>For example to stop the service:</p>
+
+<pre><code class="language-sh">http://&lt;domain&gt;/signal/stop
+</code></pre>
+
+<p>To start the service:</p>
+
+<pre><code class="language-sh">http://&lt;domain&gt;/signal/start
+</code></pre>
+
+<p>The responses are in JSON format.</p>
 
                 </section>
             </article>

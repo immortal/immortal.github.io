@@ -52,6 +52,110 @@
                 </header>
                 <section id="post-body">
                     
+
+<p><code>immortalctl</code> control services started by <code>immortal</code></p>
+
+<pre><code>immortalctl [options] [-12achikinouqstvw] [*|service]
+</code></pre>
+
+<p><code>immortalctl</code> by default prints the status of any available processes started by <a href="/post/immortal">immortal</a>, it first searches for user process located in <code>$HOME/.immortal</code> and next on the system global services started by <a href="/post/immortal">immortaldir</a> located by default in <code>/var/run/immortal</code> unless this has been changed by defining the environment var <code>IMMORTAL_SDIR</code>.</p>
+
+<p>When no services found the output will be a single row only with the headers:</p>
+
+<pre><code class="language-text">PID   Up   Down   Name   CMD
+</code></pre>
+
+<p><strong>PID</strong>    Print the current pid of the service that is been supervised</p>
+
+<p><strong>Up</strong>     Display the time the application has been running and in color green</p>
+
+<p><strong>Down</strong>   Display the time the application has been down and in color red, when in color yellow means that <code>immortal</code> is following a pid, see <code>immortal</code> option <code>-f</code>.</p>
+
+<p><strong>Name</strong>   If the service has been started with <a href="/post/immortaldir">immortaldir</a> it will be a string matching the name of  the  service.yml file, if the service has been run from command line calling directly <code>immortal</code> it will be a PID</p>
+
+<p><strong>CMD</strong>    The command that is been supervised</p>
+
+<p>By queering the socket of the service directly, extra information can be obtained in JSON format, for example when using curl:</p>
+
+<pre><code>curl --unix-socket immortal.sock http:/status -s | jq
+</code></pre>
+
+<p>Will output something like:</p>
+
+<pre><code class="language-json">{
+    &quot;pid&quot;: 7713,
+    &quot;up&quot;: &quot;4.2s&quot;,
+    &quot;cmd&quot;: &quot;sleep 5&quot;,
+    &quot;fpid&quot;: false,
+    &quot;count&quot;: 4
+}
+</code></pre>
+
+<p><strong>fpid</strong>  True when following a pid.</p>
+
+<p><strong>count</strong> The number of times the service has been restarted, if this number is to high something maybe wrong with your service since is dying frequently.</p>
+
+<p>An option or signal can be sent to all the services by using a <code>*</code> instead of the service name.</p>
+
+<h1 id="options">Options</h1>
+
+<p><strong><code>exit</code></strong>
+Stop service and supervisor, when following a pid it will only exit the supervisor, normally this option
+should not be used since the required behavior is to keep the service running forever.</p>
+
+<p><strong><code>once</code></strong>
+If the service is not running, it will be started, if for some reason the  process  stops,  it  wont  be starte again.</p>
+
+<p><strong><code>start</code></strong>
+Start the service.</p>
+
+<p><strong><code>status</code></strong>
+Print status.</p>
+
+<p><strong><code>stop</code></strong>
+Stop the service, will terminate the service and display the down time in the Down column when printing the status.</p>
+
+<h2 id="signals">Signals</h2>
+
+<p>When sending signals, options start with one dash:</p>
+
+<pre><code>-1        USR1
+-2        USR2
+-a        ALRM
+-c        CONT
+-h        HUP
+-i        INT
+-k        KILL
+-in       TTIN
+-ou       TTOU
+-q        QUIT
+-s        STOP
+-t        TERM
+-w        WINCH
+</code></pre>
+
+<blockquote>
+<p>-v will print the current version</p>
+</blockquote>
+
+<h1 id="environment">Environment</h1>
+
+<p><strong><code>IMMORTAL_SDIR</code></strong> This environment variable allows to override the default
+supervise directory /var/run/immortal, used also by <a href="/post/immortal">immortal</a>
+and <a href="/post/immortaldir">immortaldir</a></p>
+
+<h1 id="examples">Examples</h1>
+
+<p>Send signal USR2:</p>
+
+<pre><code class="language-sh">immortalctl -2 service
+</code></pre>
+
+<p>Stop all services, normally this is not the required behavior, since will exit the supervisor:</p>
+
+<pre><code class="language-sh">immortalctl exit &quot;*&quot;
+</code></pre>
+
                 </section>
             </article>
             <footer id="post-meta" class="clearfix">

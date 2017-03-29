@@ -340,18 +340,14 @@ location / {
 
 &lt;p&gt;⭕   &lt;code&gt;immortal&lt;/code&gt; runs a command or script detached from the controlling terminal as a Unix daemon, it will supervise and restart the service if  it has been terminated.  The service can be controlled by querying a Unix socket &amp;ldquo;immortal.sock&amp;rdquo;, this allows to remotely have full control over the service if required by exposing the socket using a web server like Nginx.&lt;/p&gt;
 
-&lt;h2 id=&#34;usage&#34;&gt;Usage&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;immortal [-v] [-ctl dir] [-d dir] [-e dir] [-f pidfile] [-l logfile] [-logger logger] [-p child_pidfile] [-P supervisor_pidfile] [-u user] command
+&lt;pre&gt;&lt;code&gt;immortal [-v] [-ctl dir] [-d dir] [-e dir] [-f pidfile] [-l logfile] [-logger logger] [-p child_pidfile] [-P supervisor_pidfile] [-u user] command
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;d-dir&#34;&gt;&lt;code&gt;-d dir&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;-d dir&lt;/code&gt;&lt;/strong&gt;
+Change to directory &lt;code&gt;&amp;lt;dir&amp;gt;&lt;/code&gt; before starting the command&lt;/p&gt;
 
-&lt;p&gt;Change to directory &lt;code&gt;&amp;lt;dir&amp;gt;&lt;/code&gt; before starting the command&lt;/p&gt;
-
-&lt;h2 id=&#34;e-dir&#34;&gt;&lt;code&gt;-e dir&lt;/code&gt;&lt;/h2&gt;
-
-&lt;p&gt;Set environment variables specified by files within the &lt;code&gt;&amp;lt;dir&amp;gt;&lt;/code&gt;.  For example, if &lt;code&gt;&amp;lt;dir&amp;gt;&lt;/code&gt; is /tmp/env and contains 3 files:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;-e dir&lt;/code&gt;&lt;/strong&gt;
+Set environment variables specified by files within the &lt;code&gt;&amp;lt;dir&amp;gt;&lt;/code&gt;.  For example, if &lt;code&gt;&amp;lt;dir&amp;gt;&lt;/code&gt; is /tmp/env and contains 3 files:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;/tmp/env
     |--DEBUG  (contains true)
@@ -366,9 +362,8 @@ DBHOST=10.0.0.1
 DBPASS=secret
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;f-pidfile&#34;&gt;&lt;code&gt;-f pidfile&lt;/code&gt;&lt;/h2&gt;
-
-&lt;p&gt;Follow PID in pidfile.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;-f pidfile&lt;/code&gt;&lt;/strong&gt;
+Follow PID in pidfile.&lt;/p&gt;
 
 &lt;p&gt;In  some  cases  it is required to supervise applications that daemonize by default. Normally this kind of applications create a pidfile  every  time  they fork, the one can be used to follow subsequent forks and avoid creating a race condition between the supervisor trying  to  start again the process and the forks created by the application.&lt;/p&gt;
 
@@ -380,42 +375,34 @@ DBPASS=secret
 &lt;p&gt;The  follow  pid option has better performance on Unix/BSD due the kernel event notification mechanism &lt;a href=&#34;https://www.freebsd.org/cgi/man.cgi?query=kqueue&amp;amp;sektion=2&#34;&gt;kqueue(2)&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h2 id=&#34;l-logfile&#34;&gt;&lt;code&gt;-l logfile&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;-l logfile&lt;/code&gt;&lt;/strong&gt;
+Write stdout/stderr to &lt;code&gt;&amp;lt;logfile&amp;gt;&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;Write stdout/stderr to &lt;code&gt;&amp;lt;logfile&amp;gt;&lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;logger-command&#34;&gt;&lt;code&gt;-logger command&lt;/code&gt;&lt;/h2&gt;
-
-&lt;p&gt;A command &lt;code&gt;&amp;lt;command&amp;gt;&lt;/code&gt; to pipe stdout/stderr from stdin.  Besides writing logs locally by using the option -l, they can be sent to a remote host or by processed by another tool, for example to write logs locally and send logs remotely using logger  this  could be used:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;-logger command&lt;/code&gt;&lt;/strong&gt;
+A command &lt;code&gt;&amp;lt;command&amp;gt;&lt;/code&gt; to pipe stdout/stderr from stdin.  Besides writing logs locally by using the option -l, they can be sent to a remote host or by processed by another tool, for example to write logs locally and send logs remotely using logger  this  could be used:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;-l /var/log/app.log --logger &amp;quot;logger -h 10.0.0.1 -t app&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;p-pidfile&#34;&gt;&lt;code&gt;-P pidfile&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;-P pidfile&lt;/code&gt;&lt;/strong&gt;
+Path to write the supervisor pidfile&lt;/p&gt;
 
-&lt;p&gt;Path to write the supervisor pidfile&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;-p pidfile&lt;/code&gt;&lt;/strong&gt;
+Path to write the child pidfile&lt;/p&gt;
 
-&lt;h2 id=&#34;p-pidfile-1&#34;&gt;&lt;code&gt;-p pidfile&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;-s seconds&lt;/code&gt;&lt;/strong&gt;
+Seconds (int) &lt;code&gt;&amp;lt;seconds&amp;gt;&lt;/code&gt; to wait before starting.&lt;/p&gt;
 
-&lt;p&gt;Path to write the child pidfile&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;-u user&lt;/code&gt;&lt;/strong&gt;
+Execute command on behalf &lt;code&gt;&amp;lt;user&amp;gt;&lt;/code&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;s-seconds&#34;&gt;&lt;code&gt;-s seconds&lt;/code&gt;&lt;/h2&gt;
-
-&lt;p&gt;Seconds (int) &lt;code&gt;&amp;lt;seconds&amp;gt;&lt;/code&gt; to wait before starting.&lt;/p&gt;
-
-&lt;h2 id=&#34;u-user&#34;&gt;&lt;code&gt;-u user&lt;/code&gt;&lt;/h2&gt;
-
-&lt;p&gt;Execute command on behalf &lt;code&gt;&amp;lt;user&amp;gt;&lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;v&#34;&gt;&lt;code&gt;-v&lt;/code&gt;&lt;/h2&gt;
-
-&lt;p&gt;Print version&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;-v&lt;/code&gt;&lt;/strong&gt;
+Print version&lt;/p&gt;
 
 &lt;h1 id=&#34;the-configuration-file&#34;&gt;The configuration file&lt;/h1&gt;
 
-&lt;p&gt;&lt;code&gt;-c &amp;lt;service name&amp;gt;.yml&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;A  configuration  file with valid YAML syntax, when using this option, it will overwrite other options, configuration format:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;-c &amp;lt;service name&amp;gt;.yml&lt;/code&gt;&lt;/strong&gt;
+A  configuration  file with valid YAML syntax, when using this option, it will overwrite other options, configuration format:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;cmd: &amp;lt;command to execute&amp;gt;
 cwd: &amp;lt;change workding directory&amp;gt; # option -d
@@ -435,9 +422,8 @@ user: &amp;lt;user&amp;gt;                     # option -u
 wait: &amp;lt;int&amp;gt;                      # option -s
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;ctl-var-run-immortal-service&#34;&gt;&lt;code&gt;-ctl /var/run/immortal/&amp;lt;service&amp;gt;&lt;/code&gt;&lt;/h2&gt;
-
-&lt;p&gt;Path where the supervise directory will be created. This directory is unique per
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;-ctl /var/run/immortal/&amp;lt;service&amp;gt;&lt;/code&gt;&lt;/strong&gt;
+Path where the supervise directory will be created. This directory is unique per
 service and is used to manage the service via a Unix socket besides preventing
 running multiple times the same service by using a lock.&lt;/p&gt;
 
@@ -459,6 +445,149 @@ immortal.sock
 &lt;h1 id=&#34;environment&#34;&gt;ENVIRONMENT&lt;/h1&gt;
 
 &lt;p&gt;&lt;code&gt;IMMORTAL_SDIR&lt;/code&gt; This environment variable allows to override the default supervise  directory  /var/run/immortal, used also by &lt;a href=&#34;https://immortal.run/post/immortalctl&#34;&gt;immortalctl&lt;/a&gt; and &lt;a href=&#34;https://immortal.run/post/immortaldir&#34;&gt;immortaldir&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;examples&#34;&gt;Examples&lt;/h1&gt;
+
+&lt;p&gt;Run command and restart it when finishes:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;immortal /bin/sh -c &amp;quot;date &amp;amp;&amp;amp; sleep 5 &amp;gt; /tmp/sleep.log&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Run command, restart it when finishes and log output to file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;immortal -l /tmp/sleep.log /bin/sh -c &amp;quot;date &amp;amp;&amp;amp; sleep 5&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Run command, restart it when finishes, log output to file and to external
+logger:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;immortal -l /tmp/sleep.log -logger &amp;quot;tee /tmp/sleep2.log&amp;quot; /bin/sh -c &amp;quot;date &amp;amp;&amp;amp; sleep 5&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Run command, restart it when finishes, log output to file, wait 2 seconds before
+start:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;immortal -s 2 -l /tmp/sleep.log /bin/sh -c &amp;quot;date &amp;amp;&amp;amp; sleep 5&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Run a command, restart it when finishes, log output to file, and follow pid if
+it forks:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;immortal -l /tmp/x.log -logger &amp;quot;tee /tmp/y.log&amp;quot; -f ./unicorn.pid  bundle exec unicorn -c unicorn.rb
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Run a command, restart it when finishes, log output to file and create supervice
+dir in /tmp/immortal/sleep&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;immortal -l /tmp/sleep.log -ctl /tmp/immortal/sleep /bin/sh -c &amp;quot;sleep 5 &amp;amp;&amp;amp; date&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For making &lt;code&gt;immortalctl&lt;/code&gt; work using the &lt;code&gt;-ctl &amp;lt;dir&amp;gt;&lt;/code&gt; the &lt;code&gt;IMMORTAL_SDIR&lt;/code&gt;
+environment var should be set to &lt;code&gt;/tmp/immortal&lt;/code&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;configuration-example&#34;&gt;Configuration example:&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;cmd: bundle exec unicorn -c unicorn.rb
+cwd: /test/unicorn
+env:
+    DEBUG: 1
+    ENVIROMENT: production
+pid:
+    follow: /test/unicorn/unicorn.pid
+    parent: /tmp/parent.pid
+    child: /tmp/child.pid
+log:
+    file: /tmp/app.log
+    age: 86400 # seconds
+    num: 7     # int
+    size: 1    # MegaBytes
+logger: filebeat -c filebeat.yml -v -once
+user: www
+wait: 1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Notice that when using the option &lt;code&gt;-u/user&lt;/code&gt;, superuser privileges will be required&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&#34;nginx-example-to-manage-remotely-the-service&#34;&gt;Nginx example to manage remotely the service:&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code&gt;immortal -l /tmp/sleep.log -ctl /tmp/immortal/sleep /bin/sh -c &amp;quot;sleep 5 &amp;amp;&amp;amp; date&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Based on your shell set &lt;code&gt;IMMORTAL_SDIR&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;setenv IMMORTAL_SDIR /tmp/immortal
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;or&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export IMMORTAL_SDIR=/tmp/immortal
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is only required for making &lt;code&gt;immortalctl&lt;/code&gt; to work, you can query directly the socket using curl, for example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl --unix-socket immortal.sock http:/status -s | jq
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Will output something like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+  &amp;quot;pid&amp;quot;: 7713,
+  &amp;quot;up&amp;quot;: &amp;quot;4.2s&amp;quot;,
+  &amp;quot;cmd&amp;quot;: &amp;quot;sleep 5&amp;quot;,
+  &amp;quot;fpid&amp;quot;: false,
+  &amp;quot;count&amp;quot;: 4
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;nginx-configuration&#34;&gt;Nginx configuration:&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-nginx&#34;&gt;upstream immortal {
+    server unix:/tmp/immortal/sleep/immortal.sock;
+}
+
+server {
+listen 80 default_server;
+server_name _;
+location / {
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_set_header X-NginX-Proxy true;
+    proxy_http_version 1.1; # for keep-alive
+    proxy_pass http://immortal/;
+    proxy_redirect off;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In some cases you may have to change permissions of the socket:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;chmod 766 /tmp/immortal/sleep/immortal.sock
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To check the service status:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;http://&amp;lt;domain&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To send signals:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;http://&amp;lt;domain&amp;gt;/signal/&amp;lt;signal&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For example to stop the service:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;http://&amp;lt;domain&amp;gt;/signal/stop
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To start the service:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;http://&amp;lt;domain&amp;gt;/signal/start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The responses are in JSON format.&lt;/p&gt;
 </description>
     </item>
     
@@ -468,7 +597,111 @@ immortal.sock
       <pubDate>Wed, 24 Mar 2010 23:34:54 +0200</pubDate>
       
       <guid>https://immortal.run/post/immortalctl/</guid>
-      <description></description>
+      <description>
+
+&lt;p&gt;&lt;code&gt;immortalctl&lt;/code&gt; control services started by &lt;code&gt;immortal&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;immortalctl [options] [-12achikinouqstvw] [*|service]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;immortalctl&lt;/code&gt; by default prints the status of any available processes started by &lt;a href=&#34;https://immortal.run/post/immortal&#34;&gt;immortal&lt;/a&gt;, it first searches for user process located in &lt;code&gt;$HOME/.immortal&lt;/code&gt; and next on the system global services started by &lt;a href=&#34;https://immortal.run/post/immortal&#34;&gt;immortaldir&lt;/a&gt; located by default in &lt;code&gt;/var/run/immortal&lt;/code&gt; unless this has been changed by defining the environment var &lt;code&gt;IMMORTAL_SDIR&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;When no services found the output will be a single row only with the headers:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;PID   Up   Down   Name   CMD
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;PID&lt;/strong&gt;    Print the current pid of the service that is been supervised&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Up&lt;/strong&gt;     Display the time the application has been running and in color green&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Down&lt;/strong&gt;   Display the time the application has been down and in color red, when in color yellow means that &lt;code&gt;immortal&lt;/code&gt; is following a pid, see &lt;code&gt;immortal&lt;/code&gt; option &lt;code&gt;-f&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Name&lt;/strong&gt;   If the service has been started with &lt;a href=&#34;https://immortal.run/post/immortaldir&#34;&gt;immortaldir&lt;/a&gt; it will be a string matching the name of  the  service.yml file, if the service has been run from command line calling directly &lt;code&gt;immortal&lt;/code&gt; it will be a PID&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;CMD&lt;/strong&gt;    The command that is been supervised&lt;/p&gt;
+
+&lt;p&gt;By queering the socket of the service directly, extra information can be obtained in JSON format, for example when using curl:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl --unix-socket immortal.sock http:/status -s | jq
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Will output something like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+    &amp;quot;pid&amp;quot;: 7713,
+    &amp;quot;up&amp;quot;: &amp;quot;4.2s&amp;quot;,
+    &amp;quot;cmd&amp;quot;: &amp;quot;sleep 5&amp;quot;,
+    &amp;quot;fpid&amp;quot;: false,
+    &amp;quot;count&amp;quot;: 4
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;fpid&lt;/strong&gt;  True when following a pid.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;count&lt;/strong&gt; The number of times the service has been restarted, if this number is to high something maybe wrong with your service since is dying frequently.&lt;/p&gt;
+
+&lt;p&gt;An option or signal can be sent to all the services by using a &lt;code&gt;*&lt;/code&gt; instead of the service name.&lt;/p&gt;
+
+&lt;h1 id=&#34;options&#34;&gt;Options&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;exit&lt;/code&gt;&lt;/strong&gt;
+Stop service and supervisor, when following a pid it will only exit the supervisor, normally this option
+should not be used since the required behavior is to keep the service running forever.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;once&lt;/code&gt;&lt;/strong&gt;
+If the service is not running, it will be started, if for some reason the  process  stops,  it  wont  be starte again.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;start&lt;/code&gt;&lt;/strong&gt;
+Start the service.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;status&lt;/code&gt;&lt;/strong&gt;
+Print status.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;stop&lt;/code&gt;&lt;/strong&gt;
+Stop the service, will terminate the service and display the down time in the Down column when printing the status.&lt;/p&gt;
+
+&lt;h2 id=&#34;signals&#34;&gt;Signals&lt;/h2&gt;
+
+&lt;p&gt;When sending signals, options start with one dash:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-1        USR1
+-2        USR2
+-a        ALRM
+-c        CONT
+-h        HUP
+-i        INT
+-k        KILL
+-in       TTIN
+-ou       TTOU
+-q        QUIT
+-s        STOP
+-t        TERM
+-w        WINCH
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;-v will print the current version&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&#34;environment&#34;&gt;Environment&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;IMMORTAL_SDIR&lt;/code&gt;&lt;/strong&gt; This environment variable allows to override the default
+supervise directory /var/run/immortal, used also by &lt;a href=&#34;https://immortal.run/post/immortal&#34;&gt;immortal&lt;/a&gt;
+and &lt;a href=&#34;https://immortal.run/post/immortaldir&#34;&gt;immortaldir&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;examples&#34;&gt;Examples&lt;/h1&gt;
+
+&lt;p&gt;Send signal USR2:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;immortalctl -2 service
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Stop all services, normally this is not the required behavior, since will exit the supervisor:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;immortalctl exit &amp;quot;*&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+</description>
     </item>
     
     <item>
@@ -477,7 +710,94 @@ immortal.sock
       <pubDate>Tue, 23 Mar 2010 23:34:54 +0200</pubDate>
       
       <guid>https://immortal.run/post/immortaldir/</guid>
-      <description></description>
+      <description>
+
+&lt;p&gt;&lt;code&gt;immortaldir&lt;/code&gt; start services located in a specified directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;immortalctl [dir] [-v]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;immortaldir&lt;/code&gt; will scan every 5 seconds a directory searching for files ending in &lt;code&gt;.yml&lt;/code&gt; and track changes. The files should conform the &lt;a href=&#34;https://immortal.run/post/immortal&#34;&gt;immortal&lt;/a&gt; configuration format.&lt;/p&gt;
+
+&lt;p&gt;If a file changes the service will be restarted, &lt;code&gt;immortalctl exit &amp;amp; stop&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;If a file is touched and service is down, it will be started, &lt;code&gt;immortalctl start&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;If a file is removed, the supervisor will exit, &lt;code&gt;immortalctl exit&lt;/code&gt;, this may end the  existing  process but in cases where the PID is been followed, only the supervisor will exit.&lt;/p&gt;
+
+&lt;p&gt;Based on your operating system the directory containing the services could be:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/usr/local/etc/immortal
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;or&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/etc/immortal
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;When dealing with multiple operating systems could be handy to use a unique location like &lt;code&gt;/immortal&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To keep services persistent across reboots a startup script should be used to run &lt;code&gt;immortaldir&lt;/code&gt; on boot time.&lt;/p&gt;
+
+&lt;h1 id=&#34;options&#34;&gt;Options&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;dir&lt;/code&gt;&lt;/strong&gt; Path of directory containing immortal configuration files &lt;code&gt;*.yml&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;-v&lt;/code&gt;&lt;/strong&gt; Print current version.&lt;/p&gt;
+
+&lt;h1 id=&#34;environment&#34;&gt;Environment&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;IMMORTAL_SDIR&lt;/code&gt;&lt;/strong&gt; This environment variable allows to override the default
+supervise directory &lt;code&gt;/var/run/immortal&lt;/code&gt;, used also by &lt;code&gt;immortalctl&lt;/code&gt; and
+&lt;code&gt;immortal&lt;/code&gt;.  By default &lt;code&gt;immortaldir&lt;/code&gt; after finding a configuration file
+&lt;code&gt;service.yml&lt;/code&gt; will invoke &lt;code&gt;immortal&lt;/code&gt; and pass to it the option:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-ctl &amp;lt;service&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will create the  directory &amp;ldquo;service&amp;rdquo; in &lt;code&gt;/var/run/immortal&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/var/run/immortal/service
+                 |--lock
+                 `--immortal.sock
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;lock&lt;/code&gt;&lt;/strong&gt; is a file that prevents running more than once the same service&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;immortal.sock&lt;/code&gt;&lt;/strong&gt; is a Unix socket that can be used to manage the process, example:&lt;/p&gt;
+
+&lt;p&gt;Get status:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl --unix-socket immortal.sock http:/status -s
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Down. If the service is running, send it a TERM signal. After it stops, do not restart it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl --unix-socket immortal.sock http://im/signal/down -s
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Start:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl --unix-socket immortal.sock http://im/signal/start -s
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If a different path instead of &lt;code&gt;/var/run/immortal&lt;/code&gt; is required, the &lt;code&gt;IMMORTAL_SDIR&lt;/code&gt; environment variable can be used.&lt;/p&gt;
+
+&lt;h1 id=&#34;examples&#34;&gt;Examples&lt;/h1&gt;
+
+&lt;p&gt;Read configuration files from &lt;code&gt;/etc/immortal&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;immortaldir /etc/immortal
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Read configuration files from &lt;code&gt;/srv/immortal&lt;/code&gt; and create supervise directories on &lt;code&gt;/var/www/immortal&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;export IMMORTAL_SDIR=/var/www/immortal
+immortaldir /srv/immortal
+&lt;/code&gt;&lt;/pre&gt;
+</description>
     </item>
     
   </channel>
