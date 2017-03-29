@@ -278,7 +278,7 @@ Print version&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;-c &amp;lt;service name&amp;gt;.yml&lt;/code&gt;&lt;/strong&gt;
 A  configuration  file with valid YAML syntax, when using this option, it will overwrite other options, configuration format:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;cmd: &amp;lt;command to execute&amp;gt;
+&lt;pre&gt;&lt;code&gt;cmd: &amp;lt;command to execute&amp;gt;
 cwd: &amp;lt;change workding directory&amp;gt; # option -d
 env:                             # option -e
     &amp;lt;key&amp;gt;: &amp;lt;value&amp;gt;
@@ -361,7 +361,7 @@ environment var should be set to &lt;code&gt;/tmp/immortal&lt;/code&gt;&lt;/p&gt
 
 &lt;h1 id=&#34;configuration-example&#34;&gt;Configuration example:&lt;/h1&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;cmd: bundle exec unicorn -c unicorn.rb
+&lt;pre&gt;&lt;code&gt;cmd: bundle exec unicorn -c unicorn.rb
 cwd: /test/unicorn
 env:
     DEBUG: 1
