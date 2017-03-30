@@ -100,7 +100,7 @@ remotely either TCP or UDP.&lt;/p&gt;
 file, but is also allows to specify an external logger, by specifying the &lt;code&gt;-l&lt;/code&gt;
 and &lt;code&gt;-logger&lt;/code&gt; options example:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ immortal -l /tmp/test.log -logger &amp;quot;logger -t test&amp;quot; my-app
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ immortal -l /tmp/test.log -logger &amp;quot;logger -t test&amp;quot; my-app
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;In this case &lt;code&gt;-loger&lt;/code&gt; is going to pass the Stander output/error to the
@@ -127,7 +127,7 @@ and &lt;code&gt;-logger&lt;/code&gt; options example:&lt;/p&gt;
 
 &lt;p&gt;A configuration file for running/logging/supervising:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;cmd: bundle exec unicorn -c unicorn.rb
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;cmd: bundle exec unicorn -c unicorn.rb
 cwd: /arena/app-1
 env:
     DEBUG: 1
@@ -223,7 +223,7 @@ location / {
       <description>&lt;p&gt;Example of a basic &lt;a href=&#34;https://www.ansible.com/&#34;&gt;ansible&lt;/a&gt; playbook for deploying a
 micro service using a &lt;a href=&#34;https://immortal.run/post/run.yml&#34;&gt;configuration file&lt;/a&gt;:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;- hosts: your-host
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;- hosts: your-host
   become: true
   tasks:
   - name: create arena
