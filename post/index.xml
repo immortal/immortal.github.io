@@ -215,6 +215,81 @@ location / {
     </item>
     
     <item>
+      <title>Ansible</title>
+      <link>https://immortal.run/post/ansible/</link>
+      <pubDate>Fri, 26 Mar 2010 23:10:08 +0200</pubDate>
+      
+      <guid>https://immortal.run/post/ansible/</guid>
+      <description>&lt;p&gt;Example of a basic &lt;a href=&#34;https://www.ansible.com/&#34;&gt;ansible&lt;/a&gt; playbook for deploying a
+micro service using a &lt;a href=&#34;https://immortal.run/post/run.yml&#34;&gt;configuration file&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;- hosts: your-host
+  become: true
+  tasks:
+  - name: create arena
+    file: path=/arena/foo/releases state=directory
+
+  - name: set now variable
+    set_fact:
+      now: &amp;quot;{{ ansible_date_time.iso8601 }}&amp;quot;
+
+  - name: create arena release dir
+    file: path=/arena/foo/releases/{{ now }} state=directory
+
+  - name: download app.bz2
+    get_url:
+      url: &amp;quot;http://domain.tld/foo/{{ &#39;freebsd&#39; if ansible_os_family == &#39;FreeBSD&#39; else &#39;linux&#39; }}/app.tar.bz2&amp;quot;
+      dest: /arena/foo/releases/{{ now }}
+
+  - name: unarchive app.bz2
+    command: tar -jxf /arena/foo/releases/{{ now }}/app.tar.bz2
+    args:
+      chdir: /arena/foo/releases/{{ now }}
+
+  - name: link to current
+    file:
+      src: /arena/foo/releases/{{ now }}
+      dest: /arena/foo/current
+      state: link
+
+  - name: update foo.yml
+    copy:
+      dest: &amp;quot;{{ &#39;/usr/local/etc/immortal&#39; if ansible_os_family == &#39;FreeBSD&#39; else &#39;/etc/immortal&#39; }}/foo.yml&amp;quot;
+      content: |
+        # {{ now }}
+        cmd: /arena/foo/current/app
+        cwd: /arena/foo/
+        log:
+            file: /var/log/foo.log
+            age: 86400 # seconds
+            num: 7     # int
+            size: 1    # MegaBytes
+        user: www
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Notice the last task &lt;code&gt;update foo.yml&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;- name: update foo.yml
+  copy:
+    dest: /usr/local/etc/foo.yml
+    content: |
+      # {{ now }}
+      cmd: /arena/foo/current/app
+      cwd: /arena/foo/
+      log:
+          file: /var/log/foo.log
+          age: 86400 # seconds
+          num: 7     # int
+          size: 1    # MegaBytes
+      user: www
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first line &lt;code&gt;# {{ now }}&lt;/code&gt;, change the file, therefore it is enought to triger
+a restart&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>immortal</title>
       <link>https://immortal.run/post/immortal/</link>
       <pubDate>Thu, 25 Mar 2010 23:34:54 +0200</pubDate>
