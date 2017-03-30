@@ -115,8 +115,38 @@ micro service using a <a href="/post/run.yml">configuration file</a>:</p>
       user: www
 </code></pre>
 
-<p>The first line <code># {{ now }}</code>, change the file, therefore it is enought to triger
-a restart</p>
+<p>Notice the first line in the content:</p>
+
+<pre><code class="language-html"># {{ now }}
+</code></pre>
+
+<p>That will modify/update the configuration file, therefore it is enough to
+trigger a restart, the updated file <code>/usr/local/etc/foo.yml</code>, will look
+something like:</p>
+
+<pre><code># 2017-03-29T16:36:39Z
+cmd: /arena/foo/current/app
+cwd: /arena/foo/
+log:
+    file: /var/log/foo.log
+    age: 86400 # seconds
+    num: 7     # int
+    size: 1    # MegaBytes
+user: www
+</code></pre>
+
+<p>The deployment schema in this example is as follow:</p>
+
+<pre><code class="language-html">/arena
+|--service-name-1
+|  |--releases
+|  |  `--ISO8601-time
+|  `--@current
+`--service-name-2
+   |--releases
+   |  `--ISO8601-time
+   `--@current
+</code></pre>
 
                 </section>
             </article>

@@ -284,8 +284,38 @@ micro service using a &lt;a href=&#34;https://immortal.run/post/run.yml&#34;&gt;
       user: www
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;The first line &lt;code&gt;# {{ now }}&lt;/code&gt;, change the file, therefore it is enought to triger
-a restart&lt;/p&gt;
+&lt;p&gt;Notice the first line in the content:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;# {{ now }}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That will modify/update the configuration file, therefore it is enough to
+trigger a restart, the updated file &lt;code&gt;/usr/local/etc/foo.yml&lt;/code&gt;, will look
+something like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# 2017-03-29T16:36:39Z
+cmd: /arena/foo/current/app
+cwd: /arena/foo/
+log:
+    file: /var/log/foo.log
+    age: 86400 # seconds
+    num: 7     # int
+    size: 1    # MegaBytes
+user: www
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The deployment schema in this example is as follow:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;/arena
+|--service-name-1
+|  |--releases
+|  |  `--ISO8601-time
+|  `--@current
+`--service-name-2
+   |--releases
+   |  `--ISO8601-time
+   `--@current
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
