@@ -279,6 +279,8 @@ operations/devops dependency while deploying.&lt;/p&gt;
 doing a CI &amp;amp; CD flow, by simple updating the &lt;code&gt;run.yml&lt;/code&gt; file, the &lt;strong&gt;immortal&lt;/strong&gt;
 supervisor could stop, restart, pause, resume the service without need to
 logging the server and execute does steps.&lt;/p&gt;
+
+&lt;p&gt;See the &lt;a href=&#34;https://immortal.run/post/ansible&#34;&gt;ansible playbook example&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -519,7 +521,7 @@ Print version&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;-c &amp;lt;service name&amp;gt;.yml&lt;/code&gt;&lt;/strong&gt;
 A  configuration  file with valid YAML syntax, when using this option, it will overwrite other options, configuration format:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;cmd: &amp;lt;command to execute&amp;gt;
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;cmd: &amp;lt;command to execute&amp;gt;
 cwd: &amp;lt;change workding directory&amp;gt; # option -d
 env:                             # option -e
     &amp;lt;key&amp;gt;: &amp;lt;value&amp;gt;
@@ -544,7 +546,7 @@ running multiple times the same service by using a lock.&lt;/p&gt;
 
 &lt;p&gt;A supervise directory containing two files:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;lock
+&lt;pre&gt;&lt;code&gt;lock
 immortal.sock
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -602,7 +604,7 @@ environment var should be set to &lt;code&gt;/tmp/immortal&lt;/code&gt;&lt;/p&gt
 
 &lt;h1 id=&#34;configuration-example&#34;&gt;Configuration example:&lt;/h1&gt;
 
-&lt;pre&gt;&lt;code&gt;cmd: bundle exec unicorn -c unicorn.rb
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;cmd: bundle exec unicorn -c unicorn.rb
 cwd: /test/unicorn
 env:
     DEBUG: 1
@@ -909,7 +911,7 @@ supervise directory &lt;code&gt;/var/run/immortal&lt;/code&gt;, used also by &lt
 
 &lt;p&gt;Read configuration files from &lt;code&gt;/srv/immortal&lt;/code&gt; and create supervise directories on &lt;code&gt;/var/www/immortal&lt;/code&gt;:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;export IMMORTAL_SDIR=/var/www/immortal
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;export IMMORTAL_SDIR=/var/www/immortal
 immortaldir /srv/immortal
 &lt;/code&gt;&lt;/pre&gt;
 </description>
