@@ -135,6 +135,9 @@ log:
 logger: &lt;command&gt;                # option -logger
 user: &lt;user&gt;                     # option -u
 wait: &lt;int&gt;                      # option -s
+require:                         # list of services that need to be running before starting
+  - foo
+  - bar
 </code></pre>
 
 <p><strong><code>-ctl /var/run/immortal/&lt;service&gt;</code></strong>

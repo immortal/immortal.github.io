@@ -453,6 +453,9 @@ log:
 logger: &amp;lt;command&amp;gt;                # option -logger
 user: &amp;lt;user&amp;gt;                     # option -u
 wait: &amp;lt;int&amp;gt;                      # option -s
+require:                         # list of services that need to be running before starting
+  - foo
+  - bar
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;-ctl /var/run/immortal/&amp;lt;service&amp;gt;&lt;/code&gt;&lt;/strong&gt;
