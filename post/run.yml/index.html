@@ -74,6 +74,9 @@ log:
 logger: logger -t unicorn
 user: www
 wait: 1
+require:
+  - foo
+  - bar
 </code></pre>
 
 <p>One of the main ideas behind the <code>run.yml</code> is to eliminate an
@@ -85,6 +88,26 @@ supervisor could stop, restart, pause, resume the service without need to
 logging the server and execute does steps.</p>
 
 <p>See the <a href="/post/ansible">ansible playbook example</a></p>
+
+<h1 id="require">require</h1>
+
+<p>The <code>require</code> option helps to verify that other services are running before
+starting, for example, having this services:</p>
+
+<pre><code class="language-text">/usr/local/etc/immortal
+|--foo.yml
+|--bar.yml
+`--www.yml
+</code></pre>
+
+<p>if <code>www.yml</code> contains:</p>
+
+<pre><code class="language-yaml">require:
+  - foo
+  - bar
+</code></pre>
+
+<p>If service <code>foo</code> and  <code>bar</code> are not running, the service will not start.</p>
 
                 </section>
             </article>

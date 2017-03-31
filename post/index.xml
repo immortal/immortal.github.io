@@ -144,6 +144,9 @@ log:
 logger: logger -t unicorn
 user: www
 wait: 1
+require:
+  - foo
+  - bar
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;One of the main ideas behind the &lt;code&gt;run.yml&lt;/code&gt; is to eliminate an
@@ -155,6 +158,26 @@ supervisor could stop, restart, pause, resume the service without need to
 logging the server and execute does steps.&lt;/p&gt;
 
 &lt;p&gt;See the &lt;a href=&#34;https://immortal.run/post/ansible&#34;&gt;ansible playbook example&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;require&#34;&gt;require&lt;/h1&gt;
+
+&lt;p&gt;The &lt;code&gt;require&lt;/code&gt; option helps to verify that other services are running before
+starting, for example, having this services:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;/usr/local/etc/immortal
+|--foo.yml
+|--bar.yml
+`--www.yml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;if &lt;code&gt;www.yml&lt;/code&gt; contains:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;require:
+  - foo
+  - bar
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If service &lt;code&gt;foo&lt;/code&gt; and  &lt;code&gt;bar&lt;/code&gt; are not running, the service will not start.&lt;/p&gt;
 </description>
     </item>
     
