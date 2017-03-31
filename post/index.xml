@@ -112,6 +112,25 @@ and &lt;code&gt;-logger&lt;/code&gt; options example:&lt;/p&gt;
     &lt;script type=&#34;text/javascript&#34; src=&#34;https://asciinema.org/a/80376.js&#34; id=&#34;asciicast-80376&#34; async&gt;&lt;/script&gt;
 &lt;/div&gt;
 
+
+&lt;h2 id=&#34;service-dependencies&#34;&gt;Service dependencies&lt;/h2&gt;
+
+&lt;p&gt;By defining a &lt;code&gt;require&lt;/code&gt; option the service will only start if all the services defined are running.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;/usr/local/etc/immortal
+|--foo.yml
+|--bar.yml
+`--www.yml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;if &lt;code&gt;www.yml&lt;/code&gt; contains:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;require:
+  - foo
+  - bar
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If service &lt;code&gt;foo&lt;/code&gt; and  &lt;code&gt;bar&lt;/code&gt; are not running, the service will not start.&lt;/p&gt;
 </description>
     </item>
     

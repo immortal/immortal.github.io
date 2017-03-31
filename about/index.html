@@ -90,7 +90,7 @@ offering more flexibility.</p>
 
 <p>Example <code>run.yml</code>:</p>
 
-<pre><code>cmd: bundle exec unicorn -c unicorn.rb
+<pre><code class="language-yaml">cmd: bundle exec unicorn -c unicorn.rb
 cwd: /arena/app-1/tmp
 env:
     DEBUG: 1
@@ -101,12 +101,15 @@ pid:
     child: /arena/app-1/child.pid
 log:
     file: /var/log/app-1.log
-    age: 86400 # seconds
-    num: 7     # int
-    size: 1    # MegaBytes
+    age: 86400 # log 1 day
+    num: 7     # keep 7 files
+    size: 1    # size of file 1MB
 logger: filebeat -c filebeat.yml -v -once
 user: www
-wait: 1
+wait: 2 # wait 2 seconds before start
+require:
+  - foo
+  - bar
 </code></pre>
 
 <h1 id="manage-your-process-using-a-json-api">Manage your process using a JSON API</h1>

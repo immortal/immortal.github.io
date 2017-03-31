@@ -109,6 +109,25 @@ and <code>-logger</code> options example:</p>
 </div>
 
 
+<h2 id="service-dependencies">Service dependencies</h2>
+
+<p>By defining a <code>require</code> option the service will only start if all the services defined are running.</p>
+
+<pre><code class="language-text">/usr/local/etc/immortal
+|--foo.yml
+|--bar.yml
+`--www.yml
+</code></pre>
+
+<p>if <code>www.yml</code> contains:</p>
+
+<pre><code class="language-yaml">require:
+  - foo
+  - bar
+</code></pre>
+
+<p>If service <code>foo</code> and  <code>bar</code> are not running, the service will not start.</p>
+
                 </section>
             </article>
             <footer id="post-meta" class="clearfix">
