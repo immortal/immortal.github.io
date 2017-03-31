@@ -50,6 +50,56 @@ processes besides been available to control them.&lt;/p&gt;
     </item>
     
     <item>
+      <title>compile from source</title>
+      <link>https://immortal.run/source/</link>
+      <pubDate>Mon, 20 Mar 2017 16:17:00 +0000</pubDate>
+      
+      <guid>https://immortal.run/source/</guid>
+      <description>
+
+&lt;p&gt;Setup go environment &lt;a href=&#34;https://golang.org/doc/install&#34;&gt;https://golang.org/doc/install&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;go &amp;gt;= 1.7 is required&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;For example using $HOME/go for your workspace&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ export GOPATH=$HOME/go
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Create the directory:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ mkdir -p $HOME/go/src/github.com/immortal
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Clone project into that directory:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ git clone git@github.com:immortal/immortal.git $HOME/go/src/github.com/immortal/immortal
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Build by just typing make:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd $HOME/go/src/github.com/immortal/immortal
+$ make
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To install/uninstall:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ make install
+$ make uninstall
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;help-making-the-port-package&#34;&gt;Help making the port/package&lt;/h2&gt;
+
+&lt;p&gt;If you are familiar with the platform, would be nice if could create a native
+port in order make more simple the installation process.&lt;/p&gt;
+
+&lt;p&gt;Currently there are only ports for &lt;a href=&#34;https://immortal.run/freebsd&#34;&gt;FreeBSD&lt;/a&gt; and &lt;a href=&#34;https://immortal.run/mac&#34;&gt;macOS&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>pkg install immortal</title>
       <link>https://immortal.run/freebsd/</link>
       <pubDate>Mon, 20 Mar 2017 16:17:00 +0000</pubDate>
