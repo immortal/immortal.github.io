@@ -2,13 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>immortal</title>
-    <link>https://immortal.run/index.xml</link>
+    <link>https://immortal.run/</link>
     <description>Recent content on immortal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright> </copyright>
     <lastBuildDate>Tue, 21 Mar 2017 12:04:36 +0100</lastBuildDate>
-    <atom:link href="https://immortal.run/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://immortal.run/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>How it works</title>
@@ -16,37 +18,8 @@
       <pubDate>Tue, 21 Mar 2017 12:04:36 +0100</pubDate>
       
       <guid>https://immortal.run/post/how-it-works/</guid>
-      <description>&lt;p&gt;⭕  &lt;code&gt;immortal&lt;/code&gt; runs a command or script detached from the controlling terminal
-as a Unix daemon, it will supervise and restart the service if it has
-been terminated. The service can be controlled by querying a Unix socket
-&amp;ldquo;immortal.sock&amp;rdquo; (&lt;code&gt;immortalctl&lt;/code&gt;), this allows to remotely have full control over
-the service if required by exposing the socket using a web server like Nginx.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;immortal    - Starts and monitor a service
-immortaldir - Directory to scan for services *.yml
-immortalctl - Control existing services
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In a nutshell, &lt;code&gt;immortal&lt;/code&gt; is a command that runs forever an application or
-service.  In most common cases &lt;code&gt;immortal&lt;/code&gt; is called by &lt;code&gt;imortaldir&lt;/code&gt; which
-searches for immortal configuration files &lt;a href=&#34;https://immortal.run/post/run.yml&#34;&gt;run.yml&lt;/a&gt; and ideally
-starts at boot time in order to persist across reboots.&lt;/p&gt;
-
-&lt;p&gt;In some cases there is a need to &amp;ldquo;daemonize&amp;rdquo; a command but not to keep it
-persistent across reboots, for this cases &lt;a href=&#34;https://immortal.run/post/immortal&#34;&gt;immortal&lt;/a&gt; can be
-used directly with out the need of a &lt;a href=&#34;https://immortal.run/post/run.yml&#34;&gt;configuration file&lt;/a&gt;
-or either no need to use &lt;a href=&#34;https://immortal.run/post/immortaldir&#34;&gt;immortaldir&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://immortal.run/post/immortalctl&#34;&gt;immortalctl&lt;/a&gt; still will show the status of existing
-processes besides been available to control them.&lt;/p&gt;
-
-&lt;p&gt;Example:&lt;/p&gt;
-
-&lt;div class=&#34;embed video-player&#34;&gt;
-    &lt;script type=&#34;text/javascript&#34; src=&#34;https://asciinema.org/a/108148.js&#34; id=&#34;asciicast-108148&#34; async&gt;&lt;/script&gt;
-&lt;/div&gt;
-
-</description>
+      <description>⭕ immortal runs a command or script detached from the controlling terminal as a Unix daemon, it will supervise and restart the service if it has been terminated. The service can be controlled by querying a Unix socket &amp;ldquo;immortal.sock&amp;rdquo; (immortalctl), this allows to remotely have full control over the service if required by exposing the socket using a web server like Nginx.
+immortal - Starts and monitor a service immortaldir - Directory to scan for services *.</description>
     </item>
     
     <item>
@@ -55,48 +28,14 @@ processes besides been available to control them.&lt;/p&gt;
       <pubDate>Mon, 20 Mar 2017 16:17:00 +0000</pubDate>
       
       <guid>https://immortal.run/source/</guid>
-      <description>
-
-&lt;p&gt;Setup go environment &lt;a href=&#34;https://golang.org/doc/install&#34;&gt;https://golang.org/doc/install&lt;/a&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;go &amp;gt;= 1.7 is required&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;For example using $HOME/go for your workspace&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ export GOPATH=$HOME/go
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Create the directory:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ mkdir -p $HOME/go/src/github.com/immortal
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Clone project into that directory:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ git clone git@github.com:immortal/immortal.git $HOME/go/src/github.com/immortal/immortal
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Build by just typing make:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ cd $HOME/go/src/github.com/immortal/immortal
-$ make
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To install/uninstall:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ make install
-$ make uninstall
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;help-making-the-port-package&#34;&gt;Help making the port/package&lt;/h2&gt;
-
-&lt;p&gt;If you are familiar with the platform, would be nice if could create a native
-port in order make more simple the installation process.&lt;/p&gt;
-
-&lt;p&gt;Currently there are only ports for &lt;a href=&#34;https://immortal.run/freebsd&#34;&gt;FreeBSD&lt;/a&gt; and &lt;a href=&#34;https://immortal.run/mac&#34;&gt;macOS&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>Setup go environment https://golang.org/doc/install
+ go &amp;gt;= 1.7 is required
+ For example using $HOME/go for your workspace
+$ export GOPATH=$HOME/go  Create the directory:
+$ mkdir -p $HOME/go/src/github.com/immortal  Clone project into that directory:
+$ git clone git@github.com:immortal/immortal.git $HOME/go/src/github.com/immortal/immortal  Build by just typing make:
+$ cd $HOME/go/src/github.com/immortal/immortal $ make  To install/uninstall:
+$ make install $ make uninstall  Help making the port/package If you are familiar with the platform, would be nice if could create a native port in order make more simple the installation process.</description>
     </item>
     
     <item>
@@ -105,13 +44,8 @@ port in order make more simple the installation process.&lt;/p&gt;
       <pubDate>Mon, 20 Mar 2017 16:17:00 +0000</pubDate>
       
       <guid>https://immortal.run/freebsd/</guid>
-      <description>&lt;p&gt;To install &lt;strong&gt;immortal&lt;/strong&gt; on  FreeBSD:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ pkg install immortal
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://www.freshports.org/sysutils/immortal&#34;&gt;https://www.freshports.org/sysutils/immortal&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>To install immortal on FreeBSD:
+$ pkg install immortal  https://www.freshports.org/sysutils/immortal</description>
     </item>
     
     <item>
@@ -120,16 +54,9 @@ port in order make more simple the installation process.&lt;/p&gt;
       <pubDate>Thu, 16 Mar 2017 22:54:37 +0100</pubDate>
       
       <guid>https://immortal.run/mac/</guid>
-      <description>&lt;p&gt;To install &lt;strong&gt;immortal&lt;/strong&gt; on Mac OS X:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ brew tap immortal/tap
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Next:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ brew install immortal
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>To install immortal on Mac OS X:
+$ brew tap immortal/tap  Next:
+$ brew install immortal  </description>
     </item>
     
     <item>
@@ -138,83 +65,9 @@ port in order make more simple the installation process.&lt;/p&gt;
       <pubDate>Wed, 20 Jul 2016 21:07:15 +0200</pubDate>
       
       <guid>https://immortal.run/post/the-problem-to-solve/</guid>
-      <description>
-
-&lt;h2 id=&#34;a-common-way-to-start-up-services&#34;&gt;A common way to start up services&lt;/h2&gt;
-
-&lt;p&gt;Either you are using macOs, FreeBSD, or any Linux variant the idea is to
-simplify how process/services are keep up and running, without need to worry
-about special environments or paths.&lt;/p&gt;
-
-&lt;p&gt;A single &lt;a href=&#34;https://immortal.run/post/run.yml&#34;&gt;&lt;code&gt;run.yml&lt;/code&gt;&lt;/a&gt; file should be enough for start and supervise
-the services, or used as a template within automation tools like
-&lt;a href=&#34;http://saltstack.org&#34;&gt;Saltstack&lt;/a&gt;, &lt;a href=&#34;https://ansible.com&#34;&gt;Ansible&lt;/a&gt;, etc.&lt;/p&gt;
-
-&lt;h2 id=&#34;follow-pid&#34;&gt;Follow PID&lt;/h2&gt;
-
-&lt;p&gt;In some cases it is required to supervise applications that
-daemonize by default. Normally this kind of applications create a
-&lt;a href=&#34;https://en.wikipedia.org/wiki/Process_identifier#Pidfile&#34;&gt;pidfile&lt;/a&gt; every time
-they &lt;a href=&#34;https://en.wikipedia.org/wiki/Fork_(system_call)&#34;&gt;fork&lt;/a&gt;, the one can be
-used to follow subsequent forks and avoid creating a race condition between
-the supervisor trying to start again the process and the forks created by the
-application.&lt;/p&gt;
-
-&lt;p&gt;Example of a race condition while trying to supervise unicorn with runit:&lt;/p&gt;
-
-&lt;div class=&#34;embed video-player&#34;&gt;
-    &lt;script type=&#34;text/javascript&#34; src=&#34;https://asciinema.org/a/80371.js&#34; id=&#34;asciicast-80371&#34; async&gt;&lt;/script&gt;
-&lt;/div&gt;
-
-
-&lt;p&gt;In the example given below, after forking (&lt;code&gt;kill -USR2 $PID&lt;/code&gt;), The supervisor in use
-&lt;code&gt;runit&lt;/code&gt; in this case, tries to start up again the application, since the
-process that was supervising died, but instead enters into loop
-because the application still up and running using the same port.&lt;/p&gt;
-
-&lt;h2 id=&#34;logging&#34;&gt;logging&lt;/h2&gt;
-
-&lt;p&gt;When working in distributed &amp;ldquo;cloud&amp;rdquo; environments, centralized logging becomes a
-requirement, therefore it is desired to have availability to chose how and where
-to log, either to a local file, to a local file and to a remote server or only
-remotely either TCP or UDP.&lt;/p&gt;
-
-&lt;p&gt;To achive this, &lt;strong&gt;immortal&lt;/strong&gt; is not only capable to write logs to a defined
-file, but is also allows to specify an external logger, by specifying the &lt;code&gt;-l&lt;/code&gt;
-and &lt;code&gt;-logger&lt;/code&gt; options example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ immortal -l /tmp/test.log -logger &amp;quot;logger -t test&amp;quot; my-app
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In this case &lt;code&gt;-loger&lt;/code&gt; is going to pass the Stander output/error to the
-&lt;a href=&#34;https://www.freebsd.org/cgi/man.cgi?logger(1)&#34;&gt;logger&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Example logging to a file and to the system syslog using &lt;code&gt;logger&lt;/code&gt;:&lt;/p&gt;
-
-&lt;div class=&#34;embed video-player&#34;&gt;
-    &lt;script type=&#34;text/javascript&#34; src=&#34;https://asciinema.org/a/80376.js&#34; id=&#34;asciicast-80376&#34; async&gt;&lt;/script&gt;
-&lt;/div&gt;
-
-
-&lt;h2 id=&#34;service-dependencies&#34;&gt;Service dependencies&lt;/h2&gt;
-
-&lt;p&gt;By defining a &lt;code&gt;require&lt;/code&gt; option the service will only start if all the services defined are running.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;/usr/local/etc/immortal
-|--foo.yml
-|--bar.yml
-`--www.yml
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;if &lt;code&gt;www.yml&lt;/code&gt; contains:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;require:
-  - foo
-  - bar
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If service &lt;code&gt;foo&lt;/code&gt; and  &lt;code&gt;bar&lt;/code&gt; are not running, the service will not start.&lt;/p&gt;
-</description>
+      <description>A common way to start up services Either you are using macOs, FreeBSD, or any Linux variant the idea is to simplify how process/services are keep up and running, without need to worry about special environments or paths.
+A single run.yml file should be enough for start and supervise the services, or used as a template within automation tools like Saltstack, Ansible, etc.
+Follow PID In some cases it is required to supervise applications that daemonize by default.</description>
     </item>
     
     <item>
@@ -223,94 +76,10 @@ and &lt;code&gt;-logger&lt;/code&gt; options example:&lt;/p&gt;
       <pubDate>Wed, 20 Jul 2016 17:34:22 +0200</pubDate>
       
       <guid>https://immortal.run/about/</guid>
-      <description>
-
-&lt;h1 id=&#34;what-is-immortal&#34;&gt;What is immortal ?&lt;/h1&gt;
-
-&lt;p&gt;A *nix cross-platform (OS agnostic) supervisor based on
-&lt;a href=&#34;https://cr.yp.to/daemontools.html&#34;&gt;daemontools&lt;/a&gt; &amp;amp; &lt;a href=&#34;http://smarden.org/runit/&#34;&gt;runit&lt;/a&gt;.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Improve the wheel, don’t reinvent it&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h1 id=&#34;why-another-supervisor&#34;&gt;Why another supervisor ?&lt;/h1&gt;
-
-&lt;p&gt;Daemontools &amp;amp; runit work very well but don&amp;rsquo;t cover all use cases, mainly when
-dealing with applications that follow the zero-downtime deployment pattern
-(&lt;a href=&#34;https://unicorn.bogomips.org/&#34;&gt;unicorn&lt;/a&gt;/&lt;a href=&#34;http://gunicorn.org/&#34;&gt;gunicorn&lt;/a&gt;),
-applications that daemonize itself like &lt;a href=&#34;http://nginx.org&#34;&gt;nginx&lt;/a&gt; or when
-distributed logging is required.&lt;/p&gt;
-
-&lt;p&gt;Example of a zero-downtime flow using unicorn and signal handling:
-&lt;a href=&#34;https://asciinema.org/a/80357&#34;&gt;&lt;img src=&#34;https://asciinema.org/a/80357.png&#34; alt=&#34;asciicast&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;⭕  immortal, follows and implements the same logic/principles of daemontools, it
-only extends some features to cover more needs, like the:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;-f follow pid
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Because of this, it aims to be compatible with existing daemontools or runit
-&lt;a href=&#34;https://cr.yp.to/daemontools/supervise.html&#34;&gt;run&lt;/a&gt; scripts.&lt;/p&gt;
-
-&lt;p&gt;Example using the &lt;code&gt;-f follow pid&lt;/code&gt; option supervising unicorn:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://asciinema.org/a/108148&#34;&gt;&lt;img src=&#34;https://asciinema.org/a/108148.png&#34; alt=&#34;asciicast&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;When working in distributed &amp;ldquo;cloud&amp;rdquo; environments or while doing Continuous
-Deployments, exists the need to automate the behavior of the supervisor on
-demand, because of this &lt;strong&gt;immortal&lt;/strong&gt; can be used with a custom configuration
-file &lt;code&gt;run.yml&lt;/code&gt; helping to simplify the deployment flow besides
-offering more flexibility.&lt;/p&gt;
-
-&lt;p&gt;Example &lt;code&gt;run.yml&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;cmd: bundle exec unicorn -c unicorn.rb
-cwd: /arena/app-1/tmp
-env:
-    DEBUG: 1
-    ENVIRONMENT: production
-pid:
-    follow: /arena/app-1/unicorn.pid
-    parent: /arena/app-1/parent.pid
-    child: /arena/app-1/child.pid
-log:
-    file: /var/log/app-1.log
-    age: 86400 # log 1 day
-    num: 7     # keep 7 files
-    size: 1    # size of file 1MB
-logger: filebeat -c filebeat.yml -v -once
-user: www
-wait: 2 # wait 2 seconds before start
-require:
-  - foo
-  - bar
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;manage-your-process-using-a-json-api&#34;&gt;Manage your process using a JSON API&lt;/h1&gt;
-
-&lt;p&gt;⭕ &lt;strong&gt;immortal&lt;/strong&gt; exposes full control over the process via an Unix socket,
-returning status in JSON format allowing with this to query and full manage the
-process via http, based on the requirements the services could be exposed via
-any web server like Nginx.&lt;/p&gt;
-
-&lt;p&gt;Example using curl to query the status of a process:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;curl --unix-socket immortal.sock http:/status -s | jq
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Outputs:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-  &amp;quot;pid&amp;quot;: 6940,
-  &amp;quot;up&amp;quot;: &amp;quot;7.9s&amp;quot;,
-  &amp;quot;cmd&amp;quot;: &amp;quot;./stdout&amp;quot;,
-  &amp;quot;fpid&amp;quot;: false,
-  &amp;quot;count&amp;quot;: 4
-}
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>What is immortal ? A *nix cross-platform (OS agnostic) supervisor based on daemontools &amp;amp; runit.
+ Improve the wheel, don’t reinvent it
+ Why another supervisor ? Daemontools &amp;amp; runit work very well but don&amp;rsquo;t cover all use cases, mainly when dealing with applications that follow the zero-downtime deployment pattern (unicorn/gunicorn), applications that daemonize itself like nginx or when distributed logging is required.
+Example of a zero-downtime flow using unicorn and signal handling:</description>
     </item>
     
     <item>
@@ -319,64 +88,8 @@ any web server like Nginx.&lt;/p&gt;
       <pubDate>Wed, 06 Jul 2016 20:35:39 +0200</pubDate>
       
       <guid>https://immortal.run/post/run.yml/</guid>
-      <description>
-
-&lt;h2 id=&#34;immortal-c-run-yml&#34;&gt;immortal -c run.yml&lt;/h2&gt;
-
-&lt;p&gt;A configuration file for running/logging/supervising:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;cmd: bundle exec unicorn -c unicorn.rb
-cwd: /arena/app-1
-env:
-    DEBUG: 1
-    ENVIRONMENT: production
-pid:
-    follow: /arena/app-1/unicorn.pid
-    parent: /arena/app-1/parent.pid
-    child: /arena/app-1/child.pid
-log:
-    file: /var/log/app-1.log
-    age: 86400 # seconds
-    num: 7     # int
-    size: 1    # MegaBytes
-logger: logger -t unicorn
-user: www
-wait: 1
-require:
-  - foo
-  - bar
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;One of the main ideas behind the &lt;code&gt;run.yml&lt;/code&gt; is to eliminate an
-operations/devops dependency while deploying.&lt;/p&gt;
-
-&lt;p&gt;The application &amp;ldquo;micro service&amp;rdquo; can be shipped with a &lt;code&gt;run.yml&lt;/code&gt; and when
-doing a CI &amp;amp; CD flow, by simple updating the &lt;code&gt;run.yml&lt;/code&gt; file, the &lt;strong&gt;immortal&lt;/strong&gt;
-supervisor could stop, restart, pause, resume the service without need to
-logging the server and execute does steps.&lt;/p&gt;
-
-&lt;p&gt;See the &lt;a href=&#34;https://immortal.run/post/ansible&#34;&gt;ansible playbook example&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;require&#34;&gt;require&lt;/h1&gt;
-
-&lt;p&gt;The &lt;code&gt;require&lt;/code&gt; option helps to verify that other services are running before
-starting, for example, having this services:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;/usr/local/etc/immortal
-|--foo.yml
-|--bar.yml
-`--www.yml
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;if &lt;code&gt;www.yml&lt;/code&gt; contains:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;require:
-  - foo
-  - bar
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If service &lt;code&gt;foo&lt;/code&gt; and  &lt;code&gt;bar&lt;/code&gt; are not running, the service will not start.&lt;/p&gt;
-</description>
+      <description>immortal -c run.yml A configuration file for running/logging/supervising:
+cmd: bundle exec unicorn -c unicorn.rb cwd: /arena/app-1 env: DEBUG: 1 ENVIRONMENT: production pid: follow: /arena/app-1/unicorn.pid parent: /arena/app-1/parent.pid child: /arena/app-1/child.pid log: file: /var/log/app-1.log age: 86400 # seconds num: 7 # int size: 1 # MegaBytes logger: logger -t unicorn user: www wait: 1 require: - foo - bar  One of the main ideas behind the run.yml is to eliminate an operations/devops dependency while deploying.</description>
     </item>
     
     <item>
@@ -385,56 +98,10 @@ starting, for example, having this services:&lt;/p&gt;
       <pubDate>Fri, 26 Mar 2010 23:14:08 +0200</pubDate>
       
       <guid>https://immortal.run/post/nginx/</guid>
-      <description>&lt;p&gt;To expose the services via web &lt;a href=&#34;https://nginx.com&#34;&gt;Nginx&lt;/a&gt; can be used.&lt;/p&gt;
-
-&lt;p&gt;Configuration example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-nginx&#34;&gt;upstream immortal {
-    server unix:/var/run/immortal/sleep/immortal.sock;
-}
-
-server {
-listen 80 default_server;
-server_name _;
-location / {
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header Host $http_host;
-    proxy_set_header X-NginX-Proxy true;
-    proxy_http_version 1.1; # for keep-alive
-    proxy_pass http://immortal/;
-    proxy_redirect off;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Based on the setup, permissions for the socket may need to be changed:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ chmod 766 /var/run/immortal/&amp;lt;service name&amp;gt;/immortal.sock
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To check the service status:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;http://&amp;lt;domain&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To send signals:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;http://&amp;lt;domain&amp;gt;/signal/&amp;lt;signal&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;For example to stop the service:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;http://&amp;lt;domain&amp;gt;/signal/stop
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To start the service:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;http://&amp;lt;domain&amp;gt;/signal/start
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The responses are in JSON format.&lt;/p&gt;
-</description>
+      <description>To expose the services via web Nginx can be used.
+Configuration example:
+upstream immortal { server unix:/var/run/immortal/sleep/immortal.sock; } server { listen 80 default_server; server_name _; location / { proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header Host $http_host; proxy_set_header X-NginX-Proxy true; proxy_http_version 1.1; # for keep-alive proxy_pass http://immortal/; proxy_redirect off; } }  Based on the setup, permissions for the socket may need to be changed:
+$ chmod 766 /var/run/immortal/&amp;lt;service name&amp;gt;/immortal.sock  To check the service status:</description>
     </item>
     
     <item>
@@ -443,103 +110,8 @@ location / {
       <pubDate>Fri, 26 Mar 2010 23:10:08 +0200</pubDate>
       
       <guid>https://immortal.run/post/ansible/</guid>
-      <description>&lt;p&gt;Example of a basic &lt;a href=&#34;https://www.ansible.com/&#34;&gt;ansible&lt;/a&gt; playbook for deploying a
-micro service using a &lt;a href=&#34;https://immortal.run/post/run.yml&#34;&gt;configuration file&lt;/a&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;- hosts: your-host
-  become: true
-  tasks:
-  - name: create arena
-    file: path=/arena/foo/releases state=directory
-
-  - name: set now variable
-    set_fact:
-      now: &amp;quot;{{ ansible_date_time.iso8601 }}&amp;quot;
-
-  - name: create arena release dir
-    file: path=/arena/foo/releases/{{ now }} state=directory
-
-  - name: download app.bz2
-    get_url:
-      url: &amp;quot;http://domain.tld/foo/{{ &#39;freebsd&#39; if ansible_os_family == &#39;FreeBSD&#39; else &#39;linux&#39; }}/app.tar.bz2&amp;quot;
-      dest: /arena/foo/releases/{{ now }}
-
-  - name: unarchive app.bz2
-    command: tar -jxf /arena/foo/releases/{{ now }}/app.tar.bz2
-    args:
-      chdir: /arena/foo/releases/{{ now }}
-
-  - name: link to current
-    file:
-      src: /arena/foo/releases/{{ now }}
-      dest: /arena/foo/current
-      state: link
-
-  - name: update foo.yml
-    copy:
-      dest: &amp;quot;{{ &#39;/usr/local/etc/immortal&#39; if ansible_os_family == &#39;FreeBSD&#39; else &#39;/etc/immortal&#39; }}/foo.yml&amp;quot;
-      content: |
-        # {{ now }}
-        cmd: /arena/foo/current/app
-        cwd: /arena/foo/
-        log:
-            file: /var/log/foo.log
-            age: 86400 # seconds
-            num: 7     # int
-            size: 1    # MegaBytes
-        user: www
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Notice the last task &lt;code&gt;update foo.yml&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;- name: update foo.yml
-  copy:
-    dest: /usr/local/etc/foo.yml
-    content: |
-      # {{ now }}
-      cmd: /arena/foo/current/app
-      cwd: /arena/foo/
-      log:
-          file: /var/log/foo.log
-          age: 86400 # seconds
-          num: 7     # int
-          size: 1    # MegaBytes
-      user: www
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Notice the first line in the content:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;# {{ now }}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;That will modify/update the configuration file, therefore it is enough to
-trigger a restart, the updated file &lt;code&gt;/usr/local/etc/foo.yml&lt;/code&gt;, will look
-something like:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# 2017-03-29T16:36:39Z
-cmd: /arena/foo/current/app
-cwd: /arena/foo/
-log:
-    file: /var/log/foo.log
-    age: 86400 # seconds
-    num: 7     # int
-    size: 1    # MegaBytes
-user: www
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The deployment schema in this example is as follow:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;/arena
-|--service-name-1
-|  |--releases
-|  |  `--ISO8601-time
-|  `--@current
-`--service-name-2
-   |--releases
-   |  `--ISO8601-time
-   `--@current
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>Example of a basic ansible playbook for deploying a micro service using a configuration file:
+- hosts: your-host become: true tasks: - name: create arena file: path=/arena/foo/releases state=directory - name: set now variable set_fact: now: &amp;quot;{{ ansible_date_time.iso8601 }}&amp;quot; - name: create arena release dir file: path=/arena/foo/releases/{{ now }} state=directory - name: download app.bz2 get_url: url: &amp;quot;http://domain.tld/foo/{{ &#39;freebsd&#39; if ansible_os_family == &#39;FreeBSD&#39; else &#39;linux&#39; }}/app.tar.bz2&amp;quot; dest: /arena/foo/releases/{{ now }} - name: unarchive app.</description>
     </item>
     
     <item>
@@ -548,262 +120,8 @@ user: www
       <pubDate>Thu, 25 Mar 2010 23:34:54 +0200</pubDate>
       
       <guid>https://immortal.run/post/immortal/</guid>
-      <description>
-
-&lt;p&gt;⭕   &lt;code&gt;immortal&lt;/code&gt; runs a command or script detached from the controlling terminal as a Unix daemon, it will supervise and restart the service if  it has been terminated.  The service can be controlled by querying a Unix socket &amp;ldquo;immortal.sock&amp;rdquo;, this allows to remotely have full control over the service if required by exposing the socket using a web server like Nginx.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;immortal [-v] [-ctl dir] [-d dir] [-e dir] [-f pidfile] [-l logfile] [-logger logger] [-p child_pidfile] [-P supervisor_pidfile] [-u user] command
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;-d dir&lt;/code&gt;&lt;/strong&gt;
-Change to directory &lt;code&gt;&amp;lt;dir&amp;gt;&lt;/code&gt; before starting the command&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;-e dir&lt;/code&gt;&lt;/strong&gt;
-Set environment variables specified by files within the &lt;code&gt;&amp;lt;dir&amp;gt;&lt;/code&gt;.  For example, if &lt;code&gt;&amp;lt;dir&amp;gt;&lt;/code&gt; is /tmp/env and contains 3 files:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;/tmp/env
-    |--DEBUG  (contains true)
-    |--DBHOST (contains 10.0.0.1)
-    `--DBPASS (contains secret)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;An environment var is going to be created for each file, in this case:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;DEBUG=true
-DBHOST=10.0.0.1
-DBPASS=secret
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;-f pidfile&lt;/code&gt;&lt;/strong&gt;
-Follow PID in pidfile.&lt;/p&gt;
-
-&lt;p&gt;In  some  cases  it is required to supervise applications that daemonize by default. Normally this kind of applications create a pidfile  every  time  they fork, the one can be used to follow subsequent forks and avoid creating a race condition between the supervisor trying  to  start again the process and the forks created by the application.&lt;/p&gt;
-
-&lt;p&gt;If using &lt;a href=&#34;https://immortal.run/post/immortalctl&#34;&gt;immortalctl&lt;/a&gt; the color yellow on the  Down  column, helps  to  identify  does  process that have been forked and that currently are been supervised by the PID on the &lt;code&gt;&amp;lt;pidfile&amp;gt;&lt;/code&gt;.  When the supervised application forks and creates a  &lt;code&gt;&amp;lt;pidfile&amp;gt;&lt;/code&gt; a log entry (level DAEMON) will be created:&lt;/p&gt;
-
-&lt;p&gt;Watching pid &lt;code&gt;&amp;lt;int&amp;gt;&lt;/code&gt; on file &lt;code&gt;&amp;lt;pidfile&amp;gt;&lt;/code&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;The  follow  pid option has better performance on Unix/BSD due the kernel event notification mechanism &lt;a href=&#34;https://www.freebsd.org/cgi/man.cgi?query=kqueue&amp;amp;sektion=2&#34;&gt;kqueue(2)&lt;/a&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;-l logfile&lt;/code&gt;&lt;/strong&gt;
-Write stdout/stderr to &lt;code&gt;&amp;lt;logfile&amp;gt;&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;-logger command&lt;/code&gt;&lt;/strong&gt;
-A command &lt;code&gt;&amp;lt;command&amp;gt;&lt;/code&gt; to pipe stdout/stderr from stdin.  Besides writing logs locally by using the option -l, they can be sent to a remote host or by processed by another tool, for example to write logs locally and send logs remotely using logger  this  could be used:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;-l /var/log/app.log --logger &amp;quot;logger -h 10.0.0.1 -t app&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;-P pidfile&lt;/code&gt;&lt;/strong&gt;
-Path to write the supervisor pidfile&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;-p pidfile&lt;/code&gt;&lt;/strong&gt;
-Path to write the child pidfile&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;-s seconds&lt;/code&gt;&lt;/strong&gt;
-Seconds (int) &lt;code&gt;&amp;lt;seconds&amp;gt;&lt;/code&gt; to wait before starting.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;-u user&lt;/code&gt;&lt;/strong&gt;
-Execute command on behalf &lt;code&gt;&amp;lt;user&amp;gt;&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;-v&lt;/code&gt;&lt;/strong&gt;
-Print version&lt;/p&gt;
-
-&lt;h1 id=&#34;the-configuration-file&#34;&gt;The configuration file&lt;/h1&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;-c &amp;lt;service name&amp;gt;.yml&lt;/code&gt;&lt;/strong&gt;
-A  configuration  file with valid YAML syntax, when using this option, it will overwrite other options, configuration format:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;cmd: &amp;lt;command to execute&amp;gt;
-cwd: &amp;lt;change workding directory&amp;gt; # option -d
-env:                             # option -e
-    &amp;lt;key&amp;gt;: &amp;lt;value&amp;gt;
-pid:
-    follow: &amp;lt;pidfile&amp;gt;            # option -f
-    parent: &amp;lt;pidfile&amp;gt;            # option -P
-    child: &amp;lt;pidfile&amp;gt;             # option -p
-log:
-    file: &amp;lt;path&amp;gt;                 # option -l
-    age: &amp;lt;int&amp;gt;   # seconds
-    num: &amp;lt;int&amp;gt;   # int
-    size: &amp;lt;int&amp;gt;  # MegaBytes
-logger: &amp;lt;command&amp;gt;                # option -logger
-user: &amp;lt;user&amp;gt;                     # option -u
-wait: &amp;lt;int&amp;gt;                      # option -s
-require:                         # list of services needed before starting
-  - foo
-  - bar
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;-ctl /var/run/immortal/&amp;lt;service&amp;gt;&lt;/code&gt;&lt;/strong&gt;
-Path where the supervise directory will be created. This directory is unique per
-service and is used to manage the service via a Unix socket besides preventing
-running multiple times the same service by using a lock.&lt;/p&gt;
-
-&lt;p&gt;A supervise directory containing two files:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;lock
-immortal.sock
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;When  calling  immortal  from  the  command line, not by using immortaldir(8) as root, the supervise directory, will be created on  a hidden directory named &amp;ldquo;.immortal&amp;rdquo; within the $HOME of the user:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt; ~/.immortal/&amp;lt;PID&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This  helps  to  run  and  supervise the same command multiple times without colliding, useful for testing or for temporary  services that will exit when server reboots.&lt;/p&gt;
-
-&lt;p&gt;To  keep  services  up  and running on boot time, is better to create a configuration file &amp;ldquo;run.yml&amp;rdquo; and use immortaldir(8).&lt;/p&gt;
-
-&lt;h1 id=&#34;environment&#34;&gt;ENVIRONMENT&lt;/h1&gt;
-
-&lt;p&gt;&lt;code&gt;IMMORTAL_SDIR&lt;/code&gt; This environment variable allows to override the default supervise  directory  /var/run/immortal, used also by &lt;a href=&#34;https://immortal.run/post/immortalctl&#34;&gt;immortalctl&lt;/a&gt; and &lt;a href=&#34;https://immortal.run/post/immortaldir&#34;&gt;immortaldir&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;examples&#34;&gt;Examples&lt;/h1&gt;
-
-&lt;p&gt;Run command and restart it when finishes:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;immortal /bin/sh -c &amp;quot;date &amp;amp;&amp;amp; sleep 5 &amp;gt; /tmp/sleep.log&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Run command, restart it when finishes and log output to file:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;immortal -l /tmp/sleep.log /bin/sh -c &amp;quot;date &amp;amp;&amp;amp; sleep 5&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Run command, restart it when finishes, log output to file and to external
-logger:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;immortal -l /tmp/sleep.log -logger &amp;quot;tee /tmp/sleep2.log&amp;quot; /bin/sh -c &amp;quot;date &amp;amp;&amp;amp; sleep 5&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Run command, restart it when finishes, log output to file, wait 2 seconds before
-start:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;immortal -s 2 -l /tmp/sleep.log /bin/sh -c &amp;quot;date &amp;amp;&amp;amp; sleep 5&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Run a command, restart it when finishes, log output to file, and follow pid if
-it forks:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;immortal -l /tmp/x.log -logger &amp;quot;tee /tmp/y.log&amp;quot; -f ./unicorn.pid  bundle exec unicorn -c unicorn.rb
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Run a command, restart it when finishes, log output to file and create supervice
-dir in /tmp/immortal/sleep&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;immortal -l /tmp/sleep.log -ctl /tmp/immortal/sleep /bin/sh -c &amp;quot;sleep 5 &amp;amp;&amp;amp; date&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;For making &lt;code&gt;immortalctl&lt;/code&gt; work using the &lt;code&gt;-ctl &amp;lt;dir&amp;gt;&lt;/code&gt; the &lt;code&gt;IMMORTAL_SDIR&lt;/code&gt;
-environment var should be set to &lt;code&gt;/tmp/immortal&lt;/code&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;configuration-example&#34;&gt;Configuration example:&lt;/h1&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;cmd: bundle exec unicorn -c unicorn.rb
-cwd: /test/unicorn
-env:
-    DEBUG: 1
-    ENVIROMENT: production
-pid:
-    follow: /test/unicorn/unicorn.pid
-    parent: /tmp/parent.pid
-    child: /tmp/child.pid
-log:
-    file: /tmp/app.log
-    age: 86400 # seconds
-    num: 7     # int
-    size: 1    # MegaBytes
-logger: filebeat -c filebeat.yml -v -once
-user: www
-wait: 1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Notice that when using the option &lt;code&gt;-u/user&lt;/code&gt;, superuser privileges will be required&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h1 id=&#34;nginx-example-to-manage-remotely-the-service&#34;&gt;Nginx example to manage remotely the service:&lt;/h1&gt;
-
-&lt;pre&gt;&lt;code&gt;immortal -l /tmp/sleep.log -ctl /tmp/immortal/sleep /bin/sh -c &amp;quot;sleep 5 &amp;amp;&amp;amp; date&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Based on your shell set &lt;code&gt;IMMORTAL_SDIR&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;setenv IMMORTAL_SDIR /tmp/immortal
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;or&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;export IMMORTAL_SDIR=/tmp/immortal
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This is only required for making &lt;code&gt;immortalctl&lt;/code&gt; to work, you can query directly the socket using curl, for example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;curl --unix-socket immortal.sock http:/status -s | jq
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Will output something like:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-  &amp;quot;pid&amp;quot;: 7713,
-  &amp;quot;up&amp;quot;: &amp;quot;4.2s&amp;quot;,
-  &amp;quot;cmd&amp;quot;: &amp;quot;sleep 5&amp;quot;,
-  &amp;quot;fpid&amp;quot;: false,
-  &amp;quot;count&amp;quot;: 4
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;nginx-configuration&#34;&gt;Nginx configuration:&lt;/h1&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-nginx&#34;&gt;upstream immortal {
-    server unix:/tmp/immortal/sleep/immortal.sock;
-}
-
-server {
-listen 80 default_server;
-server_name _;
-location / {
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header Host $http_host;
-    proxy_set_header X-NginX-Proxy true;
-    proxy_http_version 1.1; # for keep-alive
-    proxy_pass http://immortal/;
-    proxy_redirect off;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In some cases you may have to change permissions of the socket:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;chmod 766 /tmp/immortal/sleep/immortal.sock
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To check the service status:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;http://&amp;lt;domain&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To send signals:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;http://&amp;lt;domain&amp;gt;/signal/&amp;lt;signal&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;For example to stop the service:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;http://&amp;lt;domain&amp;gt;/signal/stop
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To start the service:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;http://&amp;lt;domain&amp;gt;/signal/start
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The responses are in JSON format.&lt;/p&gt;
-</description>
+      <description>⭕ immortal runs a command or script detached from the controlling terminal as a Unix daemon, it will supervise and restart the service if it has been terminated. The service can be controlled by querying a Unix socket &amp;ldquo;immortal.sock&amp;rdquo;, this allows to remotely have full control over the service if required by exposing the socket using a web server like Nginx.
+immortal [-v] [-ctl dir] [-d dir] [-e dir] [-f pidfile] [-l logfile] [-logger logger] [-p child_pidfile] [-P supervisor_pidfile] [-u user] command  -d dir Change to directory &amp;lt;dir&amp;gt; before starting the command</description>
     </item>
     
     <item>
@@ -812,111 +130,9 @@ location / {
       <pubDate>Wed, 24 Mar 2010 23:34:54 +0200</pubDate>
       
       <guid>https://immortal.run/post/immortalctl/</guid>
-      <description>
-
-&lt;p&gt;&lt;code&gt;immortalctl&lt;/code&gt; control services started by &lt;code&gt;immortal&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;immortalctl [options] [-12achikinouqstvw] [*|service]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;immortalctl&lt;/code&gt; by default prints the status of any available processes started by &lt;a href=&#34;https://immortal.run/post/immortal&#34;&gt;immortal&lt;/a&gt;, it first searches for user process located in &lt;code&gt;$HOME/.immortal&lt;/code&gt; and next on the system global services started by &lt;a href=&#34;https://immortal.run/post/immortal&#34;&gt;immortaldir&lt;/a&gt; located by default in &lt;code&gt;/var/run/immortal&lt;/code&gt; unless this has been changed by defining the environment var &lt;code&gt;IMMORTAL_SDIR&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;When no services found the output will be a single row only with the headers:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;PID   Up   Down   Name   CMD
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;PID&lt;/strong&gt;    Print the current pid of the service that is been supervised&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Up&lt;/strong&gt;     Display the time the application has been running and in color green&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Down&lt;/strong&gt;   Display the time the application has been down and in color red, when in color yellow means that &lt;code&gt;immortal&lt;/code&gt; is following a pid, see &lt;code&gt;immortal&lt;/code&gt; option &lt;code&gt;-f&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Name&lt;/strong&gt;   If the service has been started with &lt;a href=&#34;https://immortal.run/post/immortaldir&#34;&gt;immortaldir&lt;/a&gt; it will be a string matching the name of  the  service.yml file, if the service has been run from command line calling directly &lt;code&gt;immortal&lt;/code&gt; it will be a PID&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;CMD&lt;/strong&gt;    The command that is been supervised&lt;/p&gt;
-
-&lt;p&gt;By queering the socket of the service directly, extra information can be obtained in JSON format, for example when using curl:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;curl --unix-socket immortal.sock http:/status -s | jq
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Will output something like:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-    &amp;quot;pid&amp;quot;: 7713,
-    &amp;quot;up&amp;quot;: &amp;quot;4.2s&amp;quot;,
-    &amp;quot;cmd&amp;quot;: &amp;quot;sleep 5&amp;quot;,
-    &amp;quot;fpid&amp;quot;: false,
-    &amp;quot;count&amp;quot;: 4
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;fpid&lt;/strong&gt;  True when following a pid.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;count&lt;/strong&gt; The number of times the service has been restarted, if this number is to high something maybe wrong with your service since is dying frequently.&lt;/p&gt;
-
-&lt;p&gt;An option or signal can be sent to all the services by using a &lt;code&gt;*&lt;/code&gt; instead of the service name.&lt;/p&gt;
-
-&lt;h1 id=&#34;options&#34;&gt;Options&lt;/h1&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;exit&lt;/code&gt;&lt;/strong&gt;
-Stop service and supervisor, when following a pid it will only exit the supervisor, normally this option
-should not be used since the required behavior is to keep the service running forever.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;once&lt;/code&gt;&lt;/strong&gt;
-If the service is not running, it will be started, if for some reason the  process  stops,  it  wont  be starte again.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;start&lt;/code&gt;&lt;/strong&gt;
-Start the service.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;status&lt;/code&gt;&lt;/strong&gt;
-Print status.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;stop&lt;/code&gt;&lt;/strong&gt;
-Stop the service, will terminate the service and display the down time in the Down column when printing the status.&lt;/p&gt;
-
-&lt;h2 id=&#34;signals&#34;&gt;Signals&lt;/h2&gt;
-
-&lt;p&gt;When sending signals, options start with one dash:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;-1        USR1
--2        USR2
--a        ALRM
--c        CONT
--h        HUP
--i        INT
--k        KILL
--in       TTIN
--ou       TTOU
--q        QUIT
--s        STOP
--t        TERM
--w        WINCH
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;-v will print the current version&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h1 id=&#34;environment&#34;&gt;Environment&lt;/h1&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;IMMORTAL_SDIR&lt;/code&gt;&lt;/strong&gt; This environment variable allows to override the default
-supervise directory /var/run/immortal, used also by &lt;a href=&#34;https://immortal.run/post/immortal&#34;&gt;immortal&lt;/a&gt;
-and &lt;a href=&#34;https://immortal.run/post/immortaldir&#34;&gt;immortaldir&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;examples&#34;&gt;Examples&lt;/h1&gt;
-
-&lt;p&gt;Send signal USR2:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;immortalctl -2 service
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Stop all services, normally this is not the required behavior, since will exit the supervisor:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;immortalctl exit &amp;quot;*&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>immortalctl control services started by immortal
+immortalctl [options] [-12achikinouqstvw] [*|service]  immortalctl by default prints the status of any available processes started by immortal, it first searches for user process located in $HOME/.immortal and next on the system global services started by immortaldir located by default in /var/run/immortal unless this has been changed by defining the environment var IMMORTAL_SDIR.
+When no services found the output will be a single row only with the headers:</description>
     </item>
     
     <item>
@@ -925,94 +141,11 @@ and &lt;a href=&#34;https://immortal.run/post/immortaldir&#34;&gt;immortaldir&lt
       <pubDate>Tue, 23 Mar 2010 23:34:54 +0200</pubDate>
       
       <guid>https://immortal.run/post/immortaldir/</guid>
-      <description>
-
-&lt;p&gt;&lt;code&gt;immortaldir&lt;/code&gt; start services located in a specified directory.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;immortalctl [dir] [-v]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;immortaldir&lt;/code&gt; will scan every 5 seconds a directory searching for files ending in &lt;code&gt;.yml&lt;/code&gt; and track changes. The files should conform the &lt;a href=&#34;https://immortal.run/post/immortal&#34;&gt;immortal&lt;/a&gt; configuration format.&lt;/p&gt;
-
-&lt;p&gt;If a file changes the service will be restarted, &lt;code&gt;immortalctl exit &amp;amp; stop&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;If a file is touched and service is down, it will be started, &lt;code&gt;immortalctl start&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;If a file is removed, the supervisor will exit, &lt;code&gt;immortalctl exit&lt;/code&gt;, this may end the  existing  process but in cases where the PID is been followed, only the supervisor will exit.&lt;/p&gt;
-
-&lt;p&gt;Based on your operating system the directory containing the services could be:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;/usr/local/etc/immortal
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;or&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;/etc/immortal
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;When dealing with multiple operating systems could be handy to use a unique location like &lt;code&gt;/immortal&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;To keep services persistent across reboots a startup script should be used to run &lt;code&gt;immortaldir&lt;/code&gt; on boot time.&lt;/p&gt;
-
-&lt;h1 id=&#34;options&#34;&gt;Options&lt;/h1&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;dir&lt;/code&gt;&lt;/strong&gt; Path of directory containing immortal configuration files &lt;code&gt;*.yml&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;-v&lt;/code&gt;&lt;/strong&gt; Print current version.&lt;/p&gt;
-
-&lt;h1 id=&#34;environment&#34;&gt;Environment&lt;/h1&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;IMMORTAL_SDIR&lt;/code&gt;&lt;/strong&gt; This environment variable allows to override the default
-supervise directory &lt;code&gt;/var/run/immortal&lt;/code&gt;, used also by &lt;code&gt;immortalctl&lt;/code&gt; and
-&lt;code&gt;immortal&lt;/code&gt;.  By default &lt;code&gt;immortaldir&lt;/code&gt; after finding a configuration file
-&lt;code&gt;service.yml&lt;/code&gt; will invoke &lt;code&gt;immortal&lt;/code&gt; and pass to it the option:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;-ctl &amp;lt;service&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This will create the  directory &amp;ldquo;service&amp;rdquo; in &lt;code&gt;/var/run/immortal&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;/var/run/immortal/service
-                 |--lock
-                 `--immortal.sock
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;lock&lt;/code&gt;&lt;/strong&gt; is a file that prevents running more than once the same service&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;immortal.sock&lt;/code&gt;&lt;/strong&gt; is a Unix socket that can be used to manage the process, example:&lt;/p&gt;
-
-&lt;p&gt;Get status:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;curl --unix-socket immortal.sock http:/status -s
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Down. If the service is running, send it a TERM signal. After it stops, do not restart it:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;curl --unix-socket immortal.sock http://im/signal/down -s
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Start:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;curl --unix-socket immortal.sock http://im/signal/start -s
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If a different path instead of &lt;code&gt;/var/run/immortal&lt;/code&gt; is required, the &lt;code&gt;IMMORTAL_SDIR&lt;/code&gt; environment variable can be used.&lt;/p&gt;
-
-&lt;h1 id=&#34;examples&#34;&gt;Examples&lt;/h1&gt;
-
-&lt;p&gt;Read configuration files from &lt;code&gt;/etc/immortal&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;immortaldir /etc/immortal
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Read configuration files from &lt;code&gt;/srv/immortal&lt;/code&gt; and create supervise directories on &lt;code&gt;/var/www/immortal&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;export IMMORTAL_SDIR=/var/www/immortal
-immortaldir /srv/immortal
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>immortaldir start services located in a specified directory.
+immortalctl [dir] [-v]  immortaldir will scan every 5 seconds a directory searching for files ending in .yml and track changes. The files should conform the immortal configuration format.
+If a file changes the service will be restarted, immortalctl exit &amp;amp; stop.
+If a file is touched and service is down, it will be started, immortalctl start.
+If a file is removed, the supervisor will exit, immortalctl exit, this may end the existing process but in cases where the PID is been followed, only the supervisor will exit.</description>
     </item>
     
   </channel>

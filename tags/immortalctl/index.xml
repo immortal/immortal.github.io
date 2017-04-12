@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Immortalctl on immortal</title>
-    <link>https://immortal.run/tags/immortalctl/index.xml</link>
+    <link>https://immortal.run/tags/immortalctl/</link>
     <description>Recent content in Immortalctl on immortal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright> </copyright>
-    <atom:link href="https://immortal.run/tags/immortalctl/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 21 Mar 2017 12:04:36 +0100</lastBuildDate>
+    
+	<atom:link href="https://immortal.run/tags/immortalctl/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>How it works</title>
@@ -15,37 +18,8 @@
       <pubDate>Tue, 21 Mar 2017 12:04:36 +0100</pubDate>
       
       <guid>https://immortal.run/post/how-it-works/</guid>
-      <description>&lt;p&gt;⭕  &lt;code&gt;immortal&lt;/code&gt; runs a command or script detached from the controlling terminal
-as a Unix daemon, it will supervise and restart the service if it has
-been terminated. The service can be controlled by querying a Unix socket
-&amp;ldquo;immortal.sock&amp;rdquo; (&lt;code&gt;immortalctl&lt;/code&gt;), this allows to remotely have full control over
-the service if required by exposing the socket using a web server like Nginx.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;immortal    - Starts and monitor a service
-immortaldir - Directory to scan for services *.yml
-immortalctl - Control existing services
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In a nutshell, &lt;code&gt;immortal&lt;/code&gt; is a command that runs forever an application or
-service.  In most common cases &lt;code&gt;immortal&lt;/code&gt; is called by &lt;code&gt;imortaldir&lt;/code&gt; which
-searches for immortal configuration files &lt;a href=&#34;https://immortal.run/post/run.yml&#34;&gt;run.yml&lt;/a&gt; and ideally
-starts at boot time in order to persist across reboots.&lt;/p&gt;
-
-&lt;p&gt;In some cases there is a need to &amp;ldquo;daemonize&amp;rdquo; a command but not to keep it
-persistent across reboots, for this cases &lt;a href=&#34;https://immortal.run/post/immortal&#34;&gt;immortal&lt;/a&gt; can be
-used directly with out the need of a &lt;a href=&#34;https://immortal.run/post/run.yml&#34;&gt;configuration file&lt;/a&gt;
-or either no need to use &lt;a href=&#34;https://immortal.run/post/immortaldir&#34;&gt;immortaldir&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://immortal.run/post/immortalctl&#34;&gt;immortalctl&lt;/a&gt; still will show the status of existing
-processes besides been available to control them.&lt;/p&gt;
-
-&lt;p&gt;Example:&lt;/p&gt;
-
-&lt;div class=&#34;embed video-player&#34;&gt;
-    &lt;script type=&#34;text/javascript&#34; src=&#34;https://asciinema.org/a/108148.js&#34; id=&#34;asciicast-108148&#34; async&gt;&lt;/script&gt;
-&lt;/div&gt;
-
-</description>
+      <description>⭕ immortal runs a command or script detached from the controlling terminal as a Unix daemon, it will supervise and restart the service if it has been terminated. The service can be controlled by querying a Unix socket &amp;ldquo;immortal.sock&amp;rdquo; (immortalctl), this allows to remotely have full control over the service if required by exposing the socket using a web server like Nginx.
+immortal - Starts and monitor a service immortaldir - Directory to scan for services *.</description>
     </item>
     
   </channel>

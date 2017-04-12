@@ -7,7 +7,7 @@
 		<meta name="author" content="immortal">
 		<meta name="description" content="A *nix cross-platform (OS agnostic) supervisor that implements a follow pid feature and multiple logging options">
 		<meta name="keywords" content="supervisor, follow pid, daemonize, run, logging, immortal">
-		<meta name="generator" content="Hugo 0.19" />
+		<meta name="generator" content="Hugo 0.20" />
 		<title>immortalctl &middot; immortal</title>
 		<link rel="shortcut icon" href="https://immortal.run/images/favicon.ico">
 		<link rel="stylesheet" href="https://immortal.run/css/style.css">
@@ -100,8 +100,10 @@
 <h1 id="options">Options</h1>
 
 <p><strong><code>exit</code></strong>
-Stop service and supervisor, when following a pid it will only exit the supervisor, normally this option
-should not be used since the required behavior is to keep the service running forever.</p>
+Exits  supervisor,  when following a PID it will only exit the supervisor, normally this option should not be used since the required behavior is to keep the service running forever.</p>
+
+<p><strong><code>halt</code></strong>
+Stop the service by sending a TERM signal and exits the supervisor.</p>
 
 <p><strong><code>once</code></strong>
 If the service is not running, it will be started, if for some reason the  process  stops,  it  wont  be starte again.</p>
@@ -113,7 +115,7 @@ Start the service.</p>
 Print status.</p>
 
 <p><strong><code>stop</code></strong>
-Stop the service, will terminate the service and display the down time in the Down column when printing the status.</p>
+Stop the service by sending a TERM signal, will display the down time in the Down column when printing the status.</p>
 
 <h2 id="signals">Signals</h2>
 
@@ -151,9 +153,9 @@ and <a href="/post/immortaldir">immortaldir</a></p>
 <pre><code class="language-sh">immortalctl -2 service
 </code></pre>
 
-<p>Stop all services, normally this is not the required behavior, since will exit the supervisor:</p>
+<p>Stop  all  services,  normally  this is not the required behavior, since will exit the supervisor and terminate all services:</p>
 
-<pre><code class="language-sh">immortalctl exit &quot;*&quot;
+<pre><code class="language-sh">immortalctl halt &quot;*&quot;
 </code></pre>
 
                 </section>
