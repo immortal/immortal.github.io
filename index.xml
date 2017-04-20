@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright> </copyright>
-    <lastBuildDate>Tue, 21 Mar 2017 12:04:36 +0100</lastBuildDate>
+    <lastBuildDate>Thu, 20 Apr 2017 16:23:13 +0200</lastBuildDate>
     
 	<atom:link href="https://immortal.run/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>openbsd port</title>
+      <link>https://immortal.run/openbsd/</link>
+      <pubDate>Thu, 20 Apr 2017 16:23:13 +0200</pubDate>
+      
+      <guid>https://immortal.run/openbsd/</guid>
+      <description>To install immortal on OpenBSD &amp;gt;= 6.1 you can use this port:
+https://github.com/immortal/immortal.vendor/releases/download/0.13.2/immortal.tar.gz
+Or compile from source:</description>
+    </item>
     
     <item>
       <title>How it works</title>
