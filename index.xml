@@ -67,7 +67,6 @@ $ pkg install immortal  https://www.freshports.org/sysutils/immortal</descriptio
       
       <guid>https://immortal.run/mac/</guid>
       <description>To install immortal on Mac OS X:
-$ brew tap immortal/tap  Next:
 $ brew install immortal  </description>
     </item>
     
