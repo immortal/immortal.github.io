@@ -109,6 +109,26 @@ starting, for example, having this services:</p>
 
 <p>If service <code>foo</code> and  <code>bar</code> are not running, the service will not start.</p>
 
+<h3 id="example-using-su">example using su</h3>
+
+<p>In some cases the full environment of a user is required to be loaded before
+running the command, therefore the use of the command <code>su user -c</code> becomes
+handy, example:</p>
+
+<pre><code class="language-yaml">cmd: su ec2_user -c &quot;/path/to/bin&quot;
+env:
+    ENVIRONMENT: production
+    AWS_ACCESS_KEY_ID: access
+    AWS_SECRET_ACCESS_KEY: secret
+    AWS_ACCESS_KEY: access
+    AWS_SECRET_KEY: secret
+log:
+    file: /var/log/bin.log
+    age: 86400 # seconds
+    num: 7     # int
+    size: 1    # MegaBytes
+</code></pre>
+
                 </section>
             </article>
             <footer id="post-meta" class="clearfix">
