@@ -58,13 +58,18 @@
 <pre><code>immortalctl [dir] [-v]
 </code></pre>
 
-<p><code>immortaldir</code> will scan every 5 seconds a directory searching for files ending in <code>.yml</code> and track changes. The files should conform the <a href="/post/immortal">immortal</a> configuration format.</p>
+<p><code>immortaldir</code> will watch for changes in the specified directory or if
+using Linux, will scan the directory every 5 seconds searching for
+files ending in <code>.yml</code> and track changes. The files should conform the
+<a href="/post/immortal">immortal</a> configuration format.</p>
 
 <p>If a file changes the service will be restarted, <code>immortalctl exit &amp; stop</code>.</p>
 
 <p>If a file is touched and service is down, it will be started, <code>immortalctl start</code>.</p>
 
-<p>If a file is removed, the supervisor will exit, <code>immortalctl exit</code>, this may end the  existing  process but in cases where the PID is been followed, only the supervisor will exit.</p>
+<p>If a file is removed, the supervisor will exit, <code>immortalctl exit</code>, this may
+end the existing process but in cases where the PID is been followed, only the
+supervisor will exit.</p>
 
 <p>Based on your operating system the directory containing the services could be:</p>
 
@@ -76,15 +81,17 @@
 <pre><code>/etc/immortal
 </code></pre>
 
-<p>immortaldir checks for changes also in the IMMORTAL_SDIR directory in order to
-restart services that are not any- more running, for example when a service has
-been halted (signal halt) this helps to automatically restart the service.</p>
+<p><code>immortaldir</code> checks for changes also in the <strong><code>IMMORTAL_SDIR</code></strong> directory in
+order to restart services that are not any- more running, for example when a
+service has been halted (signal halt) this helps to automatically restart the
+service.</p>
 
 <blockquote>
 <p>When dealing with multiple operating systems could be handy to use a unique location like <code>/immortal</code></p>
 </blockquote>
 
-<p>To keep services persistent across reboots a startup script should be used to run <code>immortaldir</code> on boot time.</p>
+<p>To keep services persistent across reboots a startup script should be used to
+run <code>immortaldir</code> on boot time.</p>
 
 <h1 id="options">Options</h1>
 

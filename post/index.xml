@@ -93,10 +93,9 @@ When no services found the output will be a single row only with the headers:</d
       
       <guid>https://immortal.run/post/immortaldir/</guid>
       <description>immortaldir start services located in a specified directory.
-immortalctl [dir] [-v]  immortaldir will scan every 5 seconds a directory searching for files ending in .yml and track changes. The files should conform the immortal configuration format.
+immortalctl [dir] [-v]  immortaldir will watch for changes in the specified directory or if using Linux, will scan the directory every 5 seconds searching for files ending in .yml and track changes. The files should conform the immortal configuration format.
 If a file changes the service will be restarted, immortalctl exit &amp;amp; stop.
-If a file is touched and service is down, it will be started, immortalctl start.
-If a file is removed, the supervisor will exit, immortalctl exit, this may end the existing process but in cases where the PID is been followed, only the supervisor will exit.</description>
+If a file is touched and service is down, it will be started, immortalctl start.</description>
     </item>
     
   </channel>
