@@ -8,7 +8,7 @@
 		<meta name="description" content="A *nix cross-platform (OS agnostic) supervisor">
 		<meta name="keywords" content="supervisor, follow pid, daemonize, run, logging, immortal">
 		<meta name="generator" content="Hugo 0.25.1" />
-		<title>Using Nginx &middot; immortal</title>
+		<title>Systemd &middot; immortal</title>
 		<link rel="shortcut icon" href="https://immortal.run/images/favicon.ico">
 		<link rel="stylesheet" href="https://immortal.run/css/style.css">
 		<link rel="stylesheet" href="https://immortal.run/css/monokai.css">
@@ -44,62 +44,32 @@
         <section id="wrapper">
             <article class="post">
                 <header>
-                    <h1>Using Nginx</h1>
+                    <h1>Systemd</h1>
                     <h2 class="headline">
                     <br>
                     
                     </h2>
                 </header>
                 <section id="post-body">
-                    <p>To expose the services via web <a href="https://nginx.com">Nginx</a> can be used.</p>
+                    <p>To start <a href="/posts/immortaldir/">immortaldir</a> on Linux with Systemd, put this
+script in <code>/etc/systemd/system/immortaldir.service</code>:</p>
 
-<p>Configuration example:</p>
+<pre><code class="language-sh">[Unit]
+Description=immortaldir
+After=network.target
 
-<pre><code class="language-nginx">upstream immortal {
-    server unix:/var/run/immortal/sleep/immortal.sock;
-}
+[Service]
+ExecStart=/usr/bin/immortaldir /etc/immortal 2&gt;&amp;1 | logger -t immortaldir
+KillMode=process
+Restart=always
+Restart=on-failure
+Type=simple
+User=root
 
-server {
-listen 80 default_server;
-server_name _;
-location / {
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header Host $http_host;
-    proxy_set_header X-NginX-Proxy true;
-    proxy_http_version 1.1; # for keep-alive
-    proxy_pass http://immortal/;
-    proxy_redirect off;
-    }
-}
+[Install]
+WantedBy=multi-user.target
+Alias=immortaldir.service
 </code></pre>
-
-<p>Based on the setup, permissions for the socket may need to be changed:</p>
-
-<pre><code class="language-sh">$ chmod 766 /var/run/immortal/&lt;service name&gt;/immortal.sock
-</code></pre>
-
-<p>To check the service status:</p>
-
-<pre><code class="language-sh">http://&lt;domain&gt;
-</code></pre>
-
-<p>To send signals:</p>
-
-<pre><code class="language-sh">http://&lt;domain&gt;/signal/&lt;signal&gt;
-</code></pre>
-
-<p>For example to stop the service:</p>
-
-<pre><code class="language-sh">http://&lt;domain&gt;/signal/stop
-</code></pre>
-
-<p>To start the service:</p>
-
-<pre><code class="language-sh">http://&lt;domain&gt;/signal/start
-</code></pre>
-
-<p>The responses are in JSON format.</p>
 
                 </section>
             </article>
@@ -107,7 +77,7 @@ location / {
                 
                     
                 <section id="sharing">
-                    <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fimmortal.run%2fpost%2fnginx%2f - Using%20Nginx "><span class="icon-twitter"> Tweet</span></a>
+                    <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fimmortal.run%2fpost%2fsystemd%2f - Systemd "><span class="icon-twitter"> Tweet</span></a>
 
 <a class="facebook" href="#" onclick="
     window.open(
