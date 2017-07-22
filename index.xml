@@ -39,8 +39,7 @@ immortal - Starts and monitor a service immortaldir - Directory to scan for serv
       <pubDate>Mon, 20 Mar 2017 16:17:00 +0000</pubDate>
       
       <guid>https://immortal.run/source/</guid>
-      <description>saltstack Using Salstack: https://github.com/saltstack-formulas/immortal-formula
-pre-compiled For linux: https://github.com/immortal/immortal/releases
+      <description>pre-compiled For linux: https://github.com/immortal/immortal/releases
 compile from source Setup go environment https://golang.org/doc/install
  go &amp;gt;= 1.7 is required
  For example using $HOME/go for your workspace
