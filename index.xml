@@ -100,7 +100,7 @@ Example of a zero-downtime flow using unicorn and signal handling:</description>
       
       <guid>https://immortal.run/post/run.yml/</guid>
       <description>immortal -c run.yml A configuration file for running/logging/supervising:
-cmd: bundle exec unicorn -c unicorn.rb cwd: /arena/app-1 env: DEBUG: 1 ENVIRONMENT: production pid: follow: /arena/app-1/unicorn.pid parent: /arena/app-1/parent.pid child: /arena/app-1/child.pid log: file: /var/log/app-1.log age: 86400 # seconds num: 7 # int size: 1 # MegaBytes logger: logger -t unicorn user: www wait: 1 require: - foo - bar  One of the main ideas behind the run.yml is to eliminate an operations/devops dependency while deploying.</description>
+cmd: bundle exec unicorn -c unicorn.rb cwd: /arena/app-1 env: DEBUG: 1 ENVIRONMENT: production pid: follow: /arena/app-1/unicorn.pid parent: /arena/app-1/parent.pid child: /arena/app-1/child.pid log: file: /var/log/app-1.log age: 86400 # seconds num: 7 # int size: 1 # MegaBytes timestamp: true # will add timesamp to log logger: logger -t unicorn user: www wait: 1 require: - foo - bar  One of the main ideas behind the run.</description>
     </item>
     
     <item>

@@ -71,6 +71,7 @@ log:
     age: 86400 # seconds
     num: 7     # int
     size: 1    # MegaBytes
+    timestamp: true # will add timesamp to log
 logger: logger -t unicorn
 user: www
 wait: 1
@@ -127,6 +128,28 @@ log:
     age: 86400 # seconds
     num: 7     # int
     size: 1    # MegaBytes
+</code></pre>
+
+<h1 id="timestamp">timestamp</h1>
+
+<p>By default the option <code>timestamp</code> within the <code>log</code> is set to
+false, this is in favor of the applications that follow the
+<a href="https://12factor.net/logs">12 factor</a> and in cases where log
+is structured in <a href="https://en.wikipedia.org/wiki/JSON">json</a>.</p>
+
+<p>In case a time stamp is required simple set <code>timestamp</code>, example:</p>
+
+<pre><code class="language-yaml">log:
+    file: /var/log/bin.log
+    age: 86400 # seconds
+    num: 7     # int
+    size: 1    # MegaBytes
+    timestamp: true
+</code></pre>
+
+<p>This will prefix each line with a <code>RFC3339Nano</code> time stamp:</p>
+
+<pre><code>2017-08-03T12:10:31.040165255Z your log ...
 </code></pre>
 
                 </section>
