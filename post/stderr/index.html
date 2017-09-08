@@ -8,7 +8,7 @@
 		<meta name="description" content="A *nix cross-platform (OS agnostic) supervisor">
 		<meta name="keywords" content="supervisor, follow pid, daemonize, run, logging, immortal">
 		<meta name="generator" content="Hugo 0.26" />
-		<title>immortaldir &middot; immortal</title>
+		<title>stderr &middot; immortal</title>
 		<link rel="shortcut icon" href="https://immortal.run/images/favicon.ico">
 		<link rel="stylesheet" href="https://immortal.run/css/style.css">
 		<link rel="stylesheet" href="https://immortal.run/css/monokai.css">
@@ -44,7 +44,7 @@
         <section id="wrapper">
             <article class="post">
                 <header>
-                    <h1>immortaldir</h1>
+                    <h1>stderr</h1>
                     <h2 class="headline">
                     <br>
                     
@@ -53,102 +53,43 @@
                 <section id="post-body">
                     
 
-<p><code>immortaldir</code> start services located in a specified directory.</p>
+<h2 id="stdout-stderr">STDOUT &amp; STDERR</h2>
 
-<pre><code>immortalctl [dir] [-v]
+<p>By just using the option <code>log</code> the output file combine the
+<a href="https://en.wikipedia.org/wiki/Standard_streams">standard output and the standard error</a>,
+in case a file is required per each output the <code>stderr</code> could be used,
+for example:</p>
+
+<pre><code class="language-yaml">cmd: command
+log:
+  file: /var/log/app.log
+  age: 86400 # seconds
+  num: 7     # int
+  size: 1    # MegaBytes
+stderr:
+  file: /var/log/app-error.log
+  age: 86400 # seconds
+  num: 7     # int
+  size: 1    # MegaBytes
+  timestamp: true # will add timesamp to log
 </code></pre>
 
-<p><code>immortaldir</code> will watch for changes in the specified directory or if
-using Linux, will scan the directory every 5 seconds searching for
-files ending in <code>.yml</code> and track changes. The files should conform the
-<a href="/post/immortal">immortal</a> configuration format.</p>
+<p>In this case only the <code>STDOUT</code> will be written to <code>/varlog/app.log</code> with out
+timestamp prefix, and the <code>STDERR</code> will be written to <code>/varlog/app-error.log</code>
+having the timestamp as a prefix.</p>
 
-<p>If a file changes the service will be restarted, <code>immortalctl exit &amp; stop</code>.</p>
+<p>If only <code>STDERR</code> is required this could be used:</p>
 
-<p>If a file is touched and service is down, it will be started, <code>immortalctl start</code>.</p>
-
-<p>If a file is removed, the supervisor will exit, <code>immortalctl exit</code>, this may
-end the existing process but in cases where the PID is been followed, only the
-supervisor will exit.</p>
-
-<p>Based on your operating system the directory containing the services could be:</p>
-
-<pre><code>/usr/local/etc/immortal
+<pre><code class="language-yaml">cmd: command
+stderr:
+  file: /var/log/app-error.log
+  age: 86400 # seconds
+  num: 7     # int
+  size: 1    # MegaBytes
+  timestamp: true # will add timesamp to log
 </code></pre>
 
-<p>or</p>
-
-<pre><code>/etc/immortal
-</code></pre>
-
-<p><code>immortaldir</code> checks for changes also in the <strong><code>IMMORTAL_SDIR</code></strong> directory in
-order to restart services that are not any- more running, for example when a
-service has been halted (signal halt) this helps to automatically restart the
-service.</p>
-
-<blockquote>
-<p>When dealing with multiple operating systems could be handy to use a unique location like <code>/immortal</code></p>
-</blockquote>
-
-<p>To keep services persistent across reboots a startup script should be used to
-run <code>immortaldir</code> on boot time.</p>
-
-<h1 id="options">Options</h1>
-
-<p><strong><code>dir</code></strong> Path of directory containing immortal configuration files <code>*.yml</code></p>
-
-<p><strong><code>-v</code></strong> Print current version.</p>
-
-<h1 id="environment">Environment</h1>
-
-<p><strong><code>IMMORTAL_SDIR</code></strong> This environment variable allows to override the default
-supervise directory <code>/var/run/immortal</code>, used also by <code>immortalctl</code> and
-<code>immortal</code>.  By default <code>immortaldir</code> after finding a configuration file
-<code>service.yml</code> will invoke <code>immortal</code> and pass to it the option:</p>
-
-<pre><code>-ctl &lt;service&gt;
-</code></pre>
-
-<p>This will create the  directory &ldquo;service&rdquo; in <code>/var/run/immortal</code>:</p>
-
-<pre><code>/var/run/immortal/service
-                 |--lock
-                 `--immortal.sock
-</code></pre>
-
-<p><strong><code>lock</code></strong> is a file that prevents running more than once the same service</p>
-
-<p><strong><code>immortal.sock</code></strong> is a Unix socket that can be used to manage the process, example:</p>
-
-<p>Get status:</p>
-
-<pre><code>curl --unix-socket immortal.sock http:/status -s
-</code></pre>
-
-<p>Down. If the service is running, send it a TERM signal. After it stops, do not restart it:</p>
-
-<pre><code>curl --unix-socket immortal.sock http://im/signal/down -s
-</code></pre>
-
-<p>Start:</p>
-
-<pre><code>curl --unix-socket immortal.sock http://im/signal/start -s
-</code></pre>
-
-<p>If a different path instead of <code>/var/run/immortal</code> is required, the <code>IMMORTAL_SDIR</code> environment variable can be used.</p>
-
-<h1 id="examples">Examples</h1>
-
-<p>Read configuration files from <code>/etc/immortal</code>:</p>
-
-<pre><code>immortaldir /etc/immortal
-</code></pre>
-
-<p>Read configuration files from <code>/srv/immortal</code> and create supervise directories on <code>/var/www/immortal</code>:</p>
-
-<pre><code class="language-bash">export IMMORTAL_SDIR=/var/www/immortal
-immortaldir /srv/immortal
-</code></pre>
+<p>By default the <code>timestamp</code> is set to false.</p>
 
                 </section>
             </article>
@@ -156,7 +97,7 @@ immortaldir /srv/immortal
                 
                     
                 <section id="sharing">
-                    <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fimmortal.run%2fpost%2fimmortaldir%2f - immortaldir "><span class="icon-twitter"> Tweet</span></a>
+                    <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fimmortal.run%2fpost%2fstderr%2f - stderr "><span class="icon-twitter"> Tweet</span></a>
 
 <a class="facebook" href="#" onclick="
     window.open(

@@ -104,6 +104,16 @@ cmd: bundle exec unicorn -c unicorn.rb cwd: /arena/app-1 env: DEBUG: 1 ENVIRONME
     </item>
     
     <item>
+      <title>stderr</title>
+      <link>https://immortal.run/post/stderr/</link>
+      <pubDate>Wed, 06 Jul 2016 20:35:39 +0201</pubDate>
+      
+      <guid>https://immortal.run/post/stderr/</guid>
+      <description>STDOUT &amp;amp; STDERR By just using the option log the output file combine the standard output and the standard error, in case a file is required per each output the stderr could be used, for example:
+cmd: command log: file: /var/log/app.log age: 86400 # seconds num: 7 # int size: 1 # MegaBytes stderr: file: /var/log/app-error.log age: 86400 # seconds num: 7 # int size: 1 # MegaBytes timestamp: true # will add timesamp to log  In this case only the STDOUT will be written to /varlog/app.</description>
+    </item>
+    
+    <item>
       <title>Using Nginx</title>
       <link>https://immortal.run/post/nginx/</link>
       <pubDate>Fri, 26 Mar 2010 23:14:08 +0200</pubDate>
