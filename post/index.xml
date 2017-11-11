@@ -82,7 +82,8 @@ $ chmod 766 /var/run/immortal/&amp;lt;service name&amp;gt;/immortal.sock  To che
       
       <guid>https://immortal.run/post/systemd/</guid>
       <description>To start immortaldir on Linux with systemd, put this script in /etc/systemd/system/immortaldir.service:
-[Unit] Description=immortaldir After=network.target [Service] ExecStart=/usr/bin/immortaldir /etc/immortal 2&amp;gt;&amp;amp;1 | logger -t immortaldir KillMode=process Restart=always Restart=on-failure Type=simple User=root [Install] WantedBy=multi-user.target  </description>
+[Unit] Description=immortaldir After=network.target [Service] ExecStart=/usr/bin/immortaldir /etc/immortal 2&amp;gt;&amp;amp;1 | logger -t immortaldir KillMode=process Restart=always Restart=on-failure Type=simple User=root [Install] WantedBy=multi-user.target  For systems with no systemd like Ubuntu 14 this could be used:
+#!/bin/sh # immortaldir start-stop-daemon set -e NAME=immortaldir PIDFILE=/var/run/$NAME.pid DAEMON=/usr/bin/immortaldir DAEMON_OPTS=&amp;quot;/etc/immortal&amp;quot; export PATH=&amp;quot;${PATH:+$PATH:}/usr/sbin:/sbin&amp;quot; case &amp;quot;$1&amp;quot; in start) echo -n &amp;quot;Starting daemon: &amp;quot;$NAME start-stop-daemon --start \ --quiet \ --oknodo \ --make-pidfile \ --pidfile $PIDFILE \ --background \ --startas /bin/sh \ -- -c &amp;quot;exec $DAEMON $DAEMON_OPTS 2&amp;gt;&amp;amp;1 | logger -t immortaldir&amp;quot; echo &amp;quot;.</description>
     </item>
     
     <item>

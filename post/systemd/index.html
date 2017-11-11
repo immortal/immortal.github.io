@@ -71,6 +71,47 @@ User=root
 WantedBy=multi-user.target
 </code></pre>
 
+<p>For systems with no systemd like Ubuntu 14 this could be used:</p>
+
+<pre><code class="language-sh">
+#!/bin/sh
+
+# immortaldir start-stop-daemon
+set -e
+
+NAME=immortaldir
+PIDFILE=/var/run/$NAME.pid
+DAEMON=/usr/bin/immortaldir
+DAEMON_OPTS=&quot;/etc/immortal&quot;
+
+export PATH=&quot;${PATH:+$PATH:}/usr/sbin:/sbin&quot;
+
+case &quot;$1&quot; in
+  start)
+        echo -n &quot;Starting daemon: &quot;$NAME
+	start-stop-daemon --start \
+    --quiet \
+    --oknodo \
+    --make-pidfile \
+    --pidfile $PIDFILE \
+    --background \
+    --startas /bin/sh \
+    -- -c &quot;exec $DAEMON $DAEMON_OPTS 2&gt;&amp;1 | logger -t immortaldir&quot;
+    echo &quot;.&quot;
+	;;
+  stop)
+        echo -n &quot;Stopping daemon: &quot;$NAME
+        pkill $NAME
+        echo &quot;.&quot;
+	;;
+  *)
+	echo &quot;Usage: &quot;$1&quot; {start|stop}&quot;
+	exit 1
+esac
+
+exit 0
+</code></pre>
+
                 </section>
             </article>
             <footer id="post-meta" class="clearfix">
