@@ -51,7 +51,9 @@
                     </h2>
                 </header>
                 <section id="post-body">
-                    <p>To start <a href="/post/immortaldir/">immortaldir</a> on Linux with
+                    
+
+<p>To start <a href="/post/immortaldir/">immortaldir</a> on Linux with
 <a href="https://en.wikipedia.org/wiki/Systemd">systemd</a>, put this script in
 <code>/etc/systemd/system/immortaldir.service</code>:</p>
 
@@ -71,10 +73,12 @@ User=root
 WantedBy=multi-user.target
 </code></pre>
 
-<p>For systems with no systemd like Ubuntu 14 this could be used:</p>
+<h3 id="etc-init-d-immortaldir">/etc/init.d/immortaldir</h3>
 
-<pre><code class="language-sh">
-#!/bin/sh
+<p>For Linux systems with no systemd like Ubuntu 14 but with <code>start-stop-daemon</code>
+this script could be used:</p>
+
+<pre><code class="language-sh">#!/bin/sh
 
 # immortaldir start-stop-daemon
 set -e
@@ -111,6 +115,10 @@ esac
 
 exit 0
 </code></pre>
+
+<blockquote>
+<p>put contents of this script into file <code>/etc/init.d/immortaldir</code></p>
+</blockquote>
 
                 </section>
             </article>
