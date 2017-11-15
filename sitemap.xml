@@ -58,11 +58,6 @@
   </url>
   
   <url>
-    <loc>https://immortal.run/post/systemd/</loc>
-    <lastmod>2010-03-26T23:10:07+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://immortal.run/post/immortal/</loc>
     <lastmod>2010-03-25T23:34:54+02:00</lastmod>
   </url>
@@ -75,6 +70,16 @@
   <url>
     <loc>https://immortal.run/post/immortaldir/</loc>
     <lastmod>2010-03-23T23:34:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://immortal.run/post/how-to-install/</loc>
+    <lastmod>2010-03-22T23:34:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://immortal.run/post/systemd/</loc>
+    <lastmod>2010-03-21T23:10:07+02:00</lastmod>
   </url>
   
   <url>

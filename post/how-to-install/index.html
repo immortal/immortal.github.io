@@ -8,7 +8,7 @@
 		<meta name="description" content="A *nix cross-platform (OS agnostic) supervisor">
 		<meta name="keywords" content="supervisor, follow pid, daemonize, run, logging, immortal, forever, 12 factor">
 		<meta name="generator" content="Hugo 0.30.2" />
-		<title>immortaldir &middot; immortal</title>
+		<title>how to install &amp; setup &middot; immortal</title>
 		<link rel="shortcut icon" href="https://immortal.run/images/favicon.ico">
 		<link rel="stylesheet" href="https://immortal.run/css/style.css">
 		<link rel="stylesheet" href="https://immortal.run/css/monokai.css">
@@ -44,7 +44,7 @@
         <section id="wrapper">
             <article class="post">
                 <header>
-                    <h1>immortaldir</h1>
+                    <h1>how to install &amp; setup</h1>
                     <h2 class="headline">
                     <br>
                     
@@ -53,102 +53,75 @@
                 <section id="post-body">
                     
 
-<p><code>immortaldir</code> start services located in a specified directory.</p>
+<p>At the moment of writing this document currently <strong>immortal</strong> can be installed
+in <a href="/mac/">macOS via homebrew</a> and <a href="/freebsd/">FreeBSD (ports/pkg)</a>, therefore
+if you are familiar with your current operating system would be nice if you
+could <a href="https://github.com/immortal/immortal/blob/master/CONTRIBUTING.md#getting-started">contribute</a>
+by creating a native port in order to make more simple the installation process.</p>
 
-<pre><code>immortalctl [dir] [-v]
+<h2 id="installing-on-linux">Installing on linux</h2>
+
+<p>The easy way so far is to install a precompiled release, <a href="https://github.com/immortal/immortal/releases">download the latest one</a> that matches your architecture (*.deb) and then do:</p>
+
+<pre><code class="language-sh">sudo dpkg -i immortal_0.17.0_amd64.deb
 </code></pre>
 
-<p><code>immortaldir</code> will watch for changes in the specified directory or if
-using Linux, will scan the directory every 5 seconds searching for
-files ending in <code>.yml</code> and track changes. The files should conform the
-<a href="/post/immortal">immortal</a> configuration format.</p>
+<p>In this case it will install version <code>0.17.0</code> for amd64, but you still need to configure <a href="/post/immortaldir">immortaldir</a> to start on boot time.</p>
 
-<p>If a file changes the service will be restarted, <code>immortalctl exit &amp; stop</code>.</p>
+<h2 id="setup-immortaldir">Setup immortaldir</h2>
 
-<p>If a file is touched and service is down, it will be started, <code>immortalctl start</code>.</p>
+<p>To make your applications persistent across reboots,
+<a href="/post/immortaldir/">immortaldir</a> needs to start on boot time so that it
+launches your applications every time your system is booted.</p>
 
-<p>If a file is removed, the supervisor will exit, <code>immortalctl exit</code>, this may
-end the existing process but in cases where the PID is been followed, only the
-supervisor will exit.</p>
+<p>The main requirement is to create a directory that will contain
+all your <a href="/post/run.yml">*.yml</a> files, it can be <code>/etc/immortal</code>,
+<code>/usr/local/etc/immortal</code> or either <code>/var/services</code> at the end this directory
+needs to be passed as the first argument to <a href="/post/immortaldir">immortaldir</a></p>
 
-<p>Based on your operating system the directory containing the services could be:</p>
+<p>For Linux systems like ubuntu 14 with
+<a href="https://manpages.debian.org/jessie/dpkg/start-stop-daemon.8.en.html">start-stop-daemon</a>,
+you could put this script in <code>/etc/init.d/immortaldir</code>:</p>
 
-<pre><code>/usr/local/etc/immortal
+<pre><code class="language-sh">#!/bin/sh
+
+# immortaldir start-stop-daemon
+set -e
+
+NAME=immortaldir
+PIDFILE=/var/run/$NAME.pid
+DAEMON=/usr/bin/immortaldir
+DAEMON_OPTS=&quot;/etc/immortal&quot;
+
+export PATH=&quot;${PATH:+$PATH:}/usr/sbin:/sbin&quot;
+
+case &quot;$1&quot; in
+  start)
+        echo -n &quot;Starting daemon: &quot;$NAME
+	start-stop-daemon --start \
+    --quiet \
+    --oknodo \
+    --make-pidfile \
+    --pidfile $PIDFILE \
+    --background \
+    --startas /bin/sh \
+    -- -c &quot;exec $DAEMON $DAEMON_OPTS 2&gt;&amp;1 | logger -t immortaldir&quot;
+    echo &quot;.&quot;
+	;;
+  stop)
+        echo -n &quot;Stopping daemon: &quot;$NAME
+        pkill $NAME
+        echo &quot;.&quot;
+	;;
+  *)
+	echo &quot;Usage: &quot;$1&quot; {start|stop}&quot;
+	exit 1
+esac
+
+exit 0
 </code></pre>
 
-<p>or</p>
-
-<pre><code>/etc/immortal
-</code></pre>
-
-<p><code>immortaldir</code> checks for changes also in the <strong><code>IMMORTAL_SDIR</code></strong> directory in
-order to restart services that are not any more running, for example when a
-service has been halted (signal halt) this helps to automatically restart the
-service.</p>
-
-<blockquote>
-<p>When dealing with multiple operating systems could be handy to use a unique location like <code>/immortal</code></p>
-</blockquote>
-
-<p>To keep services persistent across reboots a startup script should be used to
-run <code>immortaldir</code> on boot time.</p>
-
-<h1 id="options">Options</h1>
-
-<p><strong><code>dir</code></strong> Path of directory containing immortal configuration files <code>*.yml</code></p>
-
-<p><strong><code>-v</code></strong> Print current version.</p>
-
-<h1 id="environment">Environment</h1>
-
-<p><strong><code>IMMORTAL_SDIR</code></strong> This environment variable allows to override the default
-supervise directory <code>/var/run/immortal</code>, used also by <code>immortalctl</code> and
-<code>immortal</code>.  By default <code>immortaldir</code> after finding a configuration file
-<code>service.yml</code> will invoke <code>immortal</code> and pass to it the option:</p>
-
-<pre><code>-ctl &lt;service&gt;
-</code></pre>
-
-<p>This will create the  directory &ldquo;service&rdquo; in <code>/var/run/immortal</code>:</p>
-
-<pre><code>/var/run/immortal/service
-                 |--lock
-                 `--immortal.sock
-</code></pre>
-
-<p><strong><code>lock</code></strong> is a file that prevents running more than once the same service</p>
-
-<p><strong><code>immortal.sock</code></strong> is a Unix socket that can be used to manage the process, example:</p>
-
-<p>Get status:</p>
-
-<pre><code>curl --unix-socket immortal.sock http:/status -s
-</code></pre>
-
-<p>Down. If the service is running, send it a TERM signal. After it stops, do not restart it:</p>
-
-<pre><code>curl --unix-socket immortal.sock http://im/signal/down -s
-</code></pre>
-
-<p>Start:</p>
-
-<pre><code>curl --unix-socket immortal.sock http://im/signal/start -s
-</code></pre>
-
-<p>If a different path instead of <code>/var/run/immortal</code> is required, the <code>IMMORTAL_SDIR</code> environment variable can be used.</p>
-
-<h1 id="examples">Examples</h1>
-
-<p>Read configuration files from <code>/etc/immortal</code>:</p>
-
-<pre><code>immortaldir /etc/immortal
-</code></pre>
-
-<p>Read configuration files from <code>/srv/immortal</code> and create supervise directories on <code>/var/www/immortal</code>:</p>
-
-<pre><code class="language-bash">export IMMORTAL_SDIR=/var/www/immortal
-immortaldir /srv/immortal
-</code></pre>
+<p>On Linux with systemd, put <a href="/post/systemd/">this script</a> in <code>/etc/systemd/system/immortaldir.service</code></p>
 
                 </section>
             </article>
@@ -156,7 +129,7 @@ immortaldir /srv/immortal
                 
                     
                 <section id="sharing">
-                    <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fimmortal.run%2fpost%2fimmortaldir%2f - immortaldir "><span class="icon-twitter"> Tweet</span></a>
+                    <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fimmortal.run%2fpost%2fhow-to-install%2f - how%20to%20install%20%26%20setup "><span class="icon-twitter"> Tweet</span></a>
 
 <a class="facebook" href="#" onclick="
     window.open(

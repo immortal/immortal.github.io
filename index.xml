@@ -41,7 +41,7 @@ immortal - Starts and monitor a service immortaldir - Directory to scan for serv
       <guid>https://immortal.run/source/</guid>
       <description>pre-compiled For linux: https://github.com/immortal/immortal/releases
 compile from source Setup go environment https://golang.org/doc/install
- go &amp;gt;= 1.7 is required
+ go &amp;gt;= 1.9 is required
  For example using $HOME/go for your workspace
 $ export GOPATH=$HOME/go  Create the directory:
 $ mkdir -p $HOME/go/src/github.com/immortal  Clone project into that directory:
@@ -136,17 +136,6 @@ $ chmod 766 /var/run/immortal/&amp;lt;service name&amp;gt;/immortal.sock  To che
     </item>
     
     <item>
-      <title>Systemd</title>
-      <link>https://immortal.run/post/systemd/</link>
-      <pubDate>Fri, 26 Mar 2010 23:10:07 +0200</pubDate>
-      
-      <guid>https://immortal.run/post/systemd/</guid>
-      <description>To start immortaldir on Linux with systemd, put this script in /etc/systemd/system/immortaldir.service:
-[Unit] Description=immortaldir After=network.target [Service] ExecStart=/usr/bin/immortaldir /etc/immortal 2&amp;gt;&amp;amp;1 | logger -t immortaldir KillMode=process Restart=always Restart=on-failure Type=simple User=root [Install] WantedBy=multi-user.target  /etc/init.d/immortaldir For Linux systems with no systemd like Ubuntu 14 but with start-stop-daemon this script could be used:
-#!/bin/sh # immortaldir start-stop-daemon set -e NAME=immortaldir PIDFILE=/var/run/$NAME.pid DAEMON=/usr/bin/immortaldir DAEMON_OPTS=&amp;quot;/etc/immortal&amp;quot; export PATH=&amp;quot;${PATH:+$PATH:}/usr/sbin:/sbin&amp;quot; case &amp;quot;$1&amp;quot; in start) echo -n &amp;quot;Starting daemon: &amp;quot;$NAME start-stop-daemon --start \ --quiet \ --oknodo \ --make-pidfile \ --pidfile $PIDFILE \ --background \ --startas /bin/sh \ -- -c &amp;quot;exec $DAEMON $DAEMON_OPTS 2&amp;gt;&amp;amp;1 | logger -t immortaldir&amp;quot; echo &amp;quot;.</description>
-    </item>
-    
-    <item>
       <title>immortal</title>
       <link>https://immortal.run/post/immortal/</link>
       <pubDate>Thu, 25 Mar 2010 23:34:54 +0200</pubDate>
@@ -177,6 +166,26 @@ When no services found the output will be a single row only with the headers:</d
 immortalctl [dir] [-v]  immortaldir will watch for changes in the specified directory or if using Linux, will scan the directory every 5 seconds searching for files ending in .yml and track changes. The files should conform the immortal configuration format.
 If a file changes the service will be restarted, immortalctl exit &amp;amp; stop.
 If a file is touched and service is down, it will be started, immortalctl start.</description>
+    </item>
+    
+    <item>
+      <title>how to install &amp; setup</title>
+      <link>https://immortal.run/post/how-to-install/</link>
+      <pubDate>Mon, 22 Mar 2010 23:34:54 +0200</pubDate>
+      
+      <guid>https://immortal.run/post/how-to-install/</guid>
+      <description>At the moment of writing this document currently immortal can be installed in macOS via homebrew and FreeBSD (ports/pkg), therefore if you are familiar with your current operating system would be nice if you could contribute by creating a native port in order to make more simple the installation process.
+Installing on linux The easy way so far is to install a precompiled release, download the latest one that matches your architecture (*.</description>
+    </item>
+    
+    <item>
+      <title>Systemd</title>
+      <link>https://immortal.run/post/systemd/</link>
+      <pubDate>Sun, 21 Mar 2010 23:10:07 +0200</pubDate>
+      
+      <guid>https://immortal.run/post/systemd/</guid>
+      <description>To start immortaldir on Linux with systemd, put this script in /etc/systemd/system/immortaldir.service:
+[Unit] Description=immortaldir After=network.target [Service] ExecStart=/usr/bin/immortaldir /etc/immortal 2&amp;gt;&amp;amp;1 | logger -t immortaldir KillMode=process Restart=always Restart=on-failure Type=simple User=root [Install] WantedBy=multi-user.target  </description>
     </item>
     
   </channel>
