@@ -44,6 +44,17 @@ cmd: bundle exec unicorn -c unicorn.rb cwd: /arena/app-1 env: DEBUG: 1 ENVIRONME
     </item>
     
     <item>
+      <title>retries</title>
+      <link>https://immortal.run/post/retries/</link>
+      <pubDate>Wed, 06 Jul 2016 20:34:39 +0200</pubDate>
+      
+      <guid>https://immortal.run/post/retries/</guid>
+      <description>In some cases, you may not want to run a command forever, here is where the option -r / retries becomes useful.
+This option normally is only used directly from the command line, for example:
+immortal -w 60 -r 3 rsync -aHAXxv --numeric-ids --delete -P &amp;lt;src&amp;gt; user@host:/&amp;lt;dest&amp;gt;  In this case immortal will wait -w 60 seconds before starting and it will only try to run the command for 3 times after that it will exit.</description>
+    </item>
+    
+    <item>
       <title>stderr</title>
       <link>https://immortal.run/post/stderr/</link>
       <pubDate>Wed, 06 Jul 2016 20:35:39 +0201</pubDate>

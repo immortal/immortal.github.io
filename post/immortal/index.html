@@ -105,8 +105,15 @@ Path to write the supervisor pidfile</p>
 <p><strong><code>-p pidfile</code></strong>
 Path to write the child pidfile</p>
 
-<p><strong><code>-s seconds</code></strong>
-Seconds (int) <code>&lt;seconds&gt;</code> to wait before starting.</p>
+<p><strong><code>-r &lt;int&gt;</code></strong>
+Number of retries before program exit, defaults to 0 (never exit). If used
+within a configuration file with the option &ldquo;retries&rdquo; the supervisor will not
+exit and instead will send a signal &ldquo;once&rdquo; preventing with this starting the
+process again unless the environment var <a href="/post/retries">IMMORTAL_EXIT</a> is
+defined which will cause to &ldquo;exit&rdquo; the supervisor instead.</p>
+
+<p><strong><code>-w seconds</code></strong>
+Seconds to wait before starting.</p>
 
 <p><strong><code>-u user</code></strong>
 Execute command on behalf <code>&lt;user&gt;</code></p>
@@ -386,6 +393,13 @@ location / {
     
         
         <li>
+            <a href="https://immortal.run/post/retries/">retries</a>
+        </li>
+        
+   
+    
+        
+        <li>
             <a href="https://immortal.run/post/stderr/">stderr</a>
         </li>
         
@@ -415,13 +429,6 @@ location / {
         
         <li>
             <a href="https://immortal.run/post/immortalctl/">immortalctl</a>
-        </li>
-        
-   
-    
-        
-        <li>
-            <a href="https://immortal.run/post/immortaldir/">immortaldir</a>
         </li>
         
    

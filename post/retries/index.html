@@ -8,7 +8,7 @@
 		<meta name="description" content="A *nix cross-platform (OS agnostic) supervisor">
 		<meta name="keywords" content="supervisor, follow pid, daemonize, run, logging, immortal, forever, 12 factor">
 		<meta name="generator" content="Hugo 0.32.3" />
-		<title>Using Nginx &middot; immortal</title>
+		<title>retries &middot; immortal</title>
 		<link rel="shortcut icon" href="https://immortal.run/images/favicon.ico">
 		<link rel="stylesheet" href="https://immortal.run/css/style.css">
 		<link rel="stylesheet" href="https://immortal.run/css/monokai.css">
@@ -44,73 +44,66 @@
         <section id="wrapper">
             <article class="post">
                 <header>
-                    <h1>Using Nginx</h1>
+                    <h1>retries</h1>
                     <h2 class="headline">
                     <br>
                     
                     </h2>
                 </header>
                 <section id="post-body">
-                    <p>To expose the services via web <a href="https://nginx.com">Nginx</a> can be used.</p>
+                    
 
-<p>Configuration example:</p>
+<p>In some cases, you may not want to run a command forever, here is where the
+option -r / retries becomes useful.</p>
 
-<pre><code class="language-nginx">upstream immortal {
-    server unix:/var/run/immortal/sleep/immortal.sock;
-}
+<p>This option normally is only used directly from the command line, for example:</p>
 
-server {
-listen 80 default_server;
-server_name _;
-location / {
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header Host $http_host;
-    proxy_set_header X-NginX-Proxy true;
-    proxy_http_version 1.1; # for keep-alive
-    proxy_pass http://immortal/;
-    proxy_redirect off;
-    }
-}
+<pre><code class="language-sh">immortal -w 60 -r 3 rsync -aHAXxv --numeric-ids --delete -P &lt;src&gt; user@host:/&lt;dest&gt;
 </code></pre>
 
-<p>Based on the setup, permissions for the socket may need to be changed:</p>
+<p>In this case <strong>immortal</strong> will wait <strong>-w</strong> 60 seconds before starting and it
+will only try to run the command for 3 times after that it will exit.</p>
 
-<pre><code class="language-sh">$ chmod 766 /var/run/immortal/&lt;service name&gt;/immortal.sock
+<p>Example using <code>retries</code> in a configuration file:</p>
+
+<pre><code class="language-yaml">cmd: rsync -aHAXxv --numeric-ids --delete -P &lt;src&gt; user@host:/&lt;dest&gt;
+log:
+    file: /tmp/rsync.log
+wait: 60
+retries: 3
 </code></pre>
 
-<p>To check the service status:</p>
+<blockquote>
+<p>by default retries is set to 0, runs forever</p>
+</blockquote>
 
-<pre><code class="language-sh">http://&lt;domain&gt;
+<h2 id="immortal-exit">IMMORTAL_EXIT</h2>
+
+<p>Normally the configuration files <code>run.yml</code> are used with
+<a href="/post/immortaldir">immortaldir(8)</a>, in this case the supervisor will not exit
+and instead will just avoid executing the command again, similar to the <code>once</code>
+option when using <a href="/post/immortalctl">immortalctl(8)</a>.</p>
+
+<p>To change this behavior and to <strong>exit</strong> the supervisor, set the environment
+variable <code>IMMORTAL_EXIT</code>:</p>
+
+<pre><code>export IMMORTAL_EXIT=1
 </code></pre>
 
-<p>To send signals:</p>
-
-<pre><code class="language-sh">http://&lt;domain&gt;/signal/&lt;signal&gt;
-</code></pre>
-
-<p>For example to stop the service:</p>
-
-<pre><code class="language-sh">http://&lt;domain&gt;/signal/stop
-</code></pre>
-
-<p>To start the service:</p>
-
-<pre><code class="language-sh">http://&lt;domain&gt;/signal/start
-</code></pre>
-
-<p>The responses are in JSON format.</p>
+<blockquote>
+<p>If using <code>immortaldir</code> is not advised to set this environment var since may cause a start/stop loop</p>
+</blockquote>
 
                 </section>
             </article>
             <footer id="post-meta" class="clearfix">
 
-                <a href="https://github.com/immortal/docs/edit/master/post/nginx.md" target="_blank">Suggest edit ✍️</a>
+                <a href="https://github.com/immortal/docs/edit/master/post/retries.md" target="_blank">Suggest edit ✍️</a>
 
                 
                     
                 <section id="sharing">
-                    <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fimmortal.run%2fpost%2fnginx%2f - Using%20Nginx "><span class="icon-twitter"> Tweet</span></a>
+                    <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fimmortal.run%2fpost%2fretries%2f - retries "><span class="icon-twitter"> Tweet</span></a>
 
 <a class="facebook" href="#" onclick="
     window.open(
