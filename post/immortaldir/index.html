@@ -58,8 +58,9 @@
 <pre><code>immortalctl [dir] [-v]
 </code></pre>
 
-<p><code>immortaldir</code> will watch for changes in the specified directory or if
-using Linux, will scan the directory every 5 seconds searching for
+<p><code>immortaldir</code> will watch for changes in the specified directory
+<a href="https://www.freebsd.org/cgi/man.cgi?query=kqueue&amp;sektion=2">kqueue(2)</a>,
+if using Linux, will scan the directory every 5 seconds searching for
 files ending in <code>.yml</code> and track changes. The files should conform the
 <a href="/post/immortal">immortal</a> configuration format.</p>
 

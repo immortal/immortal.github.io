@@ -163,7 +163,7 @@ When no services found the output will be a single row only with the headers:</d
       
       <guid>https://immortal.run/post/immortaldir/</guid>
       <description>immortaldir start services located in a specified directory.
-immortalctl [dir] [-v]  immortaldir will watch for changes in the specified directory or if using Linux, will scan the directory every 5 seconds searching for files ending in .yml and track changes. The files should conform the immortal configuration format.
+immortalctl [dir] [-v]  immortaldir will watch for changes in the specified directory kqueue(2), if using Linux, will scan the directory every 5 seconds searching for files ending in .yml and track changes. The files should conform the immortal configuration format.
 If a file changes the service will be restarted, immortalctl exit &amp;amp; stop.
 If a file is touched and service is down, it will be started, immortalctl start.</description>
     </item>
