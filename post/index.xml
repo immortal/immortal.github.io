@@ -120,7 +120,7 @@ If a file is touched and service is down, it will be started, immortalctl start.
     </item>
     
     <item>
-      <title>how to install &amp; setup</title>
+      <title>How to install &amp; setup</title>
       <link>https://immortal.run/post/how-to-install/</link>
       <pubDate>Mon, 22 Mar 2010 23:34:54 +0200</pubDate>
       
@@ -137,6 +137,16 @@ Installing on linux The easy way so far is to install a precompiled release, dow
       <guid>https://immortal.run/post/systemd/</guid>
       <description>To start immortaldir on Linux with systemd, put this script in /etc/systemd/system/immortaldir.service:
 [Unit] Description=immortaldir After=network.target [Service] ExecStart=/usr/bin/immortaldir /etc/immortal 2&amp;gt;&amp;amp;1 | logger -t immortaldir KillMode=process Restart=always Restart=on-failure Type=simple User=root [Install] WantedBy=multi-user.target  </description>
+    </item>
+    
+    <item>
+      <title>Examples</title>
+      <link>https://immortal.run/post/examples/</link>
+      <pubDate>Sat, 20 Mar 2010 23:10:07 +0200</pubDate>
+      
+      <guid>https://immortal.run/post/examples/</guid>
+      <description>The main idea behind immortal is to keep up and running services forever even if the server is rebooted the service should be started and based on the requirements probably the services may start in sequence by waiting for others to start, wait some seconds before starting, etc, but at the end the idea remains, &amp;ldquo;run something forever&amp;rdquo; and in case exist just restart it.
+Doing this could be tricky, mainly because if you just want to launch your service/worker/daemon, etc you may not want to spend to much time understanding how to properly launch something in the operating system your company is using.</description>
     </item>
     
   </channel>
