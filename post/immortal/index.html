@@ -7,7 +7,7 @@
 		<meta name="author" content="immortal">
 		<meta name="description" content="A *nix cross-platform (OS agnostic) supervisor">
 		<meta name="keywords" content="supervisor, follow pid, daemonize, run, logging, immortal, forever, 12 factor">
-		<meta name="generator" content="Hugo 0.32.3" />
+		<meta name="generator" content="Hugo 0.39" />
 		<title>immortal &middot; immortal</title>
 		<link rel="shortcut icon" href="https://immortal.run/images/favicon.ico">
 		<link rel="stylesheet" href="https://immortal.run/css/style.css">
@@ -176,7 +176,7 @@ immortal.sock
 
 <p>Run command and restart it when finishes:</p>
 
-<pre><code>immortal /bin/sh -c &quot;date &amp;&amp; sleep 5 &gt; /tmp/sleep.log&quot;
+<pre><code>immortal /bin/sh -c &quot;sleep 5 &amp;&amp; date &gt; /tmp/sleep.log&quot;
 </code></pre>
 
 <p>Run command, restart it when finishes and log output to file:</p>
