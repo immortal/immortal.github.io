@@ -59,14 +59,31 @@ if you are familiar with your current operating system would be nice if you
 could <a href="https://github.com/immortal/immortal/blob/master/CONTRIBUTING.md#getting-started">contribute</a>
 by creating a native port in order to make more simple the installation process.</p>
 
-<h2 id="installing-on-linux">Installing on linux</h2>
+<h2 id="installing-on-linux">Installing on Linux</h2>
 
-<p>The easy way so far is to install a precompiled release, <a href="https://github.com/immortal/immortal/releases">download the latest one</a> that matches your architecture (*.deb) and then do:</p>
+<p>The easy way so far is to install a pre-compiled release, <a href="https://packagecloud.io/immortal/immortal">download the latest one</a> that matches your architecture.</p>
 
-<pre><code class="language-sh">sudo dpkg -i immortal_0.18.0_amd64.deb
+<p>If need <code>deb</code> you could use:</p>
+
+<pre><code>curl -s https://packagecloud.io/install/repositories/immortal/immortal/script.deb.sh | sudo bash
 </code></pre>
 
-<p>In this case it will install version <code>0.18.0</code> for amd64, but you still need to configure <a href="/post/immortaldir">immortaldir</a> to start on boot time.</p>
+<p>If need  <code>rpm</code> you could use:</p>
+
+<pre><code>curl -s https://packagecloud.io/install/repositories/immortal/immortal/script.rpm.sh | sudo bash
+</code></pre>
+
+<p>Or get the file directly, for example an (*.deb):</p>
+
+<pre><code>wget --content-disposition https://packagecloud.io/immortal/immortal/packages/debian/stretch/immortal_0.19.0_amd64.deb/download.deb
+</code></pre>
+
+<p>Then install it using:</p>
+
+<pre><code class="language-sh">sudo dpkg -i immortal_0.19.0_amd64.deb
+</code></pre>
+
+<p>In this case it will install version <code>0.19.0</code> for amd64, you may still need to configure <a href="/post/immortaldir">immortaldir</a> to start on boot time.</p>
 
 <h2 id="setup-immortaldir">Setup immortaldir</h2>
 

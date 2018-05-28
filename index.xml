@@ -185,7 +185,7 @@ If a file is touched and service is down, it will be started, immortalctl start.
       
       <guid>https://immortal.run/post/how-to-install/</guid>
       <description>At the moment of writing this document currently immortal can be installed in macOS via homebrew and FreeBSD (ports/pkg), therefore if you are familiar with your current operating system would be nice if you could contribute by creating a native port in order to make more simple the installation process.
-Installing on linux The easy way so far is to install a precompiled release, download the latest one that matches your architecture (*.</description>
+Installing on Linux The easy way so far is to install a pre-compiled release, download the latest one that matches your architecture.</description>
     </item>
     
     <item>
