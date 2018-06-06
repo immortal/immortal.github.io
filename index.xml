@@ -39,7 +39,7 @@ immortal - Starts and monitor a service immortaldir - Directory to scan for serv
       
       <guid>https://immortal.run/source/</guid>
       <description>pre-compiled (Linux) 
-
+{{&amp;lt; figure src=&amp;ldquo;https://img.shields.io/badge/deb-packagecloud.io-844fec.svg&amp;quot; class=&amp;ldquo;badge&amp;rdquo;&amp;gt; }}
 Using https://packagecloud.io/immortal/immortal
 For rpm:
 curl -s https://packagecloud.io/install/repositories/immortal/immortal/script.rpm.sh | sudo bash  For deb:
@@ -48,7 +48,7 @@ curl -s https://packagecloud.io/install/repositories/immortal/immortal/script.de
  For example using $HOME/go for your workspace
 $ export GOPATH=$HOME/go  Create the directory:
 $ mkdir -p $HOME/go/src/github.com/immortal  Clone project into that directory:
-$ git clone git@github.com:immortal/immortal.git $HOME/go/src/github.com/immortal/immortal  Build by just typing make:</description>
+$ git clone git@github.</description>
     </item>
     
     <item>
