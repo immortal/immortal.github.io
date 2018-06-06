@@ -566,7 +566,7 @@ th {
 }
 
 
-figure.badge, img.badge {
+figure.badge img, img.badge {
     width: auto !important;
 }
 
