@@ -110,6 +110,16 @@ starting, for example, having this services:</p>
 
 <p>If service <code>foo</code> and  <code>bar</code> are not running, the service will not start.</p>
 
+<h1 id="require-cmd">require_cmd</h1>
+
+<p>The <code>require_cmd</code> option will execute a command and if the exit status is 0 it
+will start the service, example:</p>
+
+<pre><code class="language-yaml">require_cmd:  test -f /tmp/foo
+</code></pre>
+
+<p>If file <code>/tmp/foo</code> exists it will start the service otherwise not.</p>
+
 <h3 id="example-using-su">example using su</h3>
 
 <p>In some cases the full environment of a user is required to be loaded before
