@@ -38,8 +38,8 @@ immortal - Starts and monitor a service immortaldir - Directory to scan for serv
       <pubDate>Mon, 20 Mar 2017 16:17:00 +0000</pubDate>
       
       <guid>https://immortal.run/source/</guid>
-      <description>pre-compiled (Linux) ![deb](https://img.shields.io/badge/deb-packagecloud.io-844fec.svg
-![rmp](https://img.shields.io/badge/rpm-packagecloud.io-844fec.svg
+      <description>pre-compiled (Linux) 
+
 Using https://packagecloud.io/immortal/immortal
 For rpm:
 curl -s https://packagecloud.io/install/repositories/immortal/immortal/script.rpm.sh | sudo bash  For deb:
