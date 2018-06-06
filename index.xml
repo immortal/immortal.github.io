@@ -38,11 +38,12 @@ immortal - Starts and monitor a service immortaldir - Directory to scan for serv
       <pubDate>Mon, 20 Mar 2017 16:17:00 +0000</pubDate>
       
       <guid>https://immortal.run/source/</guid>
-      <description>pre-compiled (Linux)    
-Using https://packagecloud.io/immortal/immortal
+      <description>pre-compiled (Linux) Using https://packagecloud.io/immortal/immortal
 For rpm:
-curl -s https://packagecloud.io/install/repositories/immortal/immortal/script.rpm.sh | sudo bash  For deb:
-curl -s https://packagecloud.io/install/repositories/immortal/immortal/script.deb.sh | sudo bash  Compile from source Setup go environment https://golang.org/doc/install
+curl -s https://packagecloud.io/install/repositories/immortal/immortal/script.rpm.sh | sudo bash   
+For deb:
+curl -s https://packagecloud.io/install/repositories/immortal/immortal/script.deb.sh | sudo bash   
+Compile from source Setup go environment https://golang.org/doc/install
  go &amp;gt;= 1.9 is required
  For example using $HOME/go for your workspace
 $ export GOPATH=$HOME/go  Create the directory:
