@@ -42,7 +42,7 @@ immortal - Starts and monitor a service immortaldir - Directory to scan for serv
 For deb:
 curl -s https://packagecloud.io/install/repositories/immortal/immortal/script.deb.sh | sudo bash   
 Then:
-# apt install immortal  For rpm:
+apt install immortal  For rpm:
 curl -s https://packagecloud.io/install/repositories/immortal/immortal/script.rpm.sh | sudo bash   
 Compile from source Setup go environment https://golang.org/doc/install
  go &amp;gt;= 1.9 is required
