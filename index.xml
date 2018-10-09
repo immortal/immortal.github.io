@@ -44,7 +44,8 @@ curl -s https://packagecloud.io/install/repositories/immortal/immortal/script.de
 Then:
 apt install immortal  For rpm:
 curl -s https://packagecloud.io/install/repositories/immortal/immortal/script.rpm.sh | sudo bash   
-Compile from source Setup go environment https://golang.org/doc/install
+Then:
+yum install immortal  Compile from source Setup go environment https://golang.org/doc/install
  go &amp;gt;= 1.9 is required
  For example using $HOME/go for your workspace
 $ export GOPATH=$HOME/go  Create the directory:
