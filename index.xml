@@ -34,10 +34,10 @@ immortal - Starts and monitor a service immortaldir - Directory to scan for serv
     
     <item>
       <title>compile from source</title>
-      <link>https://immortal.run/source/</link>
+      <link>https://immortal.run/linux/</link>
       <pubDate>Mon, 20 Mar 2017 16:17:00 +0000</pubDate>
       
-      <guid>https://immortal.run/source/</guid>
+      <guid>https://immortal.run/linux/</guid>
       <description>pre-compiled (Linux) Using https://packagecloud.io/immortal/immortal
 For deb:
 curl -s https://packagecloud.io/install/repositories/immortal/immortal/script.deb.sh | sudo bash   
@@ -50,6 +50,22 @@ yum install immortal  Compile from source Setup go environment https://golang.or
  For example using $HOME/go for your workspace
 $ export GOPATH=$HOME/go  Create the directory:
 $ mkdir -p $HOME/go/src/github.com/immortal  Clone project into that directory:</description>
+    </item>
+    
+    <item>
+      <title>compile from source</title>
+      <link>https://immortal.run/source/</link>
+      <pubDate>Mon, 20 Mar 2017 16:17:00 +0000</pubDate>
+      
+      <guid>https://immortal.run/source/</guid>
+      <description>Compile from source Setup go environment https://golang.org/doc/install
+ go &amp;gt;= 1.9 is required
+ For example using $HOME/go for your workspace
+$ export GOPATH=$HOME/go  Create the directory:
+$ mkdir -p $HOME/go/src/github.com/immortal  Clone project into that directory:
+$ git clone git@github.com:immortal/immortal.git $HOME/go/src/github.com/immortal/immortal  Build by just typing make:
+$ cd $HOME/go/src/github.com/immortal/immortal $ make  To install/uninstall:
+$ make install $ make uninstall  Help making the port/package If you are familiar with the platform, would be nice if could create a native port in order make more simple the installation process.</description>
     </item>
     
     <item>
