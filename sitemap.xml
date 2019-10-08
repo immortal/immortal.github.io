@@ -3,12 +3,42 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://immortal.run/</loc>
+    <lastmod>2017-04-20T16:23:13+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://immortal.run/openbsd/</loc>
     <lastmod>2017-04-20T16:23:13+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://immortal.run/post/how-it-works/</loc>
+    <lastmod>2017-03-21T12:04:36+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://immortal.run/tags/immortal/</loc>
+    <lastmod>2017-03-21T12:04:36+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://immortal.run/tags/immortalctl/</loc>
+    <lastmod>2017-03-21T12:04:36+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://immortal.run/tags/immortaldir/</loc>
+    <lastmod>2017-03-21T12:04:36+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://immortal.run/post/</loc>
+    <lastmod>2017-03-21T12:04:36+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://immortal.run/tags/</loc>
     <lastmod>2017-03-21T12:04:36+01:00</lastmod>
   </url>
   
@@ -95,42 +125,6 @@
   <url>
     <loc>https://immortal.run/post/examples/</loc>
     <lastmod>2010-03-20T23:10:07+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://immortal.run/tags/immortal/</loc>
-    <lastmod>2017-03-21T12:04:36+01:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://immortal.run/tags/immortalctl/</loc>
-    <lastmod>2017-03-21T12:04:36+01:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://immortal.run/tags/immortaldir/</loc>
-    <lastmod>2017-03-21T12:04:36+01:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://immortal.run/post/</loc>
-    <lastmod>2017-03-21T12:04:36+01:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://immortal.run/tags/</loc>
-    <lastmod>2017-03-21T12:04:36+01:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://immortal.run/</loc>
-    <lastmod>2017-04-20T16:23:13+02:00</lastmod>
-    <priority>0</priority>
   </url>
   
 </urlset>
